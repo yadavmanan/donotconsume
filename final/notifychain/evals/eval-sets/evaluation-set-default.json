@@ -1,0 +1,271 @@
+{
+  "fileName": "evaluation-set-default.json",
+  "id": "179e2896-e9b8-4116-bebb-b368f7a93b26",
+  "name": "Default Evaluation Set",
+  "batchSize": 10,
+  "timeoutMinutes": 20,
+  "evaluatorRefs": [
+    "defc4359-761d-4b0d-8e17-52fee45f1932"
+  ],
+  "evaluations": [
+    {
+      "id": "740ea204-36a9-4c16-9dcb-15d4276baa02",
+      "name": "Debug Run 6/28/2026, 7:13:37 PM",
+      "inputs": {
+        "traces": {
+          "contaminationType": "E_coli_O157H7",
+          "criticalTrackingEvents": [
+            {
+              "cteId": "CTE-0001",
+              "cteType": "HARVESTING",
+              "dateTime": "2026-06-01T06:30:00Z",
+              "fromEntity": "Salinas Valley Farm",
+              "locationId": "F-100",
+              "locationType": "FACILITY",
+              "quantity": 16100,
+              "referenceDocumentNumber": "HARV-0601",
+              "toEntity": "Salinas Pack House",
+              "unitOfMeasure": "EA"
+            },
+            {
+              "cteId": "CTE-0002",
+              "cteType": "INITIAL_PACKING",
+              "dateTime": "2026-06-01T14:00:00Z",
+              "fromEntity": "Salinas Pack House",
+              "locationId": "F-200",
+              "locationType": "FACILITY",
+              "quantity": 16100,
+              "referenceDocumentNumber": "PACK-0601",
+              "toEntity": "Salinas Pack House",
+              "unitOfMeasure": "EA"
+            },
+            {
+              "cteId": "CTE-0003",
+              "cteType": "SHIPPING",
+              "dateTime": "2026-06-02T08:00:00Z",
+              "fromEntity": "Salinas Pack House",
+              "locationId": "C-300",
+              "locationType": "CUSTOMER",
+              "quantity": 4200,
+              "referenceDocumentNumber": "BOL-50021",
+              "toEntity": "FreshPack Distribution",
+              "unitOfMeasure": "EA"
+            },
+            {
+              "cteId": "CTE-0004",
+              "cteType": "SHIPPING",
+              "dateTime": "2026-06-02T09:30:00Z",
+              "fromEntity": "Salinas Pack House",
+              "locationId": "C-301",
+              "locationType": "CUSTOMER",
+              "quantity": 8800,
+              "referenceDocumentNumber": "BOL-50022",
+              "toEntity": "WestCoast Grocery DC",
+              "unitOfMeasure": "EA"
+            },
+            {
+              "cteId": "CTE-0005",
+              "cteType": "SHIPPING",
+              "dateTime": "2026-06-03T07:15:00Z",
+              "fromEntity": "Salinas Pack House",
+              "locationId": "C-302",
+              "locationType": "CUSTOMER",
+              "quantity": 3100,
+              "referenceDocumentNumber": "BOL-50023",
+              "toEntity": "Southwest Foods DC",
+              "unitOfMeasure": "EA"
+            },
+            {
+              "cteId": "CTE-0006",
+              "cteType": "RECEIVING",
+              "dateTime": "2026-06-03T10:00:00Z",
+              "fromEntity": "FreshPack Distribution",
+              "locationId": "C-300",
+              "locationType": "CUSTOMER",
+              "quantity": 4200,
+              "referenceDocumentNumber": "ASN-90011",
+              "toEntity": "FreshPack Distribution",
+              "unitOfMeasure": "EA"
+            },
+            {
+              "cteId": "CTE-0007",
+              "cteType": "RECEIVING",
+              "dateTime": "2026-06-03T11:45:00Z",
+              "fromEntity": "WestCoast Grocery DC",
+              "locationId": "C-301",
+              "locationType": "CUSTOMER",
+              "quantity": 8800,
+              "referenceDocumentNumber": "ASN-90012",
+              "toEntity": "WestCoast Grocery DC",
+              "unitOfMeasure": "EA"
+            }
+          ],
+          "expiryDate": "2026-06-12",
+          "incompleteKDENodes": [],
+          "kdeCompletenessPercent": 100,
+          "limsResults": [
+            {
+              "coaDocumentRef": "COA-2026-0437",
+              "criticalLimit": "Not detected / 25g",
+              "result": "POSITIVE",
+              "resultValue": "Detected in 25g",
+              "testDate": "2026-06-08",
+              "testId": "T-9001",
+              "testType": "E_coli_O157H7"
+            },
+            {
+              "coaDocumentRef": "COA-2026-0437",
+              "criticalLimit": "Not detected / 25g",
+              "result": "NEGATIVE",
+              "resultValue": "Not detected",
+              "testDate": "2026-06-08",
+              "testId": "T-9002",
+              "testType": "Salmonella"
+            },
+            {
+              "coaDocumentRef": "COA-2026-0437",
+              "criticalLimit": "Not detected / 25g",
+              "result": "NEGATIVE",
+              "resultValue": "Not detected",
+              "testDate": "2026-06-08",
+              "testId": "T-9003",
+              "testType": "Listeria"
+            }
+          ],
+          "originFacility": {
+            "facilityId": "F-100",
+            "name": "Salinas Valley Farm",
+            "state": "CA"
+          },
+          "product": {
+            "description": "Fresh romaine hearts, 3-count sleeve, ready-to-eat",
+            "name": "Romaine Lettuce Hearts 3-pack",
+            "productId": "PRD-1001",
+            "unitOfMeasure": "EA"
+          },
+          "productionDate": "2026-06-01",
+          "rawMaterials": [
+            {
+              "ingredientName": "Romaine seed",
+              "quantityUsed": "12.5",
+              "rawMaterialLotCode": "SEED-889",
+              "supplierId": "S-200",
+              "supplierName": "AgriSeed Co",
+              "tierLevel": 1,
+              "unitOfMeasure": "KG"
+            }
+          ],
+          "recallClassEstimate": "I",
+          "statesAffected": [
+            "AZ",
+            "CA",
+            "TX"
+          ],
+          "supplyChainNodes": [
+            {
+              "apiAvailable": true,
+              "contactEmail": "recall@freshpack.com",
+              "ediApiEndpoint": "https://api.freshpack.com/v1/quarantine",
+              "name": "FreshPack Distribution",
+              "nodeId": "C-300",
+              "referenceDocumentNumber": "BOL-50021",
+              "shippedDate": "2026-06-02",
+              "status": "DELIVERED",
+              "type": "DISTRIBUTOR",
+              "units": 4200
+            },
+            {
+              "apiAvailable": false,
+              "contactEmail": "foodsafety@westcoastgrocery.com",
+              "ediApiEndpoint": null,
+              "name": "WestCoast Grocery DC",
+              "nodeId": "C-301",
+              "referenceDocumentNumber": "BOL-50022",
+              "shippedDate": "2026-06-02",
+              "status": "DELIVERED",
+              "type": "DISTRIBUTOR",
+              "units": 8800
+            },
+            {
+              "apiAvailable": false,
+              "contactEmail": "qa@southwestfoods.com",
+              "ediApiEndpoint": null,
+              "name": "Southwest Foods DC",
+              "nodeId": "C-302",
+              "referenceDocumentNumber": "BOL-50023",
+              "shippedDate": "2026-06-03",
+              "status": "DELIVERED",
+              "type": "DISTRIBUTOR",
+              "units": 3100
+            }
+          ],
+          "totalUnitsAffected": 16100,
+          "traceabilityLotCode": "LOT-2026-0437",
+          "urgency": "IMMEDIATE",
+          "warehouseInventory": [
+            {
+              "facilityId": "F-300",
+              "inventoryId": "INV-0001",
+              "quantityOnHand": 1500,
+              "quantityQuarantined": 0,
+              "status": "AVAILABLE"
+            }
+          ]
+        }
+      },
+      "expectedOutput": {
+        "summary": "Processed a valid contamination trace for E. coli O157:H7 involving Romaine Lettuce Hearts 3-pack, traceability lot LOT-2026-0437, with IMMEDIATE urgency and recall class I. Quarantine notifications were attempted for 3 qualifying downstream distributor nodes with usable contact emails. All 3 high-importance emails were sent successfully.",
+        "notificationCount": 3,
+        "sentCount": 3,
+        "notifications": [
+          {
+            "nodeId": "C-300",
+            "nodeName": "FreshPack Distribution",
+            "recipientType": "distributor",
+            "email": "recall@freshpack.com",
+            "subject": "IMMEDIATE QUARANTINE NOTICE: Romaine Lettuce Hearts 3-pack | Lot LOT-2026-0437 | E. coli O157:H7",
+            "body": "Immediate action required: Quarantine all affected inventory immediately and stop any further distribution, shipment, or sale.\n\nProduct: Romaine Lettuce Hearts 3-pack\nDescription: Fresh romaine hearts, 3-count sleeve, ready-to-eat\nTraceability lot code: LOT-2026-0437\nContamination issue: E_coli_O157H7\nUrgency: IMMEDIATE\nRecall class estimate: I\n\nShipment details for FreshPack Distribution:\n- Units shipped: 4200 EA\n- Shipped date: 2026-06-02\n- Reference document number: BOL-50021\n- Current status: DELIVERED\n\nGrounded event details:\n- Production date: 2026-06-01\n- Expiry date: 2026-06-12\n- Origin facility: Salinas Valley Farm (CA)\n- States affected: AZ, CA, TX\n- Total units affected: 16100 EA\n\nLaboratory result summary:\n- Test type: E_coli_O157H7\n- Result: POSITIVE\n- Result value: Detected in 25g\n- Critical limit: Not detected / 25g\n- Test date: 2026-06-08\n- COA reference: COA-2026-0437\n\nRequired actions:\n1. Immediately identify and quarantine all units from lot LOT-2026-0437 in your control.\n2. Stop shipment, redistribution, and sale of the affected product.\n3. Place any downstream inventory on hold and notify any internal distribution points handling this lot.\n4. Confirm back by email that quarantine has been completed and that sale/shipment has ceased.\n\nPlease treat this notice as urgent and take immediate containment action.",
+            "status": "sent",
+            "reason": "Email sent successfully with high importance."
+          },
+          {
+            "nodeId": "C-301",
+            "nodeName": "WestCoast Grocery DC",
+            "recipientType": "distributor",
+            "email": "foodsafety@westcoastgrocery.com",
+            "subject": "IMMEDIATE QUARANTINE NOTICE: Romaine Lettuce Hearts 3-pack | Lot LOT-2026-0437 | E. coli O157:H7",
+            "body": "Immediate action required: Quarantine all affected inventory immediately and stop any further distribution, shipment, or sale.\n\nProduct: Romaine Lettuce Hearts 3-pack\nDescription: Fresh romaine hearts, 3-count sleeve, ready-to-eat\nTraceability lot code: LOT-2026-0437\nContamination issue: E_coli_O157H7\nUrgency: IMMEDIATE\nRecall class estimate: I\n\nShipment details for WestCoast Grocery DC:\n- Units shipped: 8800 EA\n- Shipped date: 2026-06-02\n- Reference document number: BOL-50022\n- Current status: DELIVERED\n\nGrounded event details:\n- Production date: 2026-06-01\n- Expiry date: 2026-06-12\n- Origin facility: Salinas Valley Farm (CA)\n- States affected: AZ, CA, TX\n- Total units affected: 16100 EA\n\nLaboratory result summary:\n- Test type: E_coli_O157H7\n- Result: POSITIVE\n- Result value: Detected in 25g\n- Critical limit: Not detected / 25g\n- Test date: 2026-06-08\n- COA reference: COA-2026-0437\n\nRequired actions:\n1. Immediately identify and quarantine all units from lot LOT-2026-0437 in your control.\n2. Stop shipment, redistribution, and sale of the affected product.\n3. Place any downstream inventory on hold and notify any internal distribution points handling this lot.\n4. Confirm back by email that quarantine has been completed and that sale/shipment has ceased.\n\nPlease treat this notice as urgent and take immediate containment action.",
+            "status": "sent",
+            "reason": "Email sent successfully with high importance."
+          },
+          {
+            "nodeId": "C-302",
+            "nodeName": "Southwest Foods DC",
+            "recipientType": "distributor",
+            "email": "qa@southwestfoods.com",
+            "subject": "IMMEDIATE QUARANTINE NOTICE: Romaine Lettuce Hearts 3-pack | Lot LOT-2026-0437 | E. coli O157:H7",
+            "body": "Immediate action required: Quarantine all affected inventory immediately and stop any further distribution, shipment, or sale.\n\nProduct: Romaine Lettuce Hearts 3-pack\nDescription: Fresh romaine hearts, 3-count sleeve, ready-to-eat\nTraceability lot code: LOT-2026-0437\nContamination issue: E_coli_O157H7\nUrgency: IMMEDIATE\nRecall class estimate: I\n\nShipment details for Southwest Foods DC:\n- Units shipped: 3100 EA\n- Shipped date: 2026-06-03\n- Reference document number: BOL-50023\n- Current status: DELIVERED\n\nGrounded event details:\n- Production date: 2026-06-01\n- Expiry date: 2026-06-12\n- Origin facility: Salinas Valley Farm (CA)\n- States affected: AZ, CA, TX\n- Total units affected: 16100 EA\n\nLaboratory result summary:\n- Test type: E_coli_O157H7\n- Result: POSITIVE\n- Result value: Detected in 25g\n- Critical limit: Not detected / 25g\n- Test date: 2026-06-08\n- COA reference: COA-2026-0437\n\nRequired actions:\n1. Immediately identify and quarantine all units from lot LOT-2026-0437 in your control.\n2. Stop shipment, redistribution, and sale of the affected product.\n3. Place any downstream inventory on hold and notify any internal distribution points handling this lot.\n4. Confirm back by email that quarantine has been completed and that sale/shipment has ceased.\n\nPlease treat this notice as urgent and take immediate containment action.",
+            "status": "sent",
+            "reason": "Email sent successfully with high importance."
+          }
+        ]
+      },
+      "expectedAgentBehavior": "",
+      "simulationInstructions": "",
+      "simulateInput": false,
+      "inputGenerationInstructions": "",
+      "simulateTools": false,
+      "evalSetId": "179e2896-e9b8-4116-bebb-b368f7a93b26",
+      "createdAt": "2026-06-28T13:43:37.434Z",
+      "updatedAt": "2026-06-28T13:43:37.434Z",
+      "source": "firstSuccessfulRun"
+    }
+  ],
+  "modelSettings": [],
+  "agentMemoryEnabled": false,
+  "agentMemorySettings": [],
+  "lineByLineEvaluation": false,
+  "createdAt": "2026-06-28T13:30:49.793Z",
+  "updatedAt": "2026-06-28T13:43:37.434Z",
+  "category": 1
+}

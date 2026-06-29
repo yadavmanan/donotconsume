@@ -1,0 +1,31 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "5a2fc771-f88d-43e2-bdf2-c03bf03e0356",
+      "input": {
+        "type": "object",
+        "properties": {
+          "recalled_events": {
+            "type": "object",
+            "properties": {},
+            "description": "This is the list of successfully recalled, quantined."
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Output content"
+          }
+        }
+      }
+    }
+  ]
+}

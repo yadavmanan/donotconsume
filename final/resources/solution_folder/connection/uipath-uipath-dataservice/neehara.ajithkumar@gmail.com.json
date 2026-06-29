@@ -1,0 +1,29 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "neehara.ajithkumar@gmail.com",
+    "kind": "connection",
+    "type": "uipath-uipath-dataservice",
+    "apiVersion": "integrationservice.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "connectorName": "UiPath Data Fabric",
+      "name": "neehara.ajithkumar@gmail.com",
+      "description": null,
+      "authenticationType": "AuthenticateAfterDeployment",
+      "connectorVersion": "1.69.3",
+      "connectorKey": "uipath-uipath-dataservice",
+      "pollingInterval": 5
+    },
+    "locks": [],
+    "key": "3f7b7686-0811-4289-a4aa-0383500df522"
+  }
+}

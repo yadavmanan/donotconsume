@@ -1,0 +1,101 @@
+{
+  "fileName": "evaluation-set-default.json",
+  "id": "4ac4b3f5-e0fe-4a2e-9824-6665c9f9b973",
+  "name": "Default Evaluation Set",
+  "batchSize": 10,
+  "evaluatorRefs": [
+    "8b702d14-2c3f-4f5a-a6be-ef90fc80ff70"
+  ],
+  "evaluations": [
+    {
+      "id": "e928ed0d-a8ff-4f48-b6ac-1852bfd7e6af",
+      "name": "Debug Run 6/28/2026, 5:49:15 PM",
+      "inputs": {
+        "property1": {
+          "caseId": "MC-2026-1847",
+          "receivedAt": "2026-06-28T09:42:11Z",
+          "sourceSystem": "Maestro Case",
+          "emailResponseObject": {
+            "messageId": "<CAH82k_supplier.alert_88421@greenvalleyfoods.com>",
+            "from": {
+              "name": "Elena Ruiz",
+              "email": "quality@greenvalleyfoods.com",
+              "company": "Green Valley Foods"
+            },
+            "to": [
+              "qa@northshoremeals.com"
+            ],
+            "cc": [
+              "supplierquality@northshoremeals.com"
+            ],
+            "subject": "URGENT: Supplier notification - possible Listeria monocytogenes contamination in frozen spinach lots",
+            "bodyText": "Hello Team,\n\nWe are issuing an urgent supplier quality notification regarding IQF chopped spinach supplied to Northshore Meals. Environmental and finished product investigation at our packing facility identified Listeria monocytogenes in retained samples associated with production on 2026-06-18 through 2026-06-20.\n\nAffected material shipped to your facility includes product: IQF Chopped Spinach 10 kg cases.\nAffected supplier lot codes: SPN-061826-A, SPN-061926-B, SPN-062026-C.\nCustomer shipments from our site occurred on 2026-06-21 and 2026-06-22.\n\nPlease place all related inventory on immediate hold and suspend use pending traceability review. We are continuing root cause investigation and will provide updates as confirmed.\n\nRegards,\nElena Ruiz\nSupplier Quality Manager\nGreen Valley Foods",
+            "bodyHtml": "<p>Hello Team,</p><p>We are issuing an urgent supplier quality notification regarding <strong>IQF chopped spinach</strong> supplied to Northshore Meals. Environmental and finished product investigation at our packing facility identified <strong>Listeria monocytogenes</strong> in retained samples associated with production on <strong>2026-06-18 through 2026-06-20</strong>.</p><p>Affected material shipped to your facility includes product: <strong>IQF Chopped Spinach 10 kg cases</strong>.<br/>Affected supplier lot codes: <strong>SPN-061826-A, SPN-061926-B, SPN-062026-C</strong>.<br/>Customer shipments from our site occurred on <strong>2026-06-21 and 2026-06-22</strong>.</p><p>Please place all related inventory on immediate hold and suspend use pending traceability review. We are continuing root cause investigation and will provide updates as confirmed.</p><p>Regards,<br/>Elena Ruiz<br/>Supplier Quality Manager<br/>Green Valley Foods</p>"
+          },
+          "caseFields": {
+            "category": "Supplier Quality Alert",
+            "status": "Open",
+            "priority": "High",
+            "plant": "Northshore Meals - Chicago",
+            "distributionStatus": "Supplier confirms shipments to customer facility",
+            "productFamily": "Frozen Vegetables",
+            "productName": "IQF Chopped Spinach 10 kg cases",
+            "supplierName": "Green Valley Foods"
+          },
+          "qualitySystemAlert": {
+            "alertId": "SQ-55821",
+            "alertText": "Supplier alert logged by incoming quality. Potential contamination event involving Listeria monocytogenes in spinach ingredient lots received from Green Valley Foods. Quarantine recommended for all receipts tied to lots SPN-061826-A, SPN-061926-B, SPN-062026-C. Ingredient may have been used in ready-to-eat meal kits on line 4 pending traceability confirmation."
+          },
+          "attachments": [
+            {
+              "fileName": "GVF_Listeria_Notification_2026-06-28.pdf",
+              "mimeType": "application/pdf",
+              "sizeBytes": 248193
+            },
+            {
+              "fileName": "Affected_Lots_Spinach.xlsx",
+              "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+              "sizeBytes": 91822
+            }
+          ],
+          "attachmentExtractedText": "Green Valley Foods Supplier Quality Notification\nDate: 2026-06-28\nSubject: Possible Listeria monocytogenes contamination\nProduct: IQF Chopped Spinach 10 kg cases\nProduction dates: 2026-06-18 to 2026-06-20\nAffected lots: SPN-061826-A; SPN-061926-B; SPN-062026-C\nReason: Listeria monocytogenes detected in retained finished product sample during investigation.\nAction requested: Immediate hold, stop use, assess downstream production exposure.\nDistribution note: Product shipped to Northshore Meals receiving dock on 2026-06-21 and 2026-06-22.",
+          "internalNotes": "Receiving team confirmed 14 pallets on hand. ERP traceability review in progress to determine whether any finished meal kits containing the ingredient were released."
+        }
+      },
+      "expectedOutput": {
+        "content": {
+          "content": {
+            "signalType": "SUPPLIER_ALERT",
+            "productName": "IQF Chopped Spinach 10 kg cases",
+            "contaminationType": "Listeria",
+            "productionDateRange": {
+              "start": "2026-06-18",
+              "end": "2026-06-20"
+            }
+          },
+          "lotCodes": [
+            "SPN-061826-A",
+            "SPN-061926-B",
+            "SPN-062026-C"
+          ]
+        },
+        "lotcodes": null
+      },
+      "expectedAgentBehavior": "",
+      "simulationInstructions": "",
+      "simulateInput": false,
+      "inputGenerationInstructions": "",
+      "simulateTools": false,
+      "evalSetId": "4ac4b3f5-e0fe-4a2e-9824-6665c9f9b973",
+      "createdAt": "2026-06-28T12:19:15.871Z",
+      "updatedAt": "2026-06-28T12:19:15.871Z",
+      "source": "firstSuccessfulRun"
+    }
+  ],
+  "modelSettings": [],
+  "createdAt": "2026-06-28T09:44:51.559Z",
+  "updatedAt": "2026-06-28T12:19:15.871Z",
+  "agentMemoryEnabled": false,
+  "agentMemorySettings": [],
+  "lineByLineEvaluation": false
+}

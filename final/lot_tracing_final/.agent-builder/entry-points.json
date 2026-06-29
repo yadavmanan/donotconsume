@@ -1,0 +1,48 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "44b333bc-74c8-41dc-bb41-e5c042d00ec7",
+      "input": {
+        "type": "object",
+        "required": [
+          "lotCode"
+        ],
+        "properties": {
+          "lotCode": {
+            "type": "string",
+            "description": "Lot code to trace. Expected format resembles LOT-2026-0437. Comes from the caller or user input. Must be non-empty and contain only letters, numbers, underscores, or hyphens.",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "totalLotsRequested": {
+            "type": "number"
+          },
+          "successfulLots": {
+            "type": "number"
+          },
+          "failedLotCodes": {
+            "type": "object",
+            "properties": {}
+          },
+          "totalUnitsAffected": {
+            "type": "number"
+          },
+          "traces": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      }
+    }
+  ]
+}

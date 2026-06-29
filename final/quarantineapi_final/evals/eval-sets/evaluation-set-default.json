@@ -1,0 +1,104 @@
+{
+  "fileName": "evaluation-set-default.json",
+  "id": "6c07bd4c-d5c5-409d-b35d-57265f2b1b3a",
+  "name": "Default Evaluation Set",
+  "batchSize": 10,
+  "evaluatorRefs": [
+    "42fab6b9-8774-46d9-b404-ba15991d04fe"
+  ],
+  "evaluations": [
+    {
+      "id": "b7a22a72-ef4e-4317-90e3-45ca721ee4a5",
+      "name": "Debug Run 6/28/2026, 6:37:14 PM",
+      "inputs": {
+        "lotcodes": [
+          "LOT-2026-0437"
+        ],
+        "traces": {
+          "type": "agentOutput",
+          "spanType": "AgentOutput",
+          "output": {
+            "totalLotsRequested": 2,
+            "successfulLots": 1,
+            "failedLotCodes": [
+              "LOT-2026-0438"
+            ],
+            "totalUnitsAffected": 16100,
+            "traces": [
+              {
+                "lotCode": "LOT-2026-0437",
+                "statusCode": 200,
+                "trace": {
+                  "contaminationType": "E_coli_O157H7",
+                  "facility": "Salinas Valley Farm, CA",
+                  "forward": [
+                    {
+                      "node": "FreshPack Distribution",
+                      "shippedDate": "2026-06-02",
+                      "units": 4200
+                    },
+                    {
+                      "node": "WestCoast Grocery DC",
+                      "shippedDate": "2026-06-02",
+                      "units": 8800
+                    },
+                    {
+                      "node": "Southwest Foods DC",
+                      "shippedDate": "2026-06-03",
+                      "units": 3100
+                    }
+                  ],
+                  "product": "Romaine Lettuce Hearts 3-pack",
+                  "productionDate": "2026-06-01",
+                  "rawMaterials": [
+                    {
+                      "lotCode": "SEED-889",
+                      "supplier": "AgriSeed Co"
+                    }
+                  ],
+                  "recallClass": "I",
+                  "totalUnits": 16100
+                }
+              }
+            ]
+          },
+          "executionType": 0,
+          "agentVersion": "1.0.3-debug.63918009968",
+          "referenceId": "e3602e6e-cd2e-4df7-bfa9-a90501f08c8b",
+          "agentId": "e3602e6e-cd2e-4df7-bfa9-a90501f08c8b",
+          "agentName": "workflow.agent.FDA.Lot.Tracing.Agent"
+        }
+      },
+      "expectedOutput": {
+        "content": "Quarantined 0 of 0 matched inventory record(s). Requested lot codes: LOT-2026-0437. Missing inventory matches: LOT-2026-0437.",
+        "quarantined": [],
+        "quarantineResults": [],
+        "notFoundLotcodes": [
+          "LOT-2026-0437"
+        ],
+        "matchedInventoryIds": [],
+        "summary": {
+          "requestedCount": 1,
+          "matchedCount": 0,
+          "quarantinedCount": 0,
+          "failedCount": 0
+        }
+      },
+      "expectedAgentBehavior": "",
+      "simulationInstructions": "",
+      "simulateInput": false,
+      "inputGenerationInstructions": "",
+      "simulateTools": false,
+      "evalSetId": "6c07bd4c-d5c5-409d-b35d-57265f2b1b3a",
+      "createdAt": "2026-06-28T13:07:14.804Z",
+      "updatedAt": "2026-06-28T13:07:14.804Z",
+      "source": "firstSuccessfulRun"
+    }
+  ],
+  "modelSettings": [],
+  "createdAt": "2026-06-28T12:48:00.439Z",
+  "updatedAt": "2026-06-28T13:07:14.804Z",
+  "agentMemoryEnabled": false,
+  "agentMemorySettings": [],
+  "lineByLineEvaluation": false
+}

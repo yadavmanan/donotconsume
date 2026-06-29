@@ -1,0 +1,25 @@
+{
+  "$resourceType": "context",
+  "id": "2eb2d175-08ab-4c33-ba64-4c0a160a340d",
+  "referenceKey": "84e46cc9-78bc-4c7c-01bf-08ded1677f40",
+  "name": "Recall Intial",
+  "description": "",
+  "contextType": "index",
+  "folderPath": "solution_folder",
+  "indexName": "Recall Intial",
+  "settings": {
+    "query": {
+      "description": "The query for the Semantic strategy.",
+      "variant": "dynamic"
+    },
+    "threshold": 0,
+    "resultCount": 3,
+    "retrievalMode": "semantic",
+    "folderPathPrefix": {
+      "variant": "static"
+    },
+    "fileExtension": {
+      "value": "All"
+    }
+  }
+}

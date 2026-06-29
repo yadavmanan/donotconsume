@@ -1,0 +1,409 @@
+Received: from SEZPR06MB6742.apcprd06.prod.outlook.com (2603:1096:101:183::9)
+ by TYZPR06MB5710.apcprd06.prod.outlook.com with HTTPS; Mon, 29 Jun 2026
+ 14:01:59 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=IHem/2uxE3w8NIYM7tpym7EJWTRIE0UEJjms6pYcpbKtR0VDqS1QtMjktS98QLDFkYrJtppCo/QPiy5geyHwGEeXs9CVdHsi+sYc7yd78fxoursZfIKfmJTOXpzeQ2SDkVivQVBQSGZGjJxyvsShLGVsaesvmsKQcM4GcVWHdetQ28xy6WSZNbi946MA89GryMFJtuFN1DkNdmzhbpRUSv4M+slf6/G/PEoAJZ3Db3+xIB6aL5cjBpJfsIKnUJ8+HX1/n18mZKIsfYTl9Sb75i16uGLj8xxRJ7fWA/W/JBnlCrqhuRzYXxGHiCIAM1Ilocu2Pj+iQtS5hbdhGg1xNw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W1kf9cBWL9kxGlG2WsfrKE4OtdK9wn0Ovo/fSNR4sb0=;
+ b=ltAhpFor7gjSmR71Znzh4/OlkWcmYAQxQ/5qD5MWgmmUMq8Wlb1FfeT+fLKIc/YB8RxiKprMuK0RykoaU0r+SeCEcu5gOIJXfgk5HIrfc7Xq234pPPJtGjWtgefCZYrW589oNRjultWBRk+71yEO8Z+UWy3Ci6ANePPr36Qb81BManT9/Bat14Kz86KGxrpNMxt6v0Ikss26uVyaz71nNSAIz/INFXV2iooHfG1IXjR0eVD8IHQnw0v5AWTPvBVvGIkTudCqWn9rCz6w4LOPyX2EqSriwV+2ij3QU4A1bcz/sGuFNy/l9TeNjWp0hvPATE7UdTUCoeGl2d91XU2LPw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 209.85.219.68) smtp.rcpttodomain=outlook.com smtp.mailfrom=gmail.com;
+ dmarc=pass (p=none sp=quarantine pct=100) action=none header.from=gmail.com;
+ dkim=pass (signature was verified) header.d=gmail.com; arc=pass (0 oda=0
+ ltdi=1)
+Received: from CH0PR04CA0095.namprd04.prod.outlook.com (2603:10b6:610:75::10)
+ by SEZPR06MB6742.apcprd06.prod.outlook.com (2603:1096:101:183::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.18; Mon, 29 Jun
+ 2026 14:01:58 +0000
+Received: from DS2PEPF000061C1.namprd02.prod.outlook.com
+ (2603:10b6:610:75:cafe::27) by CH0PR04CA0095.outlook.office365.com
+ (2603:10b6:610:75::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.19 via Frontend Transport; Mon,
+ 29 Jun 2026 14:01:56 +0000
+Authentication-Results: spf=pass (sender IP is 209.85.219.68)
+ smtp.mailfrom=gmail.com; dkim=pass (signature was verified)
+ header.d=gmail.com;dmarc=pass action=none header.from=gmail.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
+ 209.85.219.68 as permitted sender) receiver=protection.outlook.com;
+ client-ip=209.85.219.68; helo=mail-qv1-f68.google.com; pr=C
+Received: from mail-qv1-f68.google.com (209.85.219.68) by
+ DS2PEPF000061C1.mail.protection.outlook.com (10.167.23.68) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
+ via Frontend Transport; Mon, 29 Jun 2026 14:01:56 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:3299A3A2AEEC75E5A9A2968C0B81585E586DAFB0DEBCDD37E4CC1EA2B1B22243;UpperCasedChecksum:F1A0AE0D86588CDF831E4ED94068F45F8E1AABCC9FFC90136986E06ED1CA158D;SizeAsReceived:4276;Count:19
+Received: by mail-qv1-f68.google.com with SMTP id 6a1803df08f44-8ef1dc934d1so16666456d6.0
+        for <yadav.manan@outlook.com>; Mon, 29 Jun 2026 07:01:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782741716; cv=none;
+        d=google.com; s=arc-20260327;
+        b=DBygkWW7ksw1qqlx0tbFhfV2WuXcICdgE40zIwtjWTYCBgFgbwQrFb6nbsLLDBtZdL
+         PSjPrIFCRU3MXEXcO6s7qESzh7DzFk/uD5WSj5XyNvAbpVHyxoTjqFGFwZh0XFJuE1Zx
+         ZBil93Vxm5nZmyiqkfnu5U2FArTyQTuu8rowYrHQpYLQowOjaU5aKoVuldfBQiAvOgJE
+         bSjXU65hYD8SjBD4uZuuDHT526aUCxAgh08SqIrX/V4utB3nURM6wriu0S6ob92cKH26
+         aqSvjFT8pGxcAbOkH0JjzTyQ1xpaioSD8NQ+Tf/SRnMDOxqySKnNZX2DCzdB3wSHAxqE
+         SVwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=W1kf9cBWL9kxGlG2WsfrKE4OtdK9wn0Ovo/fSNR4sb0=;
+        fh=n/G3sLFa1y/h7V03QID+how7Jcc1S8kgZsFIuYpRTXs=;
+        b=UJy7fmwNkTXikAPfbxVOtRRVf4oHE6xoI3xXcQ9HkLe+V/qwAMZ6qJ57+C0EELEyrc
+         p2Cq5i18/eTXx4WJHFPfP+fXdpIMF8r3etcVSqjga6cZxenhLZ+xPY49bI4K3rHob4ut
+         +R3hoHujBL7VWjyg/bj/oVv7W2IxCPCzVXVRNUiPWaEorFQq/u9WvCoaCh+z0kh4bTfz
+         UQEpDR5nxLV7a8uQdrA9ZlE1Err9n9PzfAY6YLQR4RJ378zE5cxIVboy35TEaJ8X298I
+         jSZY8xyMARq4Ab7+N72u5VviHvmcY1084bIymiuDK4Ya1nVzntH9FbS8zvbuVWUZxgvm
+         ZBpg==;
+        darn=outlook.com
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782741716; x=1783346516; darn=outlook.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=W1kf9cBWL9kxGlG2WsfrKE4OtdK9wn0Ovo/fSNR4sb0=;
+        b=Dp7hJCqmrnIrHg7Jpmps4fWzx0mYgWhFFSa5ZUFcZWDSSLufxt1AqC8kcbqAfgqJHd
+         irPjQQhshheWsf3wEGCjeN32oBGKurfoSKkEEVo7xYjEtCMGWo/q2opUMZJ5boiz9sdt
+         63giR+OJkUuBjkEuypii4Z4Tc12Q0lsaHXi6YC19CEYH3wOdhmuWcvm1juIXP7zE6CIs
+         DEaZQid/WQWAJqG7/zv+JVW4j+8dbs+3cenmTLVQ4ytasP7iMzlszF5jQmqL/eLAqd2e
+         43M6xeowgbTRiRCyBgkt0RAOi+O4XcjW2Mm9p7DF5wfVYqYf06hIzo1fTBM5oO/CU/Ck
+         OZlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782741716; x=1783346516;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=W1kf9cBWL9kxGlG2WsfrKE4OtdK9wn0Ovo/fSNR4sb0=;
+        b=dHT4Q7r+ZtM7feZ63Jq1jUgzNy+qMPe8yB+kJBkQf0dpfEA5w7HWlmCPbpVNR4GSv0
+         fOF8lb3xSmhEvyBg3JsEBlbFHo99rPhdtAaDjzeM6b8QHM5gflqRW0lD5nFgRlCjJvij
+         TrPAw1JqVoC/e1Z2Zthc3ZBSmhHomaaXrIUpAMoMWKJjQbK4HTnvt7YnWsEwVAQfptF2
+         DUVDGkSRUxXEL5sHk5d+9H3+dBA9cjXOKWU9MjU10SDrxdr8C2Sg9k2l1JyQ7BpbaTzF
+         SxRkCVmW+q6kjEFZh0IJxFlC0aqfu486jZCjdaOUnaQ4Ol4OJc3ngvV1dBS/ZwPXKogC
+         Xkyw==
+X-Gm-Message-State: AOJu0YwJvOqotbpjoUPc2zfPpa3F1eAvCHmfwGBih47OEQLMJMyR/ODC
+	mpnd2Dq2rf9gz1L96pmZ9E5fOheAcJVSwFAmS5UfQm0rSN2rwOjxo0GCP58gd05AofBnjLz9PZg
+	NbgvvJA4THz3rPbS/daF53/TIK/76Yng5+Omc
+X-Gm-Gg: AfdE7clS2Liqtumtv9i+/GUSzq1SCtZkzpgkg4udELfBbpuvkg92QHZhXGgAq/VROP0
+	JNTq0MGmoFskpUaG9YwztGXKdstpAjIKdH+0zWdvWi8G6gUus3psb7ktrUeToG842KlVa/z6OYR
+	gwvwRP67AAzw6hVCD5TKUrtysnrWzlM+Im9X659VKDBl+QR3lk8HibGpPxIp5+Fl/HW8uVlFeX/
+	2/n+A74fNJIhVwAMAI+qZ1Lcu+PWveHR2MkWs9CfpoIWxh0P4Dkq5Y5MGXOcG2/TlOSa1y7
+X-Received: by 2002:a05:6214:1383:b0:8ce:e601:edf5 with SMTP id
+ 6a1803df08f44-8e3b664c678mr296801026d6.23.1782741715328; Mon, 29 Jun 2026
+ 07:01:55 -0700 (PDT)
+Received: from 1087538024966 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 29 Jun 2026 10:01:54 -0400
+Received: from 1087538024966 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 29 Jun 2026 10:01:54 -0400
+From: Manan yadav <yadav.manan24@gmail.com>
+Date: Mon, 29 Jun 2026 10:01:54 -0400
+X-Gm-Features: AVVi8Cdz-YB6ug1NsPx7lpytqOufphrJlRyOM-x6cAdryOG5-NI6BiAMLbg8bLk
+Message-ID: <CAG30M_s06kLuxmm5Eb8MoYR3HLcqfbj_CPQUFooz26XrsGYf9Q@mail.gmail.com>
+Subject: =?UTF-8?Q?Recall_=26_Quarantine_Confirmation_Report_=E2=80=94_2026=2D06=2D?=
+	=?UTF-8?Q?29?=
+To: yadav.manan@outlook.com
+Content-Type: multipart/alternative; boundary="000000000000ab218d065564e68d"
+X-IncomingHeaderCount: 19
+Return-Path: yadav.manan24@gmail.com
+X-MS-Exchange-Organization-ExpirationStartTime: 29 Jun 2026 14:01:56.6694
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 89879c98-8503-4408-4a24-08ded5e6fb31
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C1:EE_|SEZPR06MB6742:EE_|TYZPR06MB5710:EE_
+X-MS-Exchange-Organization-AuthSource: DS2PEPF000061C1.namprd02.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 6/29/2026 1:53:45 PM
+X-MS-Office365-Filtering-Correlation-Id: 89879c98-8503-4408-4a24-08ded5e6fb31
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 209.85.219.68
+X-SID-PRA: YADAV.MANAN24@GMAIL.COM
+X-SID-Result: PASS
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;ARA:1444111002|5019299006|29090799004|9020799019|54080799006|440099028|3412199025|1370799030|1360799030|1380799030|30041999003;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 14:01:56.6527
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89879c98-8503-4408-4a24-08ded5e6fb31
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF000061C1.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB6742
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.1484211
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0159.018
+X-Message-Flag: Flag for follow up
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000311)(920221119095)(920221120095)(90000117)(90011020)(91015020)(91040095)(9050020)(9060121)(9081003)(9100341)(944500132)(4810010)(4910033)(9930004)(9545005)(10172021)(9320005)(120001);
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0wO0Q9MTtHRD0xO1NDTD0tMQ==
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?RDltaVNvbjcyZFdMeTdNN1FMaVJnMEluZlI2K1p1Ny9uay8zRDkwOW9LWUhR?=
+ =?utf-8?B?WFRNaS9VTFJaSzYwdEdKUSs3MVlwUllyejVGYTJFbncwYXhJNE5hMGFpNUN2?=
+ =?utf-8?B?ei8vY3hkS01tOFJuM0JkTmVxSjZ4NmpFM1U3TFZaOE1NTXNOZ1dxbEp3TW8w?=
+ =?utf-8?B?dllyZXZUOUFVWmdGazNPTXhtdlI3aUd1bmlGK2N1M3NnQktTRXU4cTRheldD?=
+ =?utf-8?B?VFk4MkM1bjdWU2ZSeDVrTGtLK3NQT240R0Vuc1BtaG5Sc3dxTHlJenBQOG5F?=
+ =?utf-8?B?NVlpTXppeVFYNGcyRVZWYWhGYVJhcDJFSnBnSG9mdklGdnE4cHdHN2txcUhE?=
+ =?utf-8?B?N0o5dU5BOHJnK0dVa2pyVDhGNlJIUDVab3JveEJxaUhxc2VhenV4YVFSMWJC?=
+ =?utf-8?B?UmNpT3JVWis0TGNwUkF5ZE1pOW81T1RmcU9oNHhSL1NEd2xDNTZpNmJrUXRj?=
+ =?utf-8?B?ZVY5Rm5GR3JjSEd2YmlwRm9qbisxK0FScEV2RHJJdXJTZlUrZGhRNDRFNWdv?=
+ =?utf-8?B?Mko5Rk9ENEkxQU9jS3JieHFUcTdEVmpQN2hnNWxLOHcreCtHOXB1R3JSQWYw?=
+ =?utf-8?B?dHNTVDhWK2x3ZGZKaXB4bmxwM3NTTHFKNGJDa3F4dkVLbnFxNk4wOVU2TWdC?=
+ =?utf-8?B?Ymo3UTF4T0RhdmFOUXFLdXg0Tks1L3lweVN5YjQ3RXJYNU9pRkhHeFIyUFdO?=
+ =?utf-8?B?UDlZb29iMENuNVFYNmJTMEtINWdyclZMRTN1Tmg3Y1g2N1Jyc2gvbWE3VnV6?=
+ =?utf-8?B?RzdQWkVkbFo3UGk3WEpicjdtSks3eWV5ZUpiVFZXSW5DVVN3M251a0dqalJn?=
+ =?utf-8?B?ZkJJOFlTQWNaM3YxRjJFV2RFN092L013TGNZaHQxSHdBZnhldXFKQklycjFR?=
+ =?utf-8?B?S2g3bWs4L2dGSmlMNVg0aXpzcTNuSUprUXBXandEOEJ5eWtiUzZKSzJqWTd3?=
+ =?utf-8?B?MUd1ZUx4Z2N5WUc5WTU5MmtiVHRTSVB1N0JocHllbEF4VTd0aGJWbXl3cmg3?=
+ =?utf-8?B?RHpGU2VyY0Fja0xtcUUyVkdZelN6UzNvOHJWSXI1T0RTdTNaU3hWdXZFZUVG?=
+ =?utf-8?B?RURTam1QbElaUGFzQXIyTEVHRUlKNkVlS0s3QUdzUlo1K2hacTlVS1NHZ0NO?=
+ =?utf-8?B?YXpVNmVlNUdzU01TNFpveUV1YXVZaE1JTUJBcHJKbzBEZ3VNS1BXZU9RSEZN?=
+ =?utf-8?B?VVNKOUlaUW8yMFRvemltUlVxVWNMUVZxY3FLLzRQejgwS3JTYU1jaUg0aFpw?=
+ =?utf-8?B?anhmQVJ3aVM3ZjdnQW1DZmFjbHRlL3RVbUVZK3IxdG5LQXdJc3FuQTZERmZy?=
+ =?utf-8?B?OGRQajJiWDdMdkx2QzRFRThGVmtRTkYyVDZKcU41RjJiSm1rODRGYUI3QkNY?=
+ =?utf-8?B?Mk1ESzljYjdDa1ZLbCtpUVdlRGZTSHBiL2FuTGM5cWdSdlcrZHdZZnY4bndM?=
+ =?utf-8?B?M3NYcVBRU2l6bXl2NTRjN3FwU0FUWkhWSFNYUVRRbTdrdTBlK0MzUXpNQTdz?=
+ =?utf-8?B?citxdEhjRW4yWFBZNlFYcE5lelc0U21vd01zSG1OR2ZJWTQxeDZlNG55bzBx?=
+ =?utf-8?B?V3g0VHFnZCt2U3UwZy80QVN2NW05Tlh4aWNIL25lSFVZbGt2SUtJQWxTMnZP?=
+ =?utf-8?B?YUYvSUhlWVdDcWE2MGZIeVhBUFVYSlpsTkM4YklmbHhhbWxFVEtleHY4a2RK?=
+ =?utf-8?B?TytKblJBTXZqbUZVdDJqMkFuOENUTmtkOUJvZjlvSlRuZjQySkNid3kwTkNF?=
+ =?utf-8?B?bFhtd2g3b3RoaXJKcE1Cc3B6eXFJRHdQdm9rYUo1Z2lpcC9tSG80WFZKcWFw?=
+ =?utf-8?B?RzJFR1VUU29TanpGbHBqTkI2c29RZ2VOYkhhL3FObkNWbk9UeWtTRENyRm1K?=
+ =?utf-8?B?Vk5naGltVk5Sd1lKN3VkRDdBU3oyYjBGemRBZzV2bzBnSEFEVVhGdHZkdGE3?=
+ =?utf-8?B?RUFEMDVrMmxlZEdhZVlpbHVzN21IMmQzT1dEQ2pKQUJISUYvNXlKajhwdHdi?=
+ =?utf-8?B?ZFRBZEdzQXdzNWNDZTg4cTh0YitGc1hqUHlUU2E5OEtBZ25oMXAzYTNLcFpn?=
+ =?utf-8?B?aUkyNmd0TXY0YnVMZEgyb0ZCVHdtc3MrVjNCdE9BOFdzcGQ1aitraW02UU1s?=
+ =?utf-8?B?dzBuVW5aZTF6Wm1sdVZ2NHVaaUYrdXZseW5Da25tbm9UeUVlWStWQytXcUJl?=
+ =?utf-8?B?STIranFHRi9nVXRIbHhpQXVlNUJ0N24yVGFYTGY5N3lpT0hpOGxsYWF2cXh0?=
+ =?utf-8?B?SkNqdUxDZzhkUzZ5aytTYWltcElMTEtpeEV6cFlSSWMwVWdTNzNZbWN6S1FF?=
+ =?utf-8?B?NEc0WDcxbDVNRUZTZ0U0VDFaWUZnQXM1TUpRTnRZY1psTHhTQm1ZanRjWmNh?=
+ =?utf-8?B?UG56NXZIZ01saTk3VXJCNlUydStBOTYzN0dMNmFpUXV4YzZDY01HY0x6Mm9n?=
+ =?utf-8?B?b2xmeVlvbWpVSmlFRUV1WmtnUjQzNlBXUXpQbGJ0a3pJYXFlUTlxMmlaNzkx?=
+ =?utf-8?B?MDVLTG1zekhFMDNnYmJMWWlGeGJlMCtoT2wwMUZCZDBHTWxYZGhHSVdCbENX?=
+ =?utf-8?B?ZXNqek9iMHNQeTFCc0ZabGVnWlVKd0tYSmgvaXpwNncvMitMYldNS0gxT3Rz?=
+ =?utf-8?B?RDdQSmZmY2g4RDJjR1dBa1UwbncwT2NwTjBzbTc2VFJySFgrQlZDL3RJTGxk?=
+ =?utf-8?B?KzFxWEVaWEJZb2lqZ2pUYld5YTNrUmM4aENRQjF0T2F5UEI5WFlFd09oaVB4?=
+ =?utf-8?Q?Cssd4P//9oXXxOp+8Y6+ftp?=
+MIME-Version: 1.0
+
+--000000000000ab218d065564e68d
+Content-Type: text/plain; charset="UTF-8"
+
+Supply Chain Quality Assurance
+Recall & Quarantine Confirmation Report
+
+Reporting context: latest event timestamp date *2026-06-29* | Ship date
+range *2026-06-02 to 2026-06-03* | Lot code *LOT-2026-0437*
+Total Events
+4
+Total Units Shipped
+18,700
+Confirmed Events
+4
+Unique Recipients
+4
+Overall Status / Alert
+
+All Provided Events Confirmed
+
+All 4 provided shipment events are marked *QUARANTINE_CONFIRMED*. Based on
+the supplied data, confirmation coverage is complete for the listed events
+and no missing critical fields were identified in recipient, ship date,
+units shipped, reference document, or timestamp values.
+Key Observations
+
+   - Four valid recall/quarantine shipment events were analyzed, all
+   associated with *lot LOT-2026-0437*.
+   - Total shipped volume across the listed events is *18,700 units*.
+   - All events show status *QUARANTINE_CONFIRMED*, resulting in *100%
+   confirmation coverage* for the provided records.
+   - The shipments in scope were distributed to *4 unique recipients*.
+   - Shipments occurred across *2026-06-02 to 2026-06-03*, while
+   confirmations were recorded at *2026-06-29T05:48:27Z* for each listed
+   event.
+   - No notable data gaps were detected in the provided event fields.
+
+Event Detail Dashboard
+Lot Code Recipient Units Shipped Ship Date Reference Document Status
+Timestamp
+LOT-2026-0437 FreshPack Distribution 4,200 2026-06-02 BOL-50021 / ASN-90011
+QUARANTINE_CONFIRMED 2026-06-29T05:48:27Z
+LOT-2026-0437 WestCoast Grocery DC 8,800 2026-06-02 BOL-50022 / ASN-90012
+QUARANTINE_CONFIRMED 2026-06-29T05:48:27Z
+LOT-2026-0437 Southwest Foods DC 3,100 2026-06-03 BOL-50023 / ASN-90013
+QUARANTINE_CONFIRMED 2026-06-29T05:48:27Z
+LOT-2026-0437 Rocky Mountain Foods DC 2,600 2026-06-03 BOL-50024 / ASN-90014
+QUARANTINE_CONFIRMED 2026-06-29T05:48:27Z
+Confirmation Analysis
+
+Confirmed status was identified strictly where event status equals
+*QUARANTINE_CONFIRMED*. All 4 analyzed events meet that criterion.
+
+Each provided confirmation carries the same timestamp:
+*2026-06-29T05:48:27Z*. Based on the supplied event set, no unconfirmed
+shipment events remain in scope.
+
+Gap assessment: *none identified in the provided data*. Recipient, ship
+date, units shipped, reference document, and timestamp fields are populated
+for every listed event.
+Decision Support / Recommended Actions
+
+   1. *Maintain executive visibility:* Record that all provided in-scope
+   shipment events are confirmed under quarantine status.
+   2. *Verify closure readiness:* Use the listed recipient, reference
+   document, and shipment details to support any internal reconciliation or
+   audit trail review tied to lot LOT-2026-0437.
+   3. *Monitor for scope expansion:* If additional shipment events for this
+   lot are identified later, compare them against this confirmed set to
+   determine whether further outreach or reporting is required.
+
+This message was automatically generated from confirmed recall/quarantine
+event data provided for reporting purposes.
+
+--000000000000ab218d065564e68d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"></=
+head>
+<body style=3D"margin:0;padding:0;background-color:#f4f7fb;font-family:Aria=
+l,Helvetica,sans-serif;color:#1f2937"><div style=3D"max-width:980px;margin:=
+0 auto;padding:24px 16px"><div style=3D"background:linear-gradient(135deg,#=
+b91c1c 0%,#dc2626 55%,#991b1b 100%);border-radius:14px;padding:24px 28px;co=
+lor:#ffffff"><div style=3D"font-size:12px;letter-spacing:0.08em;text-transf=
+orm:uppercase;font-weight:bold;opacity:0.9">Supply Chain Quality Assurance<=
+/div><h1 style=3D"margin:10px 0 8px 0;font-size:28px;line-height:1.2">Recal=
+l &amp; Quarantine Confirmation Report</h1><p style=3D"margin:0;font-size:1=
+4px;line-height:1.6">Reporting context: latest event timestamp date <strong=
+>2026-06-29</strong> | Ship date range <strong>2026-06-02 to 2026-06-03</st=
+rong> | Lot code <strong>LOT-2026-0437</strong></p></div><table role=3D"pre=
+sentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"width:=
+100%;margin-top:18px;border-collapse:separate;border-spacing:12px 12px"><tr=
+><td style=3D"width:25%;background:#ffffff;border:1px solid #dbe3ef;border-=
+radius:12px;padding:16px;vertical-align:top"><div style=3D"font-size:12px;c=
+olor:#6b7280;text-transform:uppercase;letter-spacing:0.04em">Total Events</=
+div><div style=3D"margin-top:8px;font-size:30px;font-weight:bold;color:#111=
+827">4</div></td><td style=3D"width:25%;background:#ffffff;border:1px solid=
+ #dbe3ef;border-radius:12px;padding:16px;vertical-align:top"><div style=3D"=
+font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:0.04em=
+">Total Units Shipped</div><div style=3D"margin-top:8px;font-size:30px;font=
+-weight:bold;color:#111827">18,700</div></td><td style=3D"width:25%;backgro=
+und:#ffffff;border:1px solid #dbe3ef;border-radius:12px;padding:16px;vertic=
+al-align:top"><div style=3D"font-size:12px;color:#6b7280;text-transform:upp=
+ercase;letter-spacing:0.04em">Confirmed Events</div><div style=3D"margin-to=
+p:8px;font-size:30px;font-weight:bold;color:#111827">4</div></td><td style=
+=3D"width:25%;background:#ffffff;border:1px solid #dbe3ef;border-radius:12p=
+x;padding:16px;vertical-align:top"><div style=3D"font-size:12px;color:#6b72=
+80;text-transform:uppercase;letter-spacing:0.04em">Unique Recipients</div><=
+div style=3D"margin-top:8px;font-size:30px;font-weight:bold;color:#111827">=
+4</div></td></tr></table><div style=3D"margin-top:8px;background:#fff7ed;bo=
+rder:1px solid #fdba74;border-left:6px solid #ea580c;border-radius:12px;pad=
+ding:18px 20px"><h2 style=3D"margin:0 0 10px 0;font-size:18px;color:#9a3412=
+">Overall Status / Alert</h2><p style=3D"margin:0 0 8px 0;font-size:14px;li=
+ne-height:1.7"><span style=3D"display:inline-block;background:#dcfce7;borde=
+r:1px solid #86efac;color:#166534;padding:4px 10px;border-radius:999px;font=
+-weight:bold;font-size:12px">All Provided Events Confirmed</span></p><p sty=
+le=3D"margin:0;font-size:14px;line-height:1.7;color:#7c2d12">All 4 provided=
+ shipment events are marked <strong>QUARANTINE_CONFIRMED</strong>. Based on=
+ the supplied data, confirmation coverage is complete for the listed events=
+ and no missing critical fields were identified in recipient, ship date, un=
+its shipped, reference document, or timestamp values.</p></div><div style=
+=3D"margin-top:18px;background:#ffffff;border:1px solid #dbe3ef;border-radi=
+us:12px;padding:18px 20px"><h2 style=3D"margin:0 0 12px 0;font-size:18px;co=
+lor:#111827">Key Observations</h2><ul style=3D"margin:0;padding-left:20px;c=
+olor:#374151;font-size:14px;line-height:1.8"><li>Four valid recall/quaranti=
+ne shipment events were analyzed, all associated with <strong>lot LOT-2026-=
+0437</strong>.</li><li>Total shipped volume across the listed events is <st=
+rong>18,700 units</strong>.</li><li>All events show status <strong>QUARANTI=
+NE_CONFIRMED</strong>, resulting in <strong>100% confirmation coverage</str=
+ong> for the provided records.</li><li>The shipments in scope were distribu=
+ted to <strong>4 unique recipients</strong>.</li><li>Shipments occurred acr=
+oss <strong>2026-06-02 to 2026-06-03</strong>, while confirmations were rec=
+orded at <strong>2026-06-29T05:48:27Z</strong> for each listed event.</li><=
+li>No notable data gaps were detected in the provided event fields.</li></u=
+l></div><div style=3D"margin-top:18px;background:#ffffff;border:1px solid #=
+dbe3ef;border-radius:12px;padding:18px 20px"><h2 style=3D"margin:0 0 12px 0=
+;font-size:18px;color:#111827">Event Detail Dashboard</h2><table role=3D"pr=
+esentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"width=
+:100%;border-collapse:collapse;font-size:13px"><tr style=3D"background:#eff=
+6ff"><td style=3D"padding:10px;border:1px solid #dbe3ef;font-weight:bold;co=
+lor:#1e3a8a">Lot Code</td><td style=3D"padding:10px;border:1px solid #dbe3e=
+f;font-weight:bold;color:#1e3a8a">Recipient</td><td style=3D"padding:10px;b=
+order:1px solid #dbe3ef;font-weight:bold;color:#1e3a8a">Units Shipped</td><=
+td style=3D"padding:10px;border:1px solid #dbe3ef;font-weight:bold;color:#1=
+e3a8a">Ship Date</td><td style=3D"padding:10px;border:1px solid #dbe3ef;fon=
+t-weight:bold;color:#1e3a8a">Reference Document</td><td style=3D"padding:10=
+px;border:1px solid #dbe3ef;font-weight:bold;color:#1e3a8a">Status</td><td =
+style=3D"padding:10px;border:1px solid #dbe3ef;font-weight:bold;color:#1e3a=
+8a">Timestamp</td></tr><tr><td style=3D"padding:10px;border:1px solid #dbe3=
+ef">LOT-2026-0437</td><td style=3D"padding:10px;border:1px solid #dbe3ef">F=
+reshPack Distribution</td><td style=3D"padding:10px;border:1px solid #dbe3e=
+f">4,200</td><td style=3D"padding:10px;border:1px solid #dbe3ef">2026-06-02=
+</td><td style=3D"padding:10px;border:1px solid #dbe3ef">BOL-50021 / ASN-90=
+011</td><td style=3D"padding:10px;border:1px solid #dbe3ef"><span style=3D"=
+display:inline-block;background:#dcfce7;border:1px solid #86efac;color:#166=
+534;padding:3px 8px;border-radius:999px;font-weight:bold;font-size:12px">QU=
+ARANTINE_CONFIRMED</span></td><td style=3D"padding:10px;border:1px solid #d=
+be3ef">2026-06-29T05:48:27Z</td></tr><tr><td style=3D"padding:10px;border:1=
+px solid #dbe3ef">LOT-2026-0437</td><td style=3D"padding:10px;border:1px so=
+lid #dbe3ef">WestCoast Grocery DC</td><td style=3D"padding:10px;border:1px =
+solid #dbe3ef">8,800</td><td style=3D"padding:10px;border:1px solid #dbe3ef=
+">2026-06-02</td><td style=3D"padding:10px;border:1px solid #dbe3ef">BOL-50=
+022 / ASN-90012</td><td style=3D"padding:10px;border:1px solid #dbe3ef"><sp=
+an style=3D"display:inline-block;background:#dcfce7;border:1px solid #86efa=
+c;color:#166534;padding:3px 8px;border-radius:999px;font-weight:bold;font-s=
+ize:12px">QUARANTINE_CONFIRMED</span></td><td style=3D"padding:10px;border:=
+1px solid #dbe3ef">2026-06-29T05:48:27Z</td></tr><tr><td style=3D"padding:1=
+0px;border:1px solid #dbe3ef">LOT-2026-0437</td><td style=3D"padding:10px;b=
+order:1px solid #dbe3ef">Southwest Foods DC</td><td style=3D"padding:10px;b=
+order:1px solid #dbe3ef">3,100</td><td style=3D"padding:10px;border:1px sol=
+id #dbe3ef">2026-06-03</td><td style=3D"padding:10px;border:1px solid #dbe3=
+ef">BOL-50023 / ASN-90013</td><td style=3D"padding:10px;border:1px solid #d=
+be3ef"><span style=3D"display:inline-block;background:#dcfce7;border:1px so=
+lid #86efac;color:#166534;padding:3px 8px;border-radius:999px;font-weight:b=
+old;font-size:12px">QUARANTINE_CONFIRMED</span></td><td style=3D"padding:10=
+px;border:1px solid #dbe3ef">2026-06-29T05:48:27Z</td></tr><tr><td style=3D=
+"padding:10px;border:1px solid #dbe3ef">LOT-2026-0437</td><td style=3D"padd=
+ing:10px;border:1px solid #dbe3ef">Rocky Mountain Foods DC</td><td style=3D=
+"padding:10px;border:1px solid #dbe3ef">2,600</td><td style=3D"padding:10px=
+;border:1px solid #dbe3ef">2026-06-03</td><td style=3D"padding:10px;border:=
+1px solid #dbe3ef">BOL-50024 / ASN-90014</td><td style=3D"padding:10px;bord=
+er:1px solid #dbe3ef"><span style=3D"display:inline-block;background:#dcfce=
+7;border:1px solid #86efac;color:#166534;padding:3px 8px;border-radius:999p=
+x;font-weight:bold;font-size:12px">QUARANTINE_CONFIRMED</span></td><td styl=
+e=3D"padding:10px;border:1px solid #dbe3ef">2026-06-29T05:48:27Z</td></tr><=
+/table></div><div style=3D"margin-top:18px;background:#ffffff;border:1px so=
+lid #dbe3ef;border-radius:12px;padding:18px 20px"><h2 style=3D"margin:0 0 1=
+2px 0;font-size:18px;color:#111827">Confirmation Analysis</h2><p style=3D"m=
+argin:0 0 10px 0;font-size:14px;line-height:1.8;color:#374151">Confirmed st=
+atus was identified strictly where event status equals <strong>QUARANTINE_C=
+ONFIRMED</strong>. All 4 analyzed events meet that criterion.</p><p style=
+=3D"margin:0 0 10px 0;font-size:14px;line-height:1.8;color:#374151">Each pr=
+ovided confirmation carries the same timestamp: <strong>2026-06-29T05:48:27=
+Z</strong>. Based on the supplied event set, no unconfirmed shipment events=
+ remain in scope.</p><p style=3D"margin:0;font-size:14px;line-height:1.8;co=
+lor:#374151">Gap assessment: <strong>none identified in the provided data</=
+strong>. Recipient, ship date, units shipped, reference document, and times=
+tamp fields are populated for every listed event.</p></div><div style=3D"ma=
+rgin-top:18px;background:#f8fafc;border:1px solid #dbe3ef;border-radius:12p=
+x;padding:18px 20px"><h2 style=3D"margin:0 0 12px 0;font-size:18px;color:#1=
+11827">Decision Support / Recommended Actions</h2><ol style=3D"margin:0;pad=
+ding-left:20px;color:#374151;font-size:14px;line-height:1.8"><li><strong>Ma=
+intain executive visibility:</strong> Record that all provided in-scope shi=
+pment events are confirmed under quarantine status.</li><li><strong>Verify =
+closure readiness:</strong> Use the listed recipient, reference document, a=
+nd shipment details to support any internal reconciliation or audit trail r=
+eview tied to lot LOT-2026-0437.</li><li><strong>Monitor for scope expansio=
+n:</strong> If additional shipment events for this lot are identified later=
+, compare them against this confirmed set to determine whether further outr=
+each or reporting is required.</li></ol></div><div style=3D"margin-top:16px=
+;padding:14px 4px 6px 4px;color:#6b7280;font-size:12px;line-height:1.6"><p =
+style=3D"margin:0">This message was automatically generated from confirmed =
+recall/quarantine event data provided for reporting purposes.</p></div></di=
+v></body></html>
+
+--000000000000ab218d065564e68d--

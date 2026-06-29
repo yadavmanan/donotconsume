@@ -1,0 +1,67 @@
+{
+  "fileName": "evaluation-set-default.json",
+  "id": "19286403-1880-4fe1-adb9-edd0c7c85625",
+  "name": "Default Evaluation Set",
+  "batchSize": 10,
+  "evaluatorRefs": [
+    "e0764840-6fa9-4fc6-8cd8-d37234513ba8"
+  ],
+  "evaluations": [
+    {
+      "id": "72ae8489-8f9f-4958-9c20-50d894b67bdf",
+      "name": "Debug Run 6/29/2026, 1:27:59 PM",
+      "inputs": {
+        "recalled_events": [
+          {
+            "lot_code": "LQ-26-0417-B",
+            "recipient": "North Valley Medical Distribution Center",
+            "units_shipped": 1240,
+            "ship_date": "2026-06-21",
+            "reference_document": "BOL-884193 / QA-RCL-260621-17",
+            "status": "QUARANTINE_CONFIRMED",
+            "timestamp": "2026-06-28T14:32:11Z"
+          },
+          {
+            "lot_code": "RX-26-0529-K",
+            "recipient": "Starlight Regional Pharmacy Network",
+            "units_shipped": 560,
+            "ship_date": "2026-06-24",
+            "reference_document": "INV-472991 / HOLD-NOTICE-260624-08",
+            "status": "RECALL_CONFIRMED",
+            "timestamp": "2026-06-28T16:05:44Z"
+          },
+          {
+            "lot_code": "MN-26-0603-A",
+            "recipient": "Harborview Hospital Supply Chain",
+            "units_shipped": 890,
+            "ship_date": "2026-06-25",
+            "reference_document": "ASN-661204 / QA-QC-260625-03",
+            "status": "QUARANTINE_CONFIRMED",
+            "timestamp": "2026-06-29T05:48:27Z"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "emailSent": true,
+        "recipient": "yadav.manan@outlook.com",
+        "summary": "Sent a high-importance Recall & Quarantine Confirmation Report covering 3 confirmed shipment events, including an executive summary, event-by-event breakdown, confirmation analysis, identified data gaps on confirming party identity, and decision-support recommendations.",
+        "eventsProcessed": 3
+      },
+      "expectedAgentBehavior": "",
+      "simulationInstructions": "",
+      "simulateInput": false,
+      "inputGenerationInstructions": "",
+      "simulateTools": false,
+      "evalSetId": "19286403-1880-4fe1-adb9-edd0c7c85625",
+      "createdAt": "2026-06-29T07:57:59.090Z",
+      "updatedAt": "2026-06-29T07:57:59.090Z",
+      "source": "firstSuccessfulRun"
+    }
+  ],
+  "modelSettings": [],
+  "createdAt": "2026-06-29T06:39:17.371Z",
+  "updatedAt": "2026-06-29T07:57:59.090Z",
+  "agentMemoryEnabled": false,
+  "agentMemorySettings": [],
+  "lineByLineEvaluation": false
+}

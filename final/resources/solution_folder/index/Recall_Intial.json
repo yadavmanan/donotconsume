@@ -1,0 +1,38 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Recall Intial",
+    "kind": "index",
+    "apiVersion": "ecs.uipath.com/v2",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "food_recall",
+        "kind": "Bucket"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "Recall Intial",
+      "description": "",
+      "storageBucketReference": {
+        "name": "food_recall",
+        "key": "b5f015f7-bd09-4924-b9e4-ae9371e9d3a4",
+        "folderKey": "72776223-9ac9-496a-a473-617d7a7ae1fc"
+      },
+      "fileNameGlob": "All",
+      "dataSourceType": "StorageBucket",
+      "includeSubfolders": true,
+      "ingestionType": "Advanced",
+      "encrypted": false
+    },
+    "locks": [],
+    "key": "84e46cc9-78bc-4c7c-01bf-08ded1677f40"
+  }
+}

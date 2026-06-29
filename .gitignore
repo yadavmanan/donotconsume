@@ -1,0 +1,8 @@
+# Temporary archive and local export artifacts
+*.zip
+
+# Common OS/editor noise
+.DS_Store
+Thumbs.db
+*.tmp
+*.log

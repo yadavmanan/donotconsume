@@ -1,0 +1,58 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "content/Workflow.json",
+      "uniqueId": "7a45f8cc-e4c4-44a9-ae12-2e0807654e2b",
+      "type": "Api",
+      "input": {
+        "type": "object",
+        "properties": {
+          "inventoryId": {
+            "type": "string",
+            "title": "Inventory ID"
+          }
+        },
+        "required": [
+          "inventoryId"
+        ],
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "inventoryId": {
+            "type": "string"
+          },
+          "quarantined": {
+            "type": "boolean"
+          },
+          "statusCode": {
+            "type": "number"
+          },
+          "response": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "error": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "content",
+          "inventoryId",
+          "quarantined",
+          "statusCode",
+          "response",
+          "error"
+        ],
+        "title": "Outputs"
+      }
+    }
+  ]
+}

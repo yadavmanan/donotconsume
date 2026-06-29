@@ -1,0 +1,131 @@
+{
+  "$resourceType": "tool",
+  "name": "API Workflow",
+  "description": "",
+  "location": "solution",
+  "type": "api",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "lotCode": {
+        "type": "string",
+        "description": "Lot code to trace. Expected format resembles LOT-2026-0437. Comes from the calling agent or user input. Use only letters, numbers, underscores, and hyphens.",
+        "pattern": "^[A-Za-z0-9_-]+$"
+      }
+    },
+    "required": [
+      "lotCode"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "traceabilityLotCode": {
+        "type": "string",
+        "description": "Lot code returned by the trace API response body."
+      },
+      "contaminationType": {
+        "type": "string",
+        "description": "Contamination type returned by the trace API response body."
+      },
+      "urgency": {
+        "type": "string",
+        "description": "Urgency returned by the trace API response body."
+      },
+      "recallClassEstimate": {
+        "type": "string",
+        "description": "Recall class estimate returned by the trace API response body."
+      },
+      "productionDate": {
+        "type": "string",
+        "description": "Production date returned by the trace API response body."
+      },
+      "expiryDate": {
+        "type": "string",
+        "description": "Expiry date returned by the trace API response body."
+      },
+      "kdeCompletenessPercent": {
+        "type": "number",
+        "description": "KDE completeness percentage returned by the trace API response body."
+      },
+      "totalUnitsAffected": {
+        "type": "number",
+        "description": "Total affected units returned by the trace API response body."
+      },
+      "product": {
+        "type": "object",
+        "description": "Product details returned by the trace API response body.",
+        "additionalProperties": true
+      },
+      "originFacility": {
+        "type": "object",
+        "description": "Origin facility details returned by the trace API response body.",
+        "additionalProperties": true
+      },
+      "rawMaterials": {
+        "type": "array",
+        "description": "Raw material records returned by the trace API response body.",
+        "items": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "criticalTrackingEvents": {
+        "type": "array",
+        "description": "Critical tracking events returned by the trace API response body.",
+        "items": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "limsResults": {
+        "type": "array",
+        "description": "LIMS results returned by the trace API response body.",
+        "items": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "statesAffected": {
+        "type": "array",
+        "description": "States affected as returned by the trace API response body.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "supplyChainNodes": {
+        "type": "array",
+        "description": "Supply chain nodes returned by the trace API response body.",
+        "items": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "warehouseInventory": {
+        "type": "array",
+        "description": "Warehouse inventory records returned by the trace API response body.",
+        "items": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "incompleteKDENodes": {
+        "type": "array",
+        "description": "Incomplete KDE nodes returned by the trace API response body.",
+        "items": {}
+      }
+    }
+  },
+  "settings": {},
+  "properties": {
+    "folderPath": "solution_folder",
+    "processName": "API Workflow"
+  },
+  "guardrail": {
+    "policies": []
+  },
+  "id": "7a8824c2-91eb-4dbb-b38c-a8209e3bf4af",
+  "referenceKey": "eb3baa10-0d01-44e5-abce-d25ac63e9e35",
+  "isEnabled": true,
+  "argumentProperties": {}
+}

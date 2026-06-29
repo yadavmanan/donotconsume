@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "lot_tracing_final",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "e53b0fbc-4a01-4db9-aaf1-39fe1b741d65",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "lot_tracing_final",
+      "description": null
+    },
+    "locks": [],
+    "key": "b502f5ee-89ca-4a2d-9d22-3f0d0cd2f081"
+  }
+}

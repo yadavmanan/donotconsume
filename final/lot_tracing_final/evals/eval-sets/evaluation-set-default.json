@@ -1,0 +1,52 @@
+{
+  "fileName": "evaluation-set-default.json",
+  "id": "e5c6d8d3-1e76-4243-a1ef-b760c002f047",
+  "name": "Default Evaluation Set",
+  "batchSize": 10,
+  "evaluatorRefs": [
+    "43ed2352-15dd-4e92-9dc9-c7d77164a13e"
+  ],
+  "evaluations": [
+    {
+      "id": "69acc940-d6c7-43d0-8329-5bc57b141552",
+      "name": "Debug Run 6/28/2026, 4:26:42 PM",
+      "inputs": {
+        "lotCode": "LOT-2026-0437"
+      },
+      "expectedOutput": {
+        "traceabilityLotCode": null,
+        "contaminationType": null,
+        "urgency": null,
+        "recallClassEstimate": null,
+        "productionDate": null,
+        "expiryDate": null,
+        "kdeCompletenessPercent": null,
+        "totalUnitsAffected": null,
+        "product": null,
+        "originFacility": null,
+        "rawMaterials": null,
+        "criticalTrackingEvents": null,
+        "limsResults": null,
+        "statesAffected": null,
+        "supplyChainNodes": null,
+        "warehouseInventory": null,
+        "incompleteKDENodes": null
+      },
+      "expectedAgentBehavior": "",
+      "simulationInstructions": "",
+      "simulateInput": false,
+      "inputGenerationInstructions": "",
+      "simulateTools": false,
+      "evalSetId": "e5c6d8d3-1e76-4243-a1ef-b760c002f047",
+      "createdAt": "2026-06-28T10:56:42.553Z",
+      "updatedAt": "2026-06-28T10:56:42.553Z",
+      "source": "firstSuccessfulRun"
+    }
+  ],
+  "modelSettings": [],
+  "createdAt": "2026-06-28T09:58:34.611Z",
+  "updatedAt": "2026-06-28T10:56:42.553Z",
+  "agentMemoryEnabled": false,
+  "agentMemorySettings": [],
+  "lineByLineEvaluation": false
+}

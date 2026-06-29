@@ -1,0 +1,95 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "86b0f711-f3a7-42fb-9ee3-a97bee44dd60",
+      "input": {
+        "type": "object",
+        "required": [
+          "lotcodes",
+          "traces"
+        ],
+        "properties": {
+          "lotcodes": {
+            "type": "object",
+            "description": "Object containing the lot code strings that should be quarantined. Caller sends the list in lotcodes.codes.",
+            "required": [
+              "codes"
+            ],
+            "properties": {
+              "codes": {
+                "type": "array",
+                "description": "List of lot codes that should be quarantined. Provide one lot code string per array item.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "traces": {
+            "type": "object",
+            "description": "Trace payload object that the agent must inspect to find the inventory IDs related to the requested lot codes.",
+            "additionalProperties": true
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "required": [
+          "content",
+          "quarantined",
+          "quarantineResults",
+          "notFoundLotcodes",
+          "matchedInventoryIds",
+          "summary"
+        ],
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Short grounded summary of the quarantine result."
+          },
+          "quarantined": {
+            "type": "array",
+            "description": "Successful quarantine results.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "quarantineResults": {
+            "type": "array",
+            "description": "All per-inventory quarantine results, including failures.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "notFoundLotcodes": {
+            "type": "array",
+            "description": "Requested lot codes that could not be matched to an inventory ID from traces.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "matchedInventoryIds": {
+            "type": "array",
+            "description": "Distinct inventory IDs resolved from traces for the requested lot codes.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary": {
+            "type": "object",
+            "description": "Summary counts for requested lot codes, resolved inventory IDs, quarantined items, failures, and not found items.",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  ]
+}

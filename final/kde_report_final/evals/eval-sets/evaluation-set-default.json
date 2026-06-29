@@ -1,0 +1,189 @@
+{
+  "fileName": "evaluation-set-default.json",
+  "id": "2ec991f2-1100-4a57-9975-6794fb5ddd97",
+  "name": "Default Evaluation Set",
+  "batchSize": 10,
+  "evaluatorRefs": [
+    "7e9fcfd7-9f48-48c7-bbf5-67b014466f5b"
+  ],
+  "evaluations": [
+    {
+      "id": "47bb6788-766c-44a1-993b-86acfd774422",
+      "name": "Debug Run 6/29/2026, 2:07:56 PM",
+      "inputs": {
+        "attachments": [
+          {
+            "ID": "evaluationFiles/FDA_RecordsRequest_LOT-2026-0437.pdf",
+            "FullName": "FDA_RecordsRequest_LOT-2026-0437.pdf",
+            "MimeType": "application/pdf"
+          }
+        ],
+        "email_body": "the attachment is enough",
+        "traces": {
+          "type": "agentOutput",
+          "spanType": "AgentOutput",
+          "output": {
+            "totalLotsRequested": 2,
+            "successfulLots": 1,
+            "failedLotCodes": [
+              "LOT-2026-0438"
+            ],
+            "totalUnitsAffected": 16100,
+            "traces": [
+              {
+                "lotCode": "LOT-2026-0437",
+                "statusCode": 200,
+                "trace": {
+                  "contaminationType": "E_coli_O157H7",
+                  "facility": "Salinas Valley Farm, CA",
+                  "forward": [
+                    {
+                      "node": "FreshPack Distribution",
+                      "shippedDate": "2026-06-02",
+                      "units": 4200
+                    },
+                    {
+                      "node": "WestCoast Grocery DC",
+                      "shippedDate": "2026-06-02",
+                      "units": 8800
+                    },
+                    {
+                      "node": "Southwest Foods DC",
+                      "shippedDate": "2026-06-03",
+                      "units": 3100
+                    }
+                  ],
+                  "product": "Romaine Lettuce Hearts 3-pack",
+                  "productionDate": "2026-06-01",
+                  "rawMaterials": [
+                    {
+                      "lotCode": "SEED-889",
+                      "supplier": "AgriSeed Co"
+                    }
+                  ],
+                  "recallClass": "I",
+                  "totalUnits": 16100
+                }
+              }
+            ]
+          },
+          "executionType": 0,
+          "agentVersion": "1.0.3-debug.63918009968",
+          "referenceId": "e3602e6e-cd2e-4df7-bfa9-a90501f08c8b",
+          "agentId": "e3602e6e-cd2e-4df7-bfa9-a90501f08c8b",
+          "agentName": "workflow.agent.FDA.Lot.Tracing.Agent"
+        }
+      },
+      "expectedOutput": {
+        "fsma204_kde_data": [
+          {
+            "traceabilityLotCode": "LOT-2026-0437",
+            "productDescription": "Romaine Lettuce Hearts 3-pack",
+            "quantity": "INCOMPLETE",
+            "unitOfMeasure": "INCOMPLETE",
+            "cteType": "packing",
+            "cteDate": "2026-06-01",
+            "cteLocation": "Salinas Valley Farm, CA",
+            "referenceDocumentNumber": "FDA-2026-TRACE-1187",
+            "firstReceiverInfo": "INCOMPLETE"
+          },
+          {
+            "traceabilityLotCode": "LOT-2026-0437",
+            "productDescription": "Romaine Lettuce Hearts 3-pack",
+            "quantity": "4200",
+            "unitOfMeasure": "INCOMPLETE",
+            "cteType": "shipping",
+            "cteDate": "2026-06-02",
+            "cteLocation": "Salinas Valley Farm, CA",
+            "referenceDocumentNumber": "FDA-2026-TRACE-1187",
+            "firstReceiverInfo": "FreshPack Distribution"
+          },
+          {
+            "traceabilityLotCode": "LOT-2026-0437",
+            "productDescription": "Romaine Lettuce Hearts 3-pack",
+            "quantity": "8800",
+            "unitOfMeasure": "INCOMPLETE",
+            "cteType": "shipping",
+            "cteDate": "2026-06-02",
+            "cteLocation": "Salinas Valley Farm, CA",
+            "referenceDocumentNumber": "FDA-2026-TRACE-1187",
+            "firstReceiverInfo": "WestCoast Grocery DC"
+          },
+          {
+            "traceabilityLotCode": "LOT-2026-0437",
+            "productDescription": "Romaine Lettuce Hearts 3-pack",
+            "quantity": "3100",
+            "unitOfMeasure": "INCOMPLETE",
+            "cteType": "shipping",
+            "cteDate": "2026-06-03",
+            "cteLocation": "Salinas Valley Farm, CA",
+            "referenceDocumentNumber": "FDA-2026-TRACE-1187",
+            "firstReceiverInfo": "Southwest Foods DC"
+          }
+        ],
+        "fda_cover_letter": "GreenLeaf Farms Inc.\nFDA Registration Number: 12345678901\nDate: 2026-06-29\n\nTo:\nU.S. Food and Drug Administration\nOffice of Coordinated Outbreak Response and Evaluation\n\nSubject: Traceability and Recall Compliance Submission for Romaine Lettuce Hearts 3-pack, Lot Code LOT-2026-0437\n\nDear FDA Representative,\n\nGreenLeaf Farms Inc. submits this recall compliance package concerning Romaine Lettuce Hearts 3-pack associated with traceability lot code LOT-2026-0437. This submission is prepared in response to FDA traceability records request number FDA-2026-TRACE-1187 and available internal trace findings related to an E. coli O157:H7 investigation.\n\nThe affected product identified from the available records is Romaine Lettuce Hearts 3-pack, produced on 2026-06-01 at Salinas Valley Farm, CA, under lot code LOT-2026-0437. Available trace records indicate forward distribution of approximately 16,100 units to FreshPack Distribution, WestCoast Grocery DC, and Southwest Foods DC on 2026-06-02 and 2026-06-03. One additional requested lot, LOT-2026-0438, could not be successfully traced from the data provided and remains under review.\n\nActions taken to date include review of the available trace output, compilation of available FSMA Section 204 KDE information, identification of unsupported mandatory KDE fields as INCOMPLETE, and preparation of this package for stakeholder and regulatory review. The FDA request document indicates that complete electronic sortable traceability lot code records were requested by FDA.\n\nPlease note that some mandatory KDE elements remain unavailable in the supplied case materials, including confirmed unit of measure, complete first receiver details for the packing event, and additional supporting CTE/KDE documentation beyond the FDA request reference. These gaps are specifically identified in the enclosed summary.\n\nPoint of contact information available from the reviewed materials is as follows: FDA Office of Coordinated Outbreak Response and Evaluation, outbreak.response@fda.gov. Company point-of-contact information was not provided in the source data and is therefore INCOMPLETE.\n\nSincerely,\nINCOMPLETE\nGreenLeaf Farms Inc.\nCompany Point of Contact: INCOMPLETE",
+        "internal_recall_summary": "Recall case overview: The case concerns Romaine Lettuce Hearts 3-pack, traceability lot code LOT-2026-0437, linked in the trace output to E. coli O157:H7. The product was produced on 2026-06-01 at Salinas Valley Farm, CA. The lot tracing results indicate one successfully traced lot and one failed lot trace request (LOT-2026-0438). The successful lot includes a total affected volume of 16,100 units.\n\nAffected products and lots: Confirmed product is Romaine Lettuce Hearts 3-pack, lot LOT-2026-0437. A related requested lot, LOT-2026-0438, appears in the trace request set but was not successfully traced and cannot yet be included as a confirmed affected lot based on current evidence.\n\nDistribution scope: Forward distribution from the source facility was identified to three downstream nodes: FreshPack Distribution (4,200 units shipped 2026-06-02), WestCoast Grocery DC (8,800 units shipped 2026-06-02), and Southwest Foods DC (3,100 units shipped 2026-06-03). Geographic scope beyond node names is not supported in the case materials and remains INCOMPLETE.\n\nKey timeline: Production date for the confirmed lot was 2026-06-01. Shipments occurred on 2026-06-02 and 2026-06-03. FDA records request FDA-2026-TRACE-1187 is dated 2026-06-09, with records due by 2026-06-10 17:00 ET according to the attachment analysis.\n\nActions completed: Available trace data and the provided attachment were reviewed. A preliminary FSMA 204 KDE dataset was assembled by CTE where supported. Missing mandatory KDE fields were marked INCOMPLETE. A formal FDA cover letter and this internal summary were prepared for stakeholder review.\n\nOpen gaps: Mandatory KDE gaps include missing unit of measure for all identified CTE records, missing quantity for the packing event, missing first receiver information for the packing event, and absence of fuller CTE record support in the attachment itself. Company internal point-of-contact details are also not present in the source materials. No formal recall initiation date or recall number was provided.\n\nExecutive risks and next steps: This is a high-risk food safety matter given the identified E. coli O157:H7 contamination and Class I designation in the trace output. Immediate next steps should include confirming whether product remains in commerce, validating unit-of-measure conventions, obtaining complete receiving and shipping KDE records, resolving the failed trace for LOT-2026-0438, and confirming company contact information for FDA-facing correspondence.",
+        "incomplete_fields": [
+          {
+            "recordReference": "LOT-2026-0437 | packing | 2026-06-01",
+            "fieldName": "quantity",
+            "cteType": "packing",
+            "status": "INCOMPLETE",
+            "notes": "Packing-event quantity not separately stated in the source data. Only total lot units and downstream shipment quantities were provided."
+          },
+          {
+            "recordReference": "LOT-2026-0437 | packing | 2026-06-01",
+            "fieldName": "unitOfMeasure",
+            "cteType": "packing",
+            "status": "INCOMPLETE",
+            "notes": "No unit of measure was provided for the packed product or lot total."
+          },
+          {
+            "recordReference": "LOT-2026-0437 | packing | 2026-06-01",
+            "fieldName": "firstReceiverInfo",
+            "cteType": "packing",
+            "status": "INCOMPLETE",
+            "notes": "First receiver information is not applicable or not provided for the packing event in the supplied materials."
+          },
+          {
+            "recordReference": "LOT-2026-0437 | shipping | 2026-06-02 | FreshPack Distribution",
+            "fieldName": "unitOfMeasure",
+            "cteType": "shipping",
+            "status": "INCOMPLETE",
+            "notes": "Shipment quantity was provided as 4200, but the unit of measure was not stated."
+          },
+          {
+            "recordReference": "LOT-2026-0437 | shipping | 2026-06-02 | WestCoast Grocery DC",
+            "fieldName": "unitOfMeasure",
+            "cteType": "shipping",
+            "status": "INCOMPLETE",
+            "notes": "Shipment quantity was provided as 8800, but the unit of measure was not stated."
+          },
+          {
+            "recordReference": "LOT-2026-0437 | shipping | 2026-06-03 | Southwest Foods DC",
+            "fieldName": "unitOfMeasure",
+            "cteType": "shipping",
+            "status": "INCOMPLETE",
+            "notes": "Shipment quantity was provided as 3100, but the unit of measure was not stated."
+          }
+        ],
+        "content": "FDA Recall Compliance Package\n\nSource-data notes:\n- Trace source reviewed: agent output for requested lots LOT-2026-0437 and LOT-2026-0438.\n- Attachment reviewed: FDA_RecordsRequest_LOT-2026-0437.pdf.\n- Email body instruction reviewed: 'the attachment is enough'.\n- Unsupported or missing mandatory KDE fields were marked INCOMPLETE.\n\nFSMA 204 KDE Data:\n[\n  {\n    \"traceabilityLotCode\": \"LOT-2026-0437\",\n    \"productDescription\": \"Romaine Lettuce Hearts 3-pack\",\n    \"quantity\": \"INCOMPLETE\",\n    \"unitOfMeasure\": \"INCOMPLETE\",\n    \"cteType\": \"packing\",\n    \"cteDate\": \"2026-06-01\",\n    \"cteLocation\": \"Salinas Valley Farm, CA\",\n    \"referenceDocumentNumber\": \"FDA-2026-TRACE-1187\",\n    \"firstReceiverInfo\": \"INCOMPLETE\"\n  },\n  {\n    \"traceabilityLotCode\": \"LOT-2026-0437\",\n    \"productDescription\": \"Romaine Lettuce Hearts 3-pack\",\n    \"quantity\": \"4200\",\n    \"unitOfMeasure\": \"INCOMPLETE\",\n    \"cteType\": \"shipping\",\n    \"cteDate\": \"2026-06-02\",\n    \"cteLocation\": \"Salinas Valley Farm, CA\",\n    \"referenceDocumentNumber\": \"FDA-2026-TRACE-1187\",\n    \"firstReceiverInfo\": \"FreshPack Distribution\"\n  },\n  {\n    \"traceabilityLotCode\": \"LOT-2026-0437\",\n    \"productDescription\": \"Romaine Lettuce Hearts 3-pack\",\n    \"quantity\": \"8800\",\n    \"unitOfMeasure\": \"INCOMPLETE\",\n    \"cteType\": \"shipping\",\n    \"cteDate\": \"2026-06-02\",\n    \"cteLocation\": \"Salinas Valley Farm, CA\",\n    \"referenceDocumentNumber\": \"FDA-2026-TRACE-1187\",\n    \"firstReceiverInfo\": \"WestCoast Grocery DC\"\n  },\n  {\n    \"traceabilityLotCode\": \"LOT-2026-0437\",\n    \"productDescription\": \"Romaine Lettuce Hearts 3-pack\",\n    \"quantity\": \"3100\",\n    \"unitOfMeasure\": \"INCOMPLETE\",\n    \"cteType\": \"shipping\",\n    \"cteDate\": \"2026-06-03\",\n    \"cteLocation\": \"Salinas Valley Farm, CA\",\n    \"referenceDocumentNumber\": \"FDA-2026-TRACE-1187\",\n    \"firstReceiverInfo\": \"Southwest Foods DC\"\n  }\n]\n\nFDA Cover Letter:\nGreenLeaf Farms Inc.\nFDA Registration Number: 12345678901\nDate: 2026-06-29\n\nTo:\nU.S. Food and Drug Administration\nOffice of Coordinated Outbreak Response and Evaluation\n\nSubject: Traceability and Recall Compliance Submission for Romaine Lettuce Hearts 3-pack, Lot Code LOT-2026-0437\n\nDear FDA Representative,\n\nGreenLeaf Farms Inc. submits this recall compliance package concerning Romaine Lettuce Hearts 3-pack associated with traceability lot code LOT-2026-0437. This submission is prepared in response to FDA traceability records request number FDA-2026-TRACE-1187 and available internal trace findings related to an E. coli O157:H7 investigation.\n\nThe affected product identified from the available records is Romaine Lettuce Hearts 3-pack, produced on 2026-06-01 at Salinas Valley Farm, CA, under lot code LOT-2026-0437. Available trace records indicate forward distribution of approximately 16,100 units to FreshPack Distribution, WestCoast Grocery DC, and Southwest Foods DC on 2026-06-02 and 2026-06-03. One additional requested lot, LOT-2026-0438, could not be successfully traced from the data provided and remains under review.\n\nActions taken to date include review of the available trace output, compilation of available FSMA Section 204 KDE information, identification of unsupported mandatory KDE fields as INCOMPLETE, and preparation of this package for stakeholder and regulatory review. The FDA request document indicates that complete electronic sortable traceability lot code records were requested by FDA.\n\nPlease note that some mandatory KDE elements remain unavailable in the supplied case materials, including confirmed unit of measure, complete first receiver details for the packing event, and additional supporting CTE/KDE documentation beyond the FDA request reference. These gaps are specifically identified in the enclosed summary.\n\nPoint of contact information available from the reviewed materials is as follows: FDA Office of Coordinated Outbreak Response and Evaluation, outbreak.response@fda.gov. Company point-of-contact information was not provided in the source data and is therefore INCOMPLETE.\n\nSincerely,\nINCOMPLETE\nGreenLeaf Farms Inc.\nCompany Point of Contact: INCOMPLETE\n\nInternal Recall Summary:\nRecall case overview: The case concerns Romaine Lettuce Hearts 3-pack, traceability lot code LOT-2026-0437, linked in the trace output to E. coli O157:H7. The product was produced on 2026-06-01 at Salinas Valley Farm, CA. The lot tracing results indicate one successfully traced lot and one failed lot trace request (LOT-2026-0438). The successful lot includes a total affected volume of 16,100 units.\n\nAffected products and lots: Confirmed product is Romaine Lettuce Hearts 3-pack, lot LOT-2026-0437. A related requested lot, LOT-2026-0438, appears in the trace request set but was not successfully traced and cannot yet be included as a confirmed affected lot based on current evidence.\n\nDistribution scope: Forward distribution from the source facility was identified to three downstream nodes: FreshPack Distribution (4,200 units shipped 2026-06-02), WestCoast Grocery DC (8,800 units shipped 2026-06-02), and Southwest Foods DC (3,100 units shipped 2026-06-03). Geographic scope beyond node names is not supported in the case materials and remains INCOMPLETE.\n\nKey timeline: Production date for the confirmed lot was 2026-06-01. Shipments occurred on 2026-06-02 and 2026-06-03. FDA records request FDA-2026-TRACE-1187 is dated 2026-06-09, with records due by 2026-06-10 17:00 ET according to the attachment analysis.\n\nActions completed: Available trace data and the provided attachment were reviewed. A preliminary FSMA 204 KDE dataset was assembled by CTE where supported. Missing mandatory KDE fields were marked INCOMPLETE. A formal FDA cover letter and this internal summary were prepared for stakeholder review.\n\nOpen gaps: Mandatory KDE gaps include missing unit of measure for all identified CTE records, missing quantity for the packing event, missing first receiver information for the packing event, and absence of fuller CTE record support in the attachment itself. Company internal point-of-contact details are also not present in the source materials. No formal recall initiation date or recall number was provided.\n\nExecutive risks and next steps: This is a high-risk food safety matter given the identified E. coli O157:H7 contamination and Class I designation in the trace output. Immediate next steps should include confirming whether product remains in commerce, validating unit-of-measure conventions, obtaining complete receiving and shipping KDE records, resolving the failed trace for LOT-2026-0438, and confirming company contact information for FDA-facing correspondence.\n\nIncomplete KDE Fields:\n[\n  {\n    \"recordReference\": \"LOT-2026-0437 | packing | 2026-06-01\",\n    \"fieldName\": \"quantity\",\n    \"cteType\": \"packing\",\n    \"status\": \"INCOMPLETE\",\n    \"notes\": \"Packing-event quantity not separately stated in the source data. Only total lot units and downstream shipment quantities were provided.\"\n  },\n  {\n    \"recordReference\": \"LOT-2026-0437 | packing | 2026-06-01\",\n    \"fieldName\": \"unitOfMeasure\",\n    \"cteType\": \"packing\",\n    \"status\": \"INCOMPLETE\",\n    \"notes\": \"No unit of measure was provided for the packed product or lot total.\"\n  },\n  {\n    \"recordReference\": \"LOT-2026-0437 | packing | 2026-06-01\",\n    \"fieldName\": \"firstReceiverInfo\",\n    \"cteType\": \"packing\",\n    \"status\": \"INCOMPLETE\",\n    \"notes\": \"First receiver information is not applicable or not provided for the packing event in the supplied materials.\"\n  },\n  {\n    \"recordReference\": \"LOT-2026-0437 | shipping | 2026-06-02 | FreshPack Distribution\",\n    \"fieldName\": \"unitOfMeasure\",\n    \"cteType\": \"shipping\",\n    \"status\": \"INCOMPLETE\",\n    \"notes\": \"Shipment quantity was provided as 4200, but the unit of measure was not stated.\"\n  },\n  {\n    \"recordReference\": \"LOT-2026-0437 | shipping | 2026-06-02 | WestCoast Grocery DC\",\n    \"fieldName\": \"unitOfMeasure\",\n    \"cteType\": \"shipping\",\n    \"status\": \"INCOMPLETE\",\n    \"notes\": \"Shipment quantity was provided as 8800, but the unit of measure was not stated.\"\n  },\n  {\n    \"recordReference\": \"LOT-2026-0437 | shipping | 2026-06-03 | Southwest Foods DC\",\n    \"fieldName\": \"unitOfMeasure\",\n    \"cteType\": \"shipping\",\n    \"status\": \"INCOMPLETE\",\n    \"notes\": \"Shipment quantity was provided as 3100, but the unit of measure was not stated.\"\n  }\n]"
+      },
+      "expectedAgentBehavior": "",
+      "simulationInstructions": "",
+      "simulateInput": false,
+      "inputGenerationInstructions": "",
+      "simulateTools": false,
+      "evalSetId": "2ec991f2-1100-4a57-9975-6794fb5ddd97",
+      "createdAt": "2026-06-29T08:37:56.522Z",
+      "updatedAt": "2026-06-29T08:37:59.256Z",
+      "source": "firstSuccessfulRun"
+    }
+  ],
+  "modelSettings": [],
+  "createdAt": "2026-06-28T11:32:36.629Z",
+  "updatedAt": "2026-06-29T08:37:56.522Z",
+  "agentMemoryEnabled": false,
+  "agentMemorySettings": [],
+  "lineByLineEvaluation": false
+}

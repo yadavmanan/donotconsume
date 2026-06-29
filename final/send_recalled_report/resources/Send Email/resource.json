@@ -1,0 +1,333 @@
+{
+  "$resourceType": "tool",
+  "name": "Send Email",
+  "description": "Sends an email message",
+  "location": "external",
+  "type": "integration",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "SaveAsDraft": {
+        "type": "boolean",
+        "title": "Save as draft",
+        "description": "Send an email message. By default, the email will be saved as draft."
+      },
+      "BCC": {
+        "type": "string",
+        "title": "BCC",
+        "description": "The hidden recipients of the email, separated by comma (,)"
+      },
+      "Body": {
+        "type": "string",
+        "title": "Body",
+        "description": "The body of the email"
+      },
+      "CC": {
+        "type": "string",
+        "title": "CC",
+        "description": "The secondary recipients of the email, separated by comma (,)"
+      },
+      "Importance": {
+        "type": "string",
+        "title": "Importance",
+        "description": "The importance of the mail",
+        "oneOf": [
+          {
+            "const": "normal",
+            "title": "Normal"
+          },
+          {
+            "const": "high",
+            "title": "High"
+          },
+          {
+            "const": "low",
+            "title": "Low"
+          }
+        ],
+        "enum": [
+          "normal",
+          "high",
+          "low"
+        ]
+      },
+      "ReplyTo": {
+        "type": "string",
+        "title": "Reply to",
+        "description": "The email addresses to use when replying, separated by comma (,)"
+      },
+      "Subject": {
+        "type": "string",
+        "title": "Subject",
+        "description": "The subject of the email"
+      },
+      "To": {
+        "type": "string",
+        "title": "To",
+        "description": "The primary recipients of the email, separated by comma (,)"
+      }
+    },
+    "required": [
+      "To"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "Importance": {
+        "type": "string",
+        "title": "Importance",
+        "description": "The importance of the mail"
+      },
+      "id": {
+        "type": "string",
+        "title": "Id"
+      },
+      "labelIds[*]": {
+        "type": "string",
+        "title": "Label ids"
+      },
+      "threadId": {
+        "type": "string",
+        "title": "Thread ID"
+      }
+    },
+    "definitions": {}
+  },
+  "settings": {},
+  "properties": {
+    "toolPath": "/SendEmail",
+    "objectName": "SendEmail",
+    "toolDisplayName": "Send Email",
+    "toolDescription": "Sends an email message",
+    "method": "POST",
+    "connection": {
+      "id": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0",
+      "name": "yadav.manan24@gmail.com",
+      "elementInstanceId": 0,
+      "apiBaseUri": "",
+      "state": "enabled",
+      "isDefault": false,
+      "connector": {
+        "key": "uipath-google-gmail",
+        "name": "Gmail",
+        "image": "https://staging.uipath.com/elements_/scaleunit_/4a9b6040-645f-4006-a000-829794b794d4/v3/element/elements/uipath-google-gmail/image",
+        "enabled": true
+      },
+      "folder": {
+        "key": "4c029b43-3e61-4f4b-bd0c-ac669bac94c3",
+        "path": "811b80b0-a9cc-46d2-9a98-36472e85e261.4c029b43-3e61-4f4b-bd0c-ac669bac94c3"
+      },
+      "solutionProperties": {
+        "resourceKey": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0"
+      }
+    },
+    "parameters": [
+      {
+        "name": "body",
+        "displayName": "Body",
+        "type": "string",
+        "fieldLocation": "multipart",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The message body\n",
+        "dynamic": true,
+        "position": "primary",
+        "sortOrder": 1,
+        "required": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "SaveAsDraft",
+        "displayName": "Save as draft",
+        "type": "boolean",
+        "fieldLocation": "query",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "Send an email message. By default, the email will be saved as draft.",
+        "dynamic": true,
+        "position": "primary",
+        "sortOrder": 2,
+        "required": false,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "To",
+        "displayName": "To",
+        "type": "string",
+        "fieldLocation": "body",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The primary recipients of the email, separated by comma (,)",
+        "dynamic": true,
+        "position": "primary",
+        "sortOrder": 3,
+        "required": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "Subject",
+        "displayName": "Subject",
+        "type": "string",
+        "fieldLocation": "body",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The subject of the email",
+        "dynamic": true,
+        "position": "primary",
+        "sortOrder": 4,
+        "required": false,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "Body",
+        "displayName": "Body",
+        "type": "string",
+        "fieldLocation": "body",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The body of the email",
+        "dynamic": true,
+        "componentType": "RichTextEditorHTML",
+        "position": "primary",
+        "sortOrder": 5,
+        "required": false,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "file",
+        "displayName": "Attachment",
+        "type": "file",
+        "fieldLocation": "multipart",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The attachment to be sent with the email",
+        "dynamic": true,
+        "position": "primary",
+        "sortOrder": 6,
+        "required": false,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "Importance",
+        "displayName": "Importance",
+        "type": "string",
+        "fieldLocation": "body",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The importance of the mail",
+        "dynamic": true,
+        "position": "secondary",
+        "sortOrder": 7,
+        "required": false,
+        "enumValues": [
+          {
+            "name": "Normal",
+            "value": "normal"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          },
+          {
+            "name": "Low",
+            "value": "low"
+          }
+        ],
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "ReplyTo",
+        "displayName": "Reply to",
+        "type": "string",
+        "fieldLocation": "body",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The email addresses to use when replying, separated by comma (,)",
+        "dynamic": true,
+        "position": "secondary",
+        "sortOrder": 8,
+        "required": false,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "CC",
+        "displayName": "CC",
+        "type": "string",
+        "fieldLocation": "body",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The secondary recipients of the email, separated by comma (,)",
+        "dynamic": true,
+        "position": "secondary",
+        "sortOrder": 9,
+        "required": false,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      },
+      {
+        "name": "BCC",
+        "displayName": "BCC",
+        "type": "string",
+        "fieldLocation": "body",
+        "fieldVariant": "dynamic",
+        "value": "{{prompt}}",
+        "description": "The hidden recipients of the email, separated by comma (,)",
+        "dynamic": true,
+        "position": "secondary",
+        "sortOrder": 10,
+        "required": false,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null,
+        "isCascading": false
+      }
+    ],
+    "bodyStructure": {
+      "contentType": "multipart",
+      "jsonBodySection": "body"
+    }
+  },
+  "guardrail": {
+    "policies": []
+  },
+  "iconUrl": "https://staging.uipath.com/elements_/scaleunit_/4a9b6040-645f-4006-a000-829794b794d4/v3/element/elements/uipath-google-gmail/image",
+  "id": "e59247e5-4e98-4464-90dc-1129e37a4b51",
+  "isPreview": true,
+  "isEnabled": true
+}

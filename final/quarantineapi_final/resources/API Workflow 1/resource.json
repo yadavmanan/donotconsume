@@ -1,0 +1,65 @@
+{
+  "$resourceType": "tool",
+  "name": "API Workflow 1",
+  "description": "Quarantine a single inventory record by inventory ID. Use this tool only after you have already resolved a valid inventory ID from the traces object. Pass one non-empty `inventoryId` string. The tool calls the quarantine endpoint and returns the quarantine result for that inventory record. If no inventory ID was found, do not call this tool.",
+  "location": "solution",
+  "type": "api",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "inventoryId": {
+        "type": "string",
+        "title": "Inventory ID",
+        "description": "Inventory ID to quarantine, for example INV-0001."
+      }
+    },
+    "required": [
+      "inventoryId"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "string"
+      },
+      "inventoryId": {
+        "type": "string"
+      },
+      "quarantined": {
+        "type": "boolean"
+      },
+      "statusCode": {
+        "type": "number"
+      },
+      "response": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "error": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "required": [
+      "content",
+      "inventoryId",
+      "quarantined",
+      "statusCode",
+      "response",
+      "error"
+    ]
+  },
+  "settings": {},
+  "properties": {
+    "folderPath": "solution_folder",
+    "processName": "quarantine"
+  },
+  "guardrail": {
+    "policies": []
+  },
+  "id": "08a1054f-1e0d-41c7-b69c-eb228d5effbf",
+  "referenceKey": "830db2a1-ba2e-4ea4-9b8a-f6d1f5c53de1",
+  "isEnabled": true,
+  "argumentProperties": {}
+}

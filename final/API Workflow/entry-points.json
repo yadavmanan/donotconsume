@@ -1,0 +1,127 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "content/Workflow.json",
+      "uniqueId": "a2d86294-89b5-46e1-8a3a-4a149315fd0e",
+      "type": "Api",
+      "input": {
+        "type": "object",
+        "title": "Inputs",
+        "properties": {
+          "lotCode": {
+            "type": "string",
+            "description": "Lot code to trace. Expected format resembles LOT-2026-0437. Comes from the calling agent or user input. Use only letters, numbers, underscores, and hyphens.",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          }
+        },
+        "required": [
+          "lotCode"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "title": "Outputs",
+        "description": "Response body returned by the lot trace API for the requested lot code.",
+        "additionalProperties": true,
+        "properties": {
+          "traceabilityLotCode": {
+            "type": "string",
+            "description": "Lot code returned by the trace API response body."
+          },
+          "contaminationType": {
+            "type": "string",
+            "description": "Contamination type returned by the trace API response body."
+          },
+          "urgency": {
+            "type": "string",
+            "description": "Urgency returned by the trace API response body."
+          },
+          "recallClassEstimate": {
+            "type": "string",
+            "description": "Recall class estimate returned by the trace API response body."
+          },
+          "productionDate": {
+            "type": "string",
+            "description": "Production date returned by the trace API response body."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Expiry date returned by the trace API response body."
+          },
+          "kdeCompletenessPercent": {
+            "type": "number",
+            "description": "KDE completeness percentage returned by the trace API response body."
+          },
+          "totalUnitsAffected": {
+            "type": "number",
+            "description": "Total affected units returned by the trace API response body."
+          },
+          "product": {
+            "type": "object",
+            "description": "Product details returned by the trace API response body.",
+            "additionalProperties": true
+          },
+          "originFacility": {
+            "type": "object",
+            "description": "Origin facility details returned by the trace API response body.",
+            "additionalProperties": true
+          },
+          "rawMaterials": {
+            "type": "array",
+            "description": "Raw material records returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "criticalTrackingEvents": {
+            "type": "array",
+            "description": "Critical tracking events returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "limsResults": {
+            "type": "array",
+            "description": "LIMS results returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "statesAffected": {
+            "type": "array",
+            "description": "States affected as returned by the trace API response body.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supplyChainNodes": {
+            "type": "array",
+            "description": "Supply chain nodes returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "warehouseInventory": {
+            "type": "array",
+            "description": "Warehouse inventory records returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "incompleteKDENodes": {
+            "type": "array",
+            "description": "Incomplete KDE nodes returned by the trace API response body.",
+            "items": {}
+          }
+        }
+      }
+    }
+  ]
+}

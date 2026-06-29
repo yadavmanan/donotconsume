@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "connect_recall",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "b3bb5942-9a21-4f08-b94b-c5685a75bdba",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "connect_recall",
+      "description": null
+    },
+    "locks": [],
+    "key": "84543d77-f935-43fe-bcdf-b0868da8c520"
+  }
+}

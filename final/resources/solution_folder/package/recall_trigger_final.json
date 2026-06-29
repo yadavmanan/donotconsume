@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "recall_trigger_final",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "c3189189-fc2e-4635-8da5-47c92c9a503e",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "recall_trigger_final",
+      "description": null
+    },
+    "locks": [],
+    "key": "d87007d9-5158-47ab-bc66-397b77f0dc90"
+  }
+}

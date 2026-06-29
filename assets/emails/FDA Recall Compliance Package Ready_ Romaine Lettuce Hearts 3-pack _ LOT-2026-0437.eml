@@ -1,0 +1,655 @@
+Received: from SE1PPFCF6CADFC7.apcprd06.prod.outlook.com
+ (2603:1096:108:1::42a) by TYZPR06MB5710.apcprd06.prod.outlook.com with HTTPS;
+ Mon, 29 Jun 2026 10:25:20 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=W7IZzbVgBn1meFZU6dtFrGmRKsTuhozKCdKjntKgwYQMS3rifNw5zL3X+uJwFkDjn8cMf5ZoSfD8f4i54qP19/xguJQjvEzXNNPAbvbs6olIKHXBzfdOulvm+k7DSgJ6ei9xkf8oM1QJiJGowaPmBQzO9MnW4EW0Q3Gek+2qKBgEV5Weq/86ZfODZ4ahBvFDxshzaaPjDq4U7+svU6nzqlrnf/2mbUMVHTCxTAPIoLZqY/OUPEJFRHkkLLal/Gnwa6tWmAc1M0MhufIWuCV23FBomLIrbdNpmzSn8d33XACvgk7eBuO/ZR/s1dIzT2RdzhwJd8hjJQnx383C1YgIhQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DUgzKCQDT+Deu7L8xLbzyN4FDcCh2IiPQ/4O5PX0X6c=;
+ b=PJkT19OwRAo3QuaQ+g5hRXRJdNOXHUXFhxdPtycfszAYyUJdD65OptjCmQcE9P4wwuHt7iVlaJ+Wzx941R0o4mZzGy7/yhBs96LprFJTBn8Xi/YbbXQF6OBlDeL/zVeR/I0WxSGTXKCJHn2C8hFas0oidaOSXruLWNzjuhROmp48IA610ycmxz3f4AZvWzQ9bEVFylBYnnhjnYI8uOvkuY7LABmbzmgBXcdlCu9UCN5RAljrWEgGEdRgrlBzbECFZz+fkwYTGaXs0GvPkO10LJw6mHlgqDutMlGLjdPJC83/R+xm8BhflMVxpEVSeBrzvnV5JSaf6meTUWNa9A63oQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 209.85.160.196) smtp.rcpttodomain=outlook.com smtp.mailfrom=gmail.com;
+ dmarc=pass (p=none sp=quarantine pct=100) action=none header.from=gmail.com;
+ dkim=pass (signature was verified) header.d=gmail.com; arc=pass (0 oda=0
+ ltdi=1)
+Received: from CH5PR02CA0010.namprd02.prod.outlook.com (2603:10b6:610:1ed::22)
+ by SE1PPFCF6CADFC7.apcprd06.prod.outlook.com (2603:1096:108:1::42a) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Mon, 29 Jun
+ 2026 10:25:19 +0000
+Received: from CH1PEPF0000AD76.namprd04.prod.outlook.com
+ (2603:10b6:610:1ed::4) by CH5PR02CA0010.outlook.office365.com
+ (2603:10b6:610:1ed::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.19 via Frontend Transport; Mon,
+ 29 Jun 2026 10:25:17 +0000
+Authentication-Results: spf=pass (sender IP is 209.85.160.196)
+ smtp.mailfrom=gmail.com; dkim=pass (signature was verified)
+ header.d=gmail.com;dmarc=pass action=none header.from=gmail.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
+ 209.85.160.196 as permitted sender) receiver=protection.outlook.com;
+ client-ip=209.85.160.196; helo=mail-qt1-f196.google.com; pr=C
+Received: from mail-qt1-f196.google.com (209.85.160.196) by
+ CH1PEPF0000AD76.mail.protection.outlook.com (10.167.244.53) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
+ via Frontend Transport; Mon, 29 Jun 2026 10:25:17 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:C6C2AFE4A004750FE0DFDFE6A3B1F861411BD81C87EE08B03B103070F84E1C50;UpperCasedChecksum:2885E7443E3B5DB8F76A8D4DC7A4ED2B771299894C03E715BCB20BC7AD24F334;SizeAsReceived:4260;Count:19
+Received: by mail-qt1-f196.google.com with SMTP id d75a77b69052e-51c0c68aa31so274991cf.3
+        for <yadav.manan@outlook.com>; Mon, 29 Jun 2026 03:25:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782728717; cv=none;
+        d=google.com; s=arc-20260327;
+        b=UGQ8y5k/iD+lxylZMNWtMo69egHG+1RsiA8XMBiuFX6OW7zZAR28fB5oRd7AkOngcC
+         QnwD1gYHrrwHXxpsmExbpdBuW3ZJsOYa3z61EO9p3RW+0IAS4oOlz7qS6G/lS5lNAvcV
+         JJSiYvZJo4clwg95QmhS8lEpVNy3G6p6w2Sifdl9zMa8V/H51GIjE0l3hauYHONdgZcm
+         3mH6slj/HTUSS09R23MiHZIUwtrjBfF4c75IcWx+xg1yVhc4JKhOOvu/B2jNtXF5EpqB
+         0GnMlvElnVl2HuBpcg0FrrBuuJLH5Ysq9e8hHfJsbJ7uFDV+ymlHc0IcgJ0Vlp4/MBY5
+         h9pA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=DUgzKCQDT+Deu7L8xLbzyN4FDcCh2IiPQ/4O5PX0X6c=;
+        fh=n/G3sLFa1y/h7V03QID+how7Jcc1S8kgZsFIuYpRTXs=;
+        b=QMYglgqJXnVBcXePxCJNDCYj9fshJIEN1wSbmyYXXGPdr+n4iO+oC//a3EPyfUCd1y
+         A2WVKTCLtztxEQOH36F0ym0pyC3hyG14ZPcYPbAc29s8tEQEqXLW55P/z3hL5fem1KoD
+         GucOo0UXQt8ZRGy7MxmENjJEJVn/YhCaxI28rKMjfj+ixgQr+rOCABh0qQzYUwIKV4Qk
+         DEdrqeFwwRO+ha9jiiFC53jm33s7iksj7Fb9Y0pN4Smu5t3CZFqmVxrtej46lD3vUA3+
+         6kA0mCo4/XlVLap51V/q64YX04U4Fatxhz0mEYyuBfejYPe+g7Faw4ivVh8dGvk2jNfu
+         KeEA==;
+        darn=outlook.com
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782728717; x=1783333517; darn=outlook.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=DUgzKCQDT+Deu7L8xLbzyN4FDcCh2IiPQ/4O5PX0X6c=;
+        b=XsS49WmMZuTcPgNv0Sgs6aPSsZZNWUZdO8fLIli7uxd4BD+23J1PHsuAnetit6gIrr
+         JOhHP2maeP0OUX35ucEhKcMtSgVsGgD8LOPlrrCr+JiZbVnJqGVfPMCO1FkMCbZoeyEt
+         xPARGfeSABc2knRqA+ins3swCP5NLIMGU4hnSz5u72nkt3d/86ncU5Xca0Qla0sSCzVC
+         eSzDJTzRH9HFpQZNC/4h0izn9vWvVY6645Zgew1jatBIkwwZu3gtcDCG4GrwX/DZTNtO
+         0Bgw9idOHflYgeSICbam1UxPHqd2yrPhCFiseMjywndYe9osV/7yaHTjEUZJ6dHCM6wY
+         ATNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782728717; x=1783333517;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=DUgzKCQDT+Deu7L8xLbzyN4FDcCh2IiPQ/4O5PX0X6c=;
+        b=UaMzwh9ZRSjrC8nq3xHnGofruVKhGcQx+wcJDvI8/ySGQQY9c/6e2sbGzmvdMnlkm7
+         aPP7PCszdg4M66P1p91fRHBUWc7XwL/GbmGSLCgrrirCDyYD5YmAWAcukLwoWp89ZCpL
+         26SkZ4Bgejr86mLKYtdV+YCJYcGe1USSr7rmhwvbN+9NwSWOxYEexJxGxe5J6R7dYaDV
+         ZAWCN3QVTib2xR/cV0Av8I0PCFvgiYuNlLJ/vXrJVDWa6Q0dMXChWrKvP3ANFtvhBNSI
+         W34T8Hg16It1gJJyWEmtRI2RiRThSLBg/ru5LXPTqcVeAJRjQAvjv6KlCnEshfiTPyyz
+         nV3w==
+X-Gm-Message-State: AOJu0YyzXQknzMzW1Jrx7rRHMdvUK71Dvbp9lecII1EaRyN0ycjca+YU
+	pSGgdPJNy2i1Ux7vzIVeyGZMKOvq2V5c4HEb9wY8v21EAvoSZ1SlchtQTE6I8pI/ozW+9weKzSp
+	LchiaM1LjMqUllS4O6fKCy/9f7xZYSU+8ielf
+X-Gm-Gg: AfdE7clan91RCeeCOQ2FJezL9I4LV26OrTm+98Bk8WF7awrHQfUIZtgxArFXADmtpA/
+	IDAEhLT780HcXJeM/yh61uHwBu1DVqG//8BeIzCTVz1wIaozMRZMJH/qwtrAEF14JQjU/1QjyC0
+	5rWZuOXyQwMelsJNRpiFcw9QtqNSIrQ2VoDzyLmaaPz/aV5d59o9YxJ9EjpHnZGdTgQ0t7PRIb3
+	H0LjJh0+8aWaf6146LXXRYeEdJLQK51gcsi51MRsVy116X53B4uoaMn57zMGq49snML+IQz
+X-Received: by 2002:ac8:5941:0:b0:51b:1f2:f38c with SMTP id
+ d75a77b69052e-51b01f2f4f4mr106725861cf.30.1782728716614; Mon, 29 Jun 2026
+ 03:25:16 -0700 (PDT)
+Received: from 1087538024966 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 29 Jun 2026 10:25:16 +0000
+Received: from 1087538024966 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 29 Jun 2026 10:25:16 +0000
+From: Manan yadav <yadav.manan24@gmail.com>
+Date: Mon, 29 Jun 2026 10:25:16 +0000
+X-Gm-Features: AVVi8Cebn6vVz2QFzb9qeGhb2LjqPAH_yw0LJNwT7Ej26EiN3tyr88MNWIGoTAI
+Message-ID: <CAG30M_tTm-FJMZ8HKKHuJY9NosfZtDS=HyrxZyWAzZTB3fK+GA@mail.gmail.com>
+Subject: FDA Recall Compliance Package Ready: Romaine Lettuce Hearts 3-pack | LOT-2026-0437
+To: yadav.manan@outlook.com
+Content-Type: multipart/alternative; boundary="000000000000e28047065561dfd0"
+X-IncomingHeaderCount: 19
+Return-Path: yadav.manan24@gmail.com
+X-MS-Exchange-Organization-ExpirationStartTime: 29 Jun 2026 10:25:17.6481
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 89e06a43-a90f-4fcc-09a8-08ded5c8b72c
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD76:EE_|SE1PPFCF6CADFC7:EE_|TYZPR06MB5710:EE_
+X-MS-Exchange-Organization-AuthSource: CH1PEPF0000AD76.namprd04.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 6/29/2026 10:23:10 AM
+X-MS-Office365-Filtering-Correlation-Id: 89e06a43-a90f-4fcc-09a8-08ded5c8b72c
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 209.85.160.196
+X-SID-PRA: YADAV.MANAN24@GMAIL.COM
+X-SID-Result: PASS
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;ARA:1444111002|9020799019|54080799006|29090799004|440099028|3412199025|1380799030|1360799030|1370799030|30041999003;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2026 10:25:17.6262
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89e06a43-a90f-4fcc-09a8-08ded5c8b72c
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD76.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SE1PPFCF6CADFC7
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.0729710
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0159.018
+X-Message-Flag: Flag for follow up
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000311)(920221119095)(920221120095)(90000117)(90011020)(91015020)(91040095)(9050020)(9060121)(9081003)(9100341)(944500132)(4810010)(4910033)(9930004)(9545005)(10172021)(9320005)(120001);
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0wO0Q9MTtHRD0xO1NDTD0tMQ==
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?ZExYdkg1bDY1TldmVFgvcy9OZDA0Z2dweEEwN3hBNGN6MHU5dUVrZ3dVMnpK?=
+ =?utf-8?B?TXhqb3kvU2NhK1lWUU1PUmZxY0pqTWQ3TnhkU3FQRnBLSW9Vbm5nSmhlcjVm?=
+ =?utf-8?B?anVUTWRvVUU1Zk9EeTJoNWJwWEtEOEYxaVV1YU4yWnpqYjR5aElYOHQ3VDVu?=
+ =?utf-8?B?NnRNaFIwbWMrcGFydjJHd0VPUlhtV0xMbjY0N0hMck0rR0NnanBWamF0MzJW?=
+ =?utf-8?B?Sk1TZ0lJZnZBWkZyZDkxd1R5SVE4T1hpNExUbi9jYlRnSWpaTUVJUE5aL1A0?=
+ =?utf-8?B?YkZVWi9URTExZGNRUWdtbDQ1R1VsUHRKVHRZWFVpZjlnd29QYjRlWUZ6Mkx4?=
+ =?utf-8?B?QWhSbDYxVFNmRDByUnlhVlNPTUdqSmlmMUF3R2M3UzdhbFBBSEV1UnVWU1JI?=
+ =?utf-8?B?blFCeHhFaEs5bDJWUWJNNTFvdXJ4MTZkMUh4TVV4RVpkbXdiNkNzVlpjNU50?=
+ =?utf-8?B?Qk1EV1MwendWM0pRZEVVQ0RuVkJaR0Vnc0JPTjdZQkxIT3hVRVlKUkZFZ21o?=
+ =?utf-8?B?S2RQMnFIVklReFFjOFFoSmtVdkFyQ2g5emNiSExmZk5XNkczU3V4UUVTdERs?=
+ =?utf-8?B?WUs0ejM1SUs0K1ppMDQwUHpwalB2TTZPS3EzNnNvUW9HQllOYmhESFRYcUlH?=
+ =?utf-8?B?MlhObTVUS2ZEN0N2L1kyaW53T0VkSVlsL1VBNDZpS0lwcFgvVkxXdG1kWWpx?=
+ =?utf-8?B?WEc2V05TTkJIU0pORGx0UnpsRy91UDkveVY2NWZadUNId1BKN0V6MFh2UFFH?=
+ =?utf-8?B?MUpNaHl2RFhUU0I3anZNT2dzMkpYODFEaWh1Lzk2NlVnZ2xTbnhiaUxZMWJs?=
+ =?utf-8?B?ZTZjN2ZKdFpVeHJwZ2U1V3M1Z3VZNUxsR2UxTDl2UWpESVZKSnIxWGdHekV3?=
+ =?utf-8?B?MlgzNlgvMERrdjAxN05HaGlvekNWWGwzdy9KZDdnSnBNMnpLN1BxQmxFOWdS?=
+ =?utf-8?B?bzE3aE8wZlkwdkRxQ0t1akNvVTY1YjZscEtxR1VvNENpQVJwRTJ5OFMxenVn?=
+ =?utf-8?B?MEh3UENpbXdaaksrZTdpMnA1ZzVWZW1VMzI4YSs3RThVck10K2dDdDA5aDRs?=
+ =?utf-8?B?WGVjRHE0eWRNVHM4Tms0MnBjWC9OZzdBSXRzR1NMWERGeFdDNUdmY2xkOVhK?=
+ =?utf-8?B?cXRsMXpmbFI3SjNOZDNXMk5oWTlkeTB6ZHYrc0ZtWUpmbzA5SUFNd1JNNHpH?=
+ =?utf-8?B?RDdaVGM3bkh5Rmx5cS9ERXYxOWhvcHdVclhJQklJa1BFdGo1Skx2RElxMGc3?=
+ =?utf-8?B?K3c2K1lVaWJ4SzVQUS9EUXZuU2JsUWZHOFpDVnVWU2lVSFVYbGpRbkt1VWVS?=
+ =?utf-8?B?MFl0RTFUVDBXelVJWE8zZXFCZmordHRGZzRXUW9iTXRka3RNUU42U2I4VnE4?=
+ =?utf-8?B?U2hWWEhJcU1ENG9xelh1TjF3SG56MGQ1aitkeFN5UFpvT3drbFlJbzJhUUsw?=
+ =?utf-8?B?NXFHVHBZRzI0UFE4dmY0alNOaHF4MW9DT0VPUitnckhNUGQrRmErdnpvMHBO?=
+ =?utf-8?B?bitHMHRjazB4SnQ2RS9OVXRwNDJtMVdGcUlEb0hsTlRuZVliRDhzODdOZFd4?=
+ =?utf-8?B?TDhkMlFRZ0ROMDBGUW0xWk5FVGE0dkgvRHJhWmFqQ3hNaUgzL1U4dmRMWVcw?=
+ =?utf-8?B?VC9kZk1LZkFNTkwxL213V3ZWaE5CMGpJZXJVUGdJNzBUM21MYWd1aER4cTZG?=
+ =?utf-8?B?RHYydnIwMXhYMDdPSnB6OEJLenIwT3Y1Yy9xaTFkOCtDcTQxNmk4dGRLZ2Jo?=
+ =?utf-8?B?cFkrN29XamNySjR4SWxFSDlnaEwrYkc1SkU0WWFkY3pqN2RpS3N2RGMzMGxX?=
+ =?utf-8?B?S1dGdjNqWS9WdVR0bEh1Q0VnUWNiNWpnbnZIK3V2K3YzZjJQUmd3VmkrR2I2?=
+ =?utf-8?B?enJMNm05THl4aFdEZjZrOUZ1LzV5SHRwaE52eC9rV0hybFF4cS94Q2lCYTRk?=
+ =?utf-8?B?VEczRFdSSC9KVFVESVpXZkFWU2NJY2xTWHFyaysrSXd3bitYNjVLNTA1Wklu?=
+ =?utf-8?B?V2dkdUZuTjhTc2FOd0huTGptVjlLTllmZ2xxQ3RTallTM3AzaTk2NWpCalVG?=
+ =?utf-8?B?K2Nsd0tKYSs4aUY4ZUZ2N1VzV2pQR0RtUkRiMS9XUWpJUHNmbWRmd0o1eGFj?=
+ =?utf-8?B?ejlRM1RTdWxJZldNT1dCdTVVUjVKTDlRSEJWaXdZZG5heTVPYy9FYlpWdGRq?=
+ =?utf-8?B?Y1pHREFnZHMyQ1VuZThrWUFTbXEwM3RvRmJ6UWlKNjI2bVdpa3dKQ1JPZ0F2?=
+ =?utf-8?B?VVpDR0cyOFhJR1U2U3h6L3Q5WGVKU2ExOW5yMDh2NHRDSGkrWVRxdGRtYm5T?=
+ =?utf-8?B?ZTFGZXRTZlhHdzgzQ0FuQlN5WEN2cVZJUXJoRGZGcE5acnI0NVVBRy82MHRp?=
+ =?utf-8?B?RjlZM3RFbHNDYnJUdCtuWDhBeTkralpyc0pJaDFJN1JsbWc0TGdCZTFlMkVK?=
+ =?utf-8?B?dnRReTBOTXdhY1hWSTduOXRSc25wZnA5K1l4OHh6RjBYd01BVFdhdU03TW8x?=
+ =?utf-8?B?S1drVFV5Q0RKOWo1S1YzQ2VjamEyaFZGZUkrL0p2emdKOENaY2JUMFlhdTlw?=
+ =?utf-8?B?aFk4aHppYThRRUtIcUpNVGdJV3R1dTBEanFTN3JOSG8wQW9oQzJHSWx3YlV2?=
+ =?utf-8?B?bGJBRWc2NW5FQ3RKUmd3YStPUXU1dTQyVzBrOVlHbHh2Z0JKVkZSOXZMODdh?=
+ =?utf-8?B?SWJlT2JaTTV4U0FabVFiZGltR2VsazhWaG1pZEZiZ2o0OTZYWGRhWWVndDd6?=
+ =?utf-8?B?TVRjVW5BR2pKQ3NIb3V4L21jWUVyRURlVlhDQTQyYU15KzNLSXg4YWxPUS91?=
+ =?utf-8?B?OWVHcFZtdldTQ2tReWpCVnNPekQ5WTVtT1V3YUxVTmFNeUhCdTdxU0xpQng4?=
+ =?utf-8?Q?JxTqH57fUGtsArDPgsjDyZgR4I4TUKd6pr7f+LR4=3D?=
+MIME-Version: 1.0
+
+--000000000000e28047065561dfd0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+FDA Recall Compliance Package1. Executive summary
+
+An automated FDA recall compliance package has been prepared for
+stakeholder review regarding traceability lot *LOT-2026-0437* for *Romaine
+Lettuce Hearts 3-pack* / *Fresh romaine hearts, 3-count sleeve,
+ready-to-eat*. Source data indicates a *positive E. coli O157:H7* finding
+(Detected in 25g) associated with production date *2026-06-01* and expiry
+date *2026-06-12*. The trace indicates *18,700 EA* affected, Class *I*
+recall estimate, immediate urgency, and distribution into *AZ, CA, CO, TX*.
+On-hand warehouse inventory identified in quarantine totals *2,850 EA*. No
+source attachments were available for substantive review.
+2. FSMA 204 KDE data
+
+[{"traceabilityLotCode":"LOT-2026-0437","productDescription":"Fresh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"18700","unitOfMeasure":"EA","cteType":"harvesting=
+","cteDate":"2026-06-01T06:30:00Z","cteLocation":"Salinas
+Valley Farm (F-100)","referenceDocumentNumber":"HARV-0601","firstReceiverIn=
+fo":"Salinas
+Pack House"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":"F=
+resh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"18700","unitOfMeasure":"EA","cteType":"cooling","=
+cteDate":"2026-06-01T10:00:00Z","cteLocation":"Salinas
+Valley Farm (F-100)","referenceDocumentNumber":"COOL-0601","firstReceiverIn=
+fo":"Salinas
+Valley Farm"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":"=
+Fresh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"18700","unitOfMeasure":"EA","cteType":"packing","=
+cteDate":"2026-06-01T14:00:00Z","cteLocation":"Salinas
+Pack House (F-200)","referenceDocumentNumber":"PACK-0601","firstReceiverInf=
+o":"Salinas
+Pack House"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":"F=
+resh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"4200","unitOfMeasure":"EA","cteType":"shipping","=
+cteDate":"2026-06-02T08:00:00Z","cteLocation":"Salinas
+Pack House (C-300)","referenceDocumentNumber":"BOL-50021","firstReceiverInf=
+o":"FreshPack
+Distribution"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":=
+"Fresh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"8800","unitOfMeasure":"EA","cteType":"shipping","=
+cteDate":"2026-06-02T09:30:00Z","cteLocation":"Salinas
+Pack House (C-301)","referenceDocumentNumber":"BOL-50022","firstReceiverInf=
+o":"WestCoast
+Grocery DC"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":"F=
+resh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"3100","unitOfMeasure":"EA","cteType":"shipping","=
+cteDate":"2026-06-03T07:15:00Z","cteLocation":"Salinas
+Pack House (C-302)","referenceDocumentNumber":"BOL-50023","firstReceiverInf=
+o":"Southwest
+Foods DC"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":"Fre=
+sh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"2600","unitOfMeasure":"EA","cteType":"shipping","=
+cteDate":"2026-06-03T08:45:00Z","cteLocation":"Salinas
+Pack House (C-304)","referenceDocumentNumber":"BOL-50024","firstReceiverInf=
+o":"Rocky
+Mountain Foods DC"},{"traceabilityLotCode":"LOT-2026-0437","productDescript=
+ion":"Fresh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"4200","unitOfMeasure":"EA","cteType":"receiving",=
+"cteDate":"2026-06-03T10:00:00Z","cteLocation":"FreshPack
+Distribution (C-300)","referenceDocumentNumber":"ASN-90011","firstReceiverI=
+nfo":"FreshPack
+Distribution"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":=
+"Fresh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"8800","unitOfMeasure":"EA","cteType":"receiving",=
+"cteDate":"2026-06-03T11:45:00Z","cteLocation":"WestCoast
+Grocery DC (C-301)","referenceDocumentNumber":"ASN-90012","firstReceiverInf=
+o":"WestCoast
+Grocery DC"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":"F=
+resh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"3100","unitOfMeasure":"EA","cteType":"receiving",=
+"cteDate":"2026-06-04T09:20:00Z","cteLocation":"Southwest
+Foods DC (C-302)","referenceDocumentNumber":"ASN-90013","firstReceiverInfo"=
+:"Southwest
+Foods DC"},{"traceabilityLotCode":"LOT-2026-0437","productDescription":"Fre=
+sh
+romaine hearts, 3-count sleeve,
+ready-to-eat","quantity":"2600","unitOfMeasure":"EA","cteType":"receiving",=
+"cteDate":"2026-06-04T13:10:00Z","cteLocation":"Rocky
+Mountain Foods DC
+(C-304)","referenceDocumentNumber":"ASN-90014","firstReceiverInfo":"Rocky
+Mountain Foods DC"}]
+
+3. FDA cover letter
+
+June 29, 2026
+
+U.S. Food and Drug Administration
+Subject: Voluntary Recall Notification =E2=80=93 Romaine Lettuce Hearts
+3-pack, Traceability Lot LOT-2026-0437
+
+To Whom It May Concern:
+
+This letter serves as notice of a voluntary recall concerning Fresh
+romaine hearts, 3-count sleeve, ready-to-eat, marketed as Romaine
+Lettuce Hearts 3-pack (Product ID PRD-1001), traceability lot code
+LOT-2026-0437, produced on 2026-06-01 with expiry date 2026-06-12.
+
+Based on the available source data, the recalling firm is GreenLeaf
+Farms Food Safety Team / GreenLeaf Farms. The origin facility
+identified in the trace is Salinas Valley Farm, Salinas, California
+(Facility ID F-100). FDA registration number: INCOMPLETE.
+
+Reason for recall: Source records indicate a positive laboratory
+finding for E. coli O157:H7. The available testing record references
+COA-2026-0437 and reports =E2=80=9CDetected in 25g=E2=80=9D on test date 20=
+26-06-08
+against a specification of =E2=80=9CNot detected / 25g.=E2=80=9D The email =
+notice also
+states that GreenLeaf QA Laboratory confirmed a positive result for
+sample SMP-7001 drawn on 2026-06-07 and tested on 2026-06-08.
+
+Scope of affected product: Total affected quantity is 18,700 EA.
+Distributed product was shipped from Salinas Pack House to the
+following downstream distribution points: FreshPack Distribution
+(4,200 EA; BOL-50021), WestCoast Grocery DC (8,800 EA; BOL-50022),
+Southwest Foods DC (3,100 EA; BOL-50023), and Rocky Mountain Foods DC
+(2,600 EA; BOL-50024). States identified as affected in the source
+trace are AZ, CA, CO, and TX.
+
+Actions taken to date: Source records indicate immediate recall
+urgency, downstream notification initiation request, and quarantine
+holds on identified warehouse inventory. Warehouse inventory listed on
+hold totals 2,850 EA across inventory records INV-0001, INV-0002, and
+INV-0003. Trace records show complete critical tracking event coverage
+for the available lot trace data.
+
+Point of contact: Maria Lopez, QA Manager, AgriSeed Co,
+qa@agriseed.com, +1-831-555-0142. Recalling firm contact details
+beyond the provided records are INCOMPLETE.
+
+Please note that this notice is based solely on the source data
+provided for compliance package preparation. Certain mandatory
+elements remain incomplete where unsupported by the record.
+
+Sincerely,
+
+Automated Recall Compliance Preparation
+On behalf of stakeholder review
+
+4. Internal recall summary
+
+Executive Recall Brief
+
+Case overview:
+A Class I recall scenario is indicated for Romaine Lettuce Hearts
+3-pack / Fresh romaine hearts, 3-count sleeve, ready-to-eat, lot
+LOT-2026-0437. The triggering hazard is E. coli O157:H7, supported by
+laboratory data dated 2026-06-08 showing a positive result (=E2=80=9CDetect=
+ed
+in 25g=E2=80=9D). Production date is 2026-06-01 and expiry date is 2026-06-=
+12.
+Total units affected are 18,700 EA.
+
+Affected products and lots:
+- Product: Romaine Lettuce Hearts 3-pack
+- Description: Fresh romaine hearts, 3-count sleeve, ready-to-eat
+- Product ID: PRD-1001
+- Traceability lot code: LOT-2026-0437
+- Production date: 2026-06-01
+- Expiry date: 2026-06-12
+
+Distribution scope:
+Trace records show product moved from Salinas Valley Farm through
+cooling and packing, then shipped from Salinas Pack House to four
+downstream nodes:
+- FreshPack Distribution: 4,200 EA
+- WestCoast Grocery DC: 8,800 EA
+- Southwest Foods DC: 3,100 EA
+- Rocky Mountain Foods DC: 2,600 EA
+Affected states listed in the trace are Arizona, California, Colorado,
+and Texas.
+
+Key timeline:
+- 2026-06-01 06:30Z: Harvesting at Salinas Valley Farm
+- 2026-06-01 10:00Z: Cooling at Salinas Valley Farm
+- 2026-06-01 14:00Z: Initial packing at Salinas Pack House
+- 2026-06-02 to 2026-06-03: Shipments to four distribution nodes
+- 2026-06-03 to 2026-06-04: Receiving confirmations at all four downstream =
+nodes
+- 2026-06-07: Email body states sample SMP-7001 drawn
+- 2026-06-08: Positive E. coli O157:H7 result reported
+
+Actions completed / underway:
+- Immediate quarantine requested in supplier notification
+- Downstream notification requested to affected distribution centers
+- Warehouse inventory on quarantine hold totals 2,850 EA
+- Trace data indicates KDE completeness at 100% for available trace records
+
+Open gaps:
+- FDA registration number not provided
+- Formal recalling firm legal entity details not fully verified
+- First receiver/contact designation is limited to entity names in trace da=
+ta
+- No source attachments were actually available for document review
+despite attachment reference in the request
+
+Executive risks:
+- Ready-to-eat produce with confirmed E. coli O157:H7 presents severe
+public health risk
+- Product appears to have been fully distributed across multiple states
+- Speed of consignee notification, effectiveness checks, and market
+withdrawal verification remain critical
+- Additional regulatory package details may need confirmation before
+external submission
+
+Recommended next steps:
+1. Verify recalling firm legal name and FDA registration number.
+2. Confirm consignee notification completion and quarantine
+effectiveness at each downstream node.
+3. Reconcile on-hand, in-transit, and recovered quantities.
+4. Prepare regulator-facing submission with verified contact and
+registration details.
+5. Maintain all FSMA 204 KDE and supporting laboratory documentation
+for inspection.
+
+5. Incomplete KDE fields / open gaps
+
+[]
+
+6. Source attachments reviewed
+
+Attachment analysis result: No attachments provided to analyze.
+7. Automated package note
+
+This is an automated FDA recall compliance package for stakeholder review.
+Unsupported or unavailable mandatory information has been marked as
+INCOMPLETE or Unknown where applicable.
+
+--000000000000e28047065561dfd0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"></=
+head>
+<body><h1>FDA Recall Compliance Package</h1><h2>1. Executive summary</h2><p=
+>An automated FDA recall compliance package has been prepared for stakehold=
+er review regarding traceability lot <strong>LOT-2026-0437</strong> for <st=
+rong>Romaine Lettuce Hearts 3-pack</strong> / <strong>Fresh romaine hearts,=
+ 3-count sleeve, ready-to-eat</strong>. Source data indicates a <strong>pos=
+itive E. coli O157:H7</strong> finding (Detected in 25g) associated with pr=
+oduction date <strong>2026-06-01</strong> and expiry date <strong>2026-06-1=
+2</strong>. The trace indicates <strong>18,700 EA</strong> affected, Class =
+<strong>I</strong> recall estimate, immediate urgency, and distribution int=
+o <strong>AZ, CA, CO, TX</strong>. On-hand warehouse inventory identified i=
+n quarantine totals <strong>2,850 EA</strong>. No source attachments were a=
+vailable for substantive review.</p><h2>2. FSMA 204 KDE data</h2><pre>[{&qu=
+ot;traceabilityLotCode&quot;:&quot;LOT-2026-0437&quot;,&quot;productDescrip=
+tion&quot;:&quot;Fresh romaine hearts, 3-count sleeve, ready-to-eat&quot;,&=
+quot;quantity&quot;:&quot;18700&quot;,&quot;unitOfMeasure&quot;:&quot;EA&qu=
+ot;,&quot;cteType&quot;:&quot;harvesting&quot;,&quot;cteDate&quot;:&quot;20=
+26-06-01T06:30:00Z&quot;,&quot;cteLocation&quot;:&quot;Salinas Valley Farm =
+(F-100)&quot;,&quot;referenceDocumentNumber&quot;:&quot;HARV-0601&quot;,&qu=
+ot;firstReceiverInfo&quot;:&quot;Salinas Pack House&quot;},{&quot;traceabil=
+ityLotCode&quot;:&quot;LOT-2026-0437&quot;,&quot;productDescription&quot;:&=
+quot;Fresh romaine hearts, 3-count sleeve, ready-to-eat&quot;,&quot;quantit=
+y&quot;:&quot;18700&quot;,&quot;unitOfMeasure&quot;:&quot;EA&quot;,&quot;ct=
+eType&quot;:&quot;cooling&quot;,&quot;cteDate&quot;:&quot;2026-06-01T10:00:=
+00Z&quot;,&quot;cteLocation&quot;:&quot;Salinas Valley Farm (F-100)&quot;,&=
+quot;referenceDocumentNumber&quot;:&quot;COOL-0601&quot;,&quot;firstReceive=
+rInfo&quot;:&quot;Salinas Valley Farm&quot;},{&quot;traceabilityLotCode&quo=
+t;:&quot;LOT-2026-0437&quot;,&quot;productDescription&quot;:&quot;Fresh rom=
+aine hearts, 3-count sleeve, ready-to-eat&quot;,&quot;quantity&quot;:&quot;=
+18700&quot;,&quot;unitOfMeasure&quot;:&quot;EA&quot;,&quot;cteType&quot;:&q=
+uot;packing&quot;,&quot;cteDate&quot;:&quot;2026-06-01T14:00:00Z&quot;,&quo=
+t;cteLocation&quot;:&quot;Salinas Pack House (F-200)&quot;,&quot;referenceD=
+ocumentNumber&quot;:&quot;PACK-0601&quot;,&quot;firstReceiverInfo&quot;:&qu=
+ot;Salinas Pack House&quot;},{&quot;traceabilityLotCode&quot;:&quot;LOT-202=
+6-0437&quot;,&quot;productDescription&quot;:&quot;Fresh romaine hearts, 3-c=
+ount sleeve, ready-to-eat&quot;,&quot;quantity&quot;:&quot;4200&quot;,&quot=
+;unitOfMeasure&quot;:&quot;EA&quot;,&quot;cteType&quot;:&quot;shipping&quot=
+;,&quot;cteDate&quot;:&quot;2026-06-02T08:00:00Z&quot;,&quot;cteLocation&qu=
+ot;:&quot;Salinas Pack House (C-300)&quot;,&quot;referenceDocumentNumber&qu=
+ot;:&quot;BOL-50021&quot;,&quot;firstReceiverInfo&quot;:&quot;FreshPack Dis=
+tribution&quot;},{&quot;traceabilityLotCode&quot;:&quot;LOT-2026-0437&quot;=
+,&quot;productDescription&quot;:&quot;Fresh romaine hearts, 3-count sleeve,=
+ ready-to-eat&quot;,&quot;quantity&quot;:&quot;8800&quot;,&quot;unitOfMeasu=
+re&quot;:&quot;EA&quot;,&quot;cteType&quot;:&quot;shipping&quot;,&quot;cteD=
+ate&quot;:&quot;2026-06-02T09:30:00Z&quot;,&quot;cteLocation&quot;:&quot;Sa=
+linas Pack House (C-301)&quot;,&quot;referenceDocumentNumber&quot;:&quot;BO=
+L-50022&quot;,&quot;firstReceiverInfo&quot;:&quot;WestCoast Grocery DC&quot=
+;},{&quot;traceabilityLotCode&quot;:&quot;LOT-2026-0437&quot;,&quot;product=
+Description&quot;:&quot;Fresh romaine hearts, 3-count sleeve, ready-to-eat&=
+quot;,&quot;quantity&quot;:&quot;3100&quot;,&quot;unitOfMeasure&quot;:&quot=
+;EA&quot;,&quot;cteType&quot;:&quot;shipping&quot;,&quot;cteDate&quot;:&quo=
+t;2026-06-03T07:15:00Z&quot;,&quot;cteLocation&quot;:&quot;Salinas Pack Hou=
+se (C-302)&quot;,&quot;referenceDocumentNumber&quot;:&quot;BOL-50023&quot;,=
+&quot;firstReceiverInfo&quot;:&quot;Southwest Foods DC&quot;},{&quot;tracea=
+bilityLotCode&quot;:&quot;LOT-2026-0437&quot;,&quot;productDescription&quot=
+;:&quot;Fresh romaine hearts, 3-count sleeve, ready-to-eat&quot;,&quot;quan=
+tity&quot;:&quot;2600&quot;,&quot;unitOfMeasure&quot;:&quot;EA&quot;,&quot;=
+cteType&quot;:&quot;shipping&quot;,&quot;cteDate&quot;:&quot;2026-06-03T08:=
+45:00Z&quot;,&quot;cteLocation&quot;:&quot;Salinas Pack House (C-304)&quot;=
+,&quot;referenceDocumentNumber&quot;:&quot;BOL-50024&quot;,&quot;firstRecei=
+verInfo&quot;:&quot;Rocky Mountain Foods DC&quot;},{&quot;traceabilityLotCo=
+de&quot;:&quot;LOT-2026-0437&quot;,&quot;productDescription&quot;:&quot;Fre=
+sh romaine hearts, 3-count sleeve, ready-to-eat&quot;,&quot;quantity&quot;:=
+&quot;4200&quot;,&quot;unitOfMeasure&quot;:&quot;EA&quot;,&quot;cteType&quo=
+t;:&quot;receiving&quot;,&quot;cteDate&quot;:&quot;2026-06-03T10:00:00Z&quo=
+t;,&quot;cteLocation&quot;:&quot;FreshPack Distribution (C-300)&quot;,&quot=
+;referenceDocumentNumber&quot;:&quot;ASN-90011&quot;,&quot;firstReceiverInf=
+o&quot;:&quot;FreshPack Distribution&quot;},{&quot;traceabilityLotCode&quot=
+;:&quot;LOT-2026-0437&quot;,&quot;productDescription&quot;:&quot;Fresh roma=
+ine hearts, 3-count sleeve, ready-to-eat&quot;,&quot;quantity&quot;:&quot;8=
+800&quot;,&quot;unitOfMeasure&quot;:&quot;EA&quot;,&quot;cteType&quot;:&quo=
+t;receiving&quot;,&quot;cteDate&quot;:&quot;2026-06-03T11:45:00Z&quot;,&quo=
+t;cteLocation&quot;:&quot;WestCoast Grocery DC (C-301)&quot;,&quot;referenc=
+eDocumentNumber&quot;:&quot;ASN-90012&quot;,&quot;firstReceiverInfo&quot;:&=
+quot;WestCoast Grocery DC&quot;},{&quot;traceabilityLotCode&quot;:&quot;LOT=
+-2026-0437&quot;,&quot;productDescription&quot;:&quot;Fresh romaine hearts,=
+ 3-count sleeve, ready-to-eat&quot;,&quot;quantity&quot;:&quot;3100&quot;,&=
+quot;unitOfMeasure&quot;:&quot;EA&quot;,&quot;cteType&quot;:&quot;receiving=
+&quot;,&quot;cteDate&quot;:&quot;2026-06-04T09:20:00Z&quot;,&quot;cteLocati=
+on&quot;:&quot;Southwest Foods DC (C-302)&quot;,&quot;referenceDocumentNumb=
+er&quot;:&quot;ASN-90013&quot;,&quot;firstReceiverInfo&quot;:&quot;Southwes=
+t Foods DC&quot;},{&quot;traceabilityLotCode&quot;:&quot;LOT-2026-0437&quot=
+;,&quot;productDescription&quot;:&quot;Fresh romaine hearts, 3-count sleeve=
+, ready-to-eat&quot;,&quot;quantity&quot;:&quot;2600&quot;,&quot;unitOfMeas=
+ure&quot;:&quot;EA&quot;,&quot;cteType&quot;:&quot;receiving&quot;,&quot;ct=
+eDate&quot;:&quot;2026-06-04T13:10:00Z&quot;,&quot;cteLocation&quot;:&quot;=
+Rocky Mountain Foods DC (C-304)&quot;,&quot;referenceDocumentNumber&quot;:&=
+quot;ASN-90014&quot;,&quot;firstReceiverInfo&quot;:&quot;Rocky Mountain Foo=
+ds DC&quot;}]</pre><h2>3. FDA cover letter</h2><pre>June 29, 2026
+
+U.S. Food and Drug Administration
+Subject: Voluntary Recall Notification =E2=80=93 Romaine Lettuce Hearts 3-p=
+ack, Traceability Lot LOT-2026-0437
+
+To Whom It May Concern:
+
+This letter serves as notice of a voluntary recall concerning Fresh romaine=
+ hearts, 3-count sleeve, ready-to-eat, marketed as Romaine Lettuce Hearts 3=
+-pack (Product ID PRD-1001), traceability lot code LOT-2026-0437, produced =
+on 2026-06-01 with expiry date 2026-06-12.
+
+Based on the available source data, the recalling firm is GreenLeaf Farms F=
+ood Safety Team / GreenLeaf Farms. The origin facility identified in the tr=
+ace is Salinas Valley Farm, Salinas, California (Facility ID F-100). FDA re=
+gistration number: INCOMPLETE.
+
+Reason for recall: Source records indicate a positive laboratory finding fo=
+r E. coli O157:H7. The available testing record references COA-2026-0437 an=
+d reports =E2=80=9CDetected in 25g=E2=80=9D on test date 2026-06-08 against=
+ a specification of =E2=80=9CNot detected / 25g.=E2=80=9D The email notice =
+also states that GreenLeaf QA Laboratory confirmed a positive result for sa=
+mple SMP-7001 drawn on 2026-06-07 and tested on 2026-06-08.
+
+Scope of affected product: Total affected quantity is 18,700 EA. Distribute=
+d product was shipped from Salinas Pack House to the following downstream d=
+istribution points: FreshPack Distribution (4,200 EA; BOL-50021), WestCoast=
+ Grocery DC (8,800 EA; BOL-50022), Southwest Foods DC (3,100 EA; BOL-50023)=
+, and Rocky Mountain Foods DC (2,600 EA; BOL-50024). States identified as a=
+ffected in the source trace are AZ, CA, CO, and TX.
+
+Actions taken to date: Source records indicate immediate recall urgency, do=
+wnstream notification initiation request, and quarantine holds on identifie=
+d warehouse inventory. Warehouse inventory listed on hold totals 2,850 EA a=
+cross inventory records INV-0001, INV-0002, and INV-0003. Trace records sho=
+w complete critical tracking event coverage for the available lot trace dat=
+a.
+
+Point of contact: Maria Lopez, QA Manager, AgriSeed Co, <a href=3D"mailto:q=
+a@agriseed.com">qa@agriseed.com</a>, +1-831-555-0142. Recalling firm contac=
+t details beyond the provided records are INCOMPLETE.
+
+Please note that this notice is based solely on the source data provided fo=
+r compliance package preparation. Certain mandatory elements remain incompl=
+ete where unsupported by the record.
+
+Sincerely,
+
+Automated Recall Compliance Preparation
+On behalf of stakeholder review</pre><h2>4. Internal recall summary</h2><pr=
+e>Executive Recall Brief
+
+Case overview:
+A Class I recall scenario is indicated for Romaine Lettuce Hearts 3-pack / =
+Fresh romaine hearts, 3-count sleeve, ready-to-eat, lot LOT-2026-0437. The =
+triggering hazard is E. coli O157:H7, supported by laboratory data dated 20=
+26-06-08 showing a positive result (=E2=80=9CDetected in 25g=E2=80=9D). Pro=
+duction date is 2026-06-01 and expiry date is 2026-06-12. Total units affec=
+ted are 18,700 EA.
+
+Affected products and lots:
+- Product: Romaine Lettuce Hearts 3-pack
+- Description: Fresh romaine hearts, 3-count sleeve, ready-to-eat
+- Product ID: PRD-1001
+- Traceability lot code: LOT-2026-0437
+- Production date: 2026-06-01
+- Expiry date: 2026-06-12
+
+Distribution scope:
+Trace records show product moved from Salinas Valley Farm through cooling a=
+nd packing, then shipped from Salinas Pack House to four downstream nodes:
+- FreshPack Distribution: 4,200 EA
+- WestCoast Grocery DC: 8,800 EA
+- Southwest Foods DC: 3,100 EA
+- Rocky Mountain Foods DC: 2,600 EA
+Affected states listed in the trace are Arizona, California, Colorado, and =
+Texas.
+
+Key timeline:
+- 2026-06-01 06:30Z: Harvesting at Salinas Valley Farm
+- 2026-06-01 10:00Z: Cooling at Salinas Valley Farm
+- 2026-06-01 14:00Z: Initial packing at Salinas Pack House
+- 2026-06-02 to 2026-06-03: Shipments to four distribution nodes
+- 2026-06-03 to 2026-06-04: Receiving confirmations at all four downstream =
+nodes
+- 2026-06-07: Email body states sample SMP-7001 drawn
+- 2026-06-08: Positive E. coli O157:H7 result reported
+
+Actions completed / underway:
+- Immediate quarantine requested in supplier notification
+- Downstream notification requested to affected distribution centers
+- Warehouse inventory on quarantine hold totals 2,850 EA
+- Trace data indicates KDE completeness at 100% for available trace records
+
+Open gaps:
+- FDA registration number not provided
+- Formal recalling firm legal entity details not fully verified
+- First receiver/contact designation is limited to entity names in trace da=
+ta
+- No source attachments were actually available for document review despite=
+ attachment reference in the request
+
+Executive risks:
+- Ready-to-eat produce with confirmed E. coli O157:H7 presents severe publi=
+c health risk
+- Product appears to have been fully distributed across multiple states
+- Speed of consignee notification, effectiveness checks, and market withdra=
+wal verification remain critical
+- Additional regulatory package details may need confirmation before extern=
+al submission
+
+Recommended next steps:
+1. Verify recalling firm legal name and FDA registration number.
+2. Confirm consignee notification completion and quarantine effectiveness a=
+t each downstream node.
+3. Reconcile on-hand, in-transit, and recovered quantities.
+4. Prepare regulator-facing submission with verified contact and registrati=
+on details.
+5. Maintain all FSMA 204 KDE and supporting laboratory documentation for in=
+spection.</pre><h2>5. Incomplete KDE fields / open gaps</h2><pre>[]</pre><h=
+2>6. Source attachments reviewed</h2><p>Attachment analysis result: No atta=
+chments provided to analyze.</p><h2>7. Automated package note</h2><p>This i=
+s an automated FDA recall compliance package for stakeholder review. Unsupp=
+orted or unavailable mandatory information has been marked as INCOMPLETE or=
+ Unknown where applicable.</p></body></html>
+
+--000000000000e28047065561dfd0--

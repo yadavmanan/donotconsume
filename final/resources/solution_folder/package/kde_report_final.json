@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "kde_report_final",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "97d15fd4-e06f-4f47-81a0-7344d7f48241",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "kde_report_final",
+      "description": null
+    },
+    "locks": [],
+    "key": "27349e48-8337-4507-854b-75ce25af631d"
+  }
+}

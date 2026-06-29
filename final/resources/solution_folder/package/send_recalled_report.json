@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "send_recalled_report",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "713f46dc-a96b-435e-9dbc-3c5dd9ed444b",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "send_recalled_report",
+      "description": null
+    },
+    "locks": [],
+    "key": "9d067ebe-5a46-4eac-86e6-c4c175dcf69c"
+  }
+}

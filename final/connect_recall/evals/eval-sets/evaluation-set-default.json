@@ -1,0 +1,121 @@
+{
+  "fileName": "evaluation-set-default.json",
+  "id": "f1413048-f25f-4dff-bad7-ef52cdc22c36",
+  "name": "Default Evaluation Set",
+  "batchSize": 10,
+  "evaluatorRefs": [
+    "8ed4d4c8-9d85-46f0-b97e-022bbf7ce5b8"
+  ],
+  "evaluations": [
+    {
+      "id": "e4b7f197-7dba-4d77-bbaa-2d27a8d96f3f",
+      "name": "Debug Run 6/29/2026, 11:57:50 AM",
+      "inputs": {
+        "recall_events": [
+          {
+            "lot_code": "LOT-24-1187-B",
+            "recipient": "North Valley Foods Distribution Center",
+            "units_shipped": 420,
+            "ship_date": "2026-06-18",
+            "reference_document": "BOL-884219",
+            "status": "QUARANTINE_CONFIRMED",
+            "timestamp": "2026-06-21T14:32:09Z"
+          }
+        ],
+        "traces": {
+          "shipments": [
+            {
+              "shipment_id": "SHP-900441",
+              "recipient": "North Valley Foods Distribution Center",
+              "recipient_id": "CUST-1048",
+              "lot_code": "LOT-24-1187-B",
+              "product": "Frozen Spinach 12oz",
+              "units_shipped": 420,
+              "ship_date": "2026-06-18",
+              "reference_document": "BOL-884219",
+              "carrier": "BlueLine Freight"
+            },
+            {
+              "shipment_id": "SHP-900517",
+              "recipient": "Harbor Fresh Wholesale",
+              "recipient_id": "CUST-1091",
+              "lot_code": "LOT-24-2044-A",
+              "product": "Romaine Hearts 6ct",
+              "units_shipped": 180,
+              "ship_date": "2026-06-20",
+              "reference_document": "BOL-884377",
+              "carrier": "TriState Logistics"
+            }
+          ],
+          "inventory": [
+            {
+              "location": "North Valley Foods Distribution Center",
+              "lot_code": "LOT-24-1187-B",
+              "on_hand_units": 0,
+              "quarantined_units": 420,
+              "status": "QUARANTINED"
+            },
+            {
+              "location": "Harbor Fresh Wholesale",
+              "lot_code": "LOT-24-2044-A",
+              "on_hand_units": 180,
+              "quarantined_units": 0,
+              "status": "AVAILABLE"
+            }
+          ],
+          "customers": [
+            {
+              "recipient_id": "CUST-1048",
+              "name": "North Valley Foods Distribution Center",
+              "contact": "Megan Ruiz",
+              "email": "mruiz@northvalleyfdc.com"
+            },
+            {
+              "recipient_id": "CUST-1091",
+              "name": "Harbor Fresh Wholesale",
+              "contact": "Daniel Cho",
+              "email": "dcho@harborfresh.com"
+            }
+          ],
+          "documents": [
+            {
+              "reference_document": "BOL-884219",
+              "type": "BOL",
+              "shipment_id": "SHP-900441"
+            },
+            {
+              "reference_document": "BOL-884377",
+              "type": "BOL",
+              "shipment_id": "SHP-900517"
+            }
+          ]
+        },
+        "mail": {
+          "from": "quality@harborfresh.com",
+          "to": "recalls@fdatrace-automation.test",
+          "subject": "Quarantine confirmation for lot LOT-24-2044-A / BOL-884377",
+          "date": "Mon, 29 Jun 2026 05:58:11 -0400",
+          "body": "Hello Recall Team,\n\nThis is to confirm that all 180 units from lot LOT-24-2044-A associated with BOL-884377 were identified in our warehouse and placed on hold as of 05:40 AM today. No units have been further distributed.\n\nPlease update your records to reflect quarantine completion.\n\nRegards,\nDaniel Cho\nInventory Control\nHarbor Fresh Wholesale"
+        }
+      },
+      "expectedOutput": {
+        "content": "{\"action\":\"APPEND_EVENT\",\"event\":{\"lot_code\":\"LOT-24-2044-A\",\"recipient\":\"Harbor Fresh Wholesale\",\"units_shipped\":180,\"ship_date\":\"2026-06-20\",\"reference_document\":\"BOL-884377\",\"status\":\"QUARANTINE_CONFIRMED\",\"timestamp\":\"2026-06-29T09:58:11Z\"}}"
+      },
+      "expectedAgentBehavior": "",
+      "simulationInstructions": "",
+      "simulateInput": false,
+      "inputGenerationInstructions": "",
+      "simulateTools": false,
+      "evalSetId": "f1413048-f25f-4dff-bad7-ef52cdc22c36",
+      "createdAt": "2026-06-29T06:27:50.060Z",
+      "updatedAt": "2026-06-29T06:27:50.060Z",
+      "source": "firstSuccessfulRun"
+    }
+  ],
+  "modelSettings": [],
+  "createdAt": "2026-06-28T14:18:49.392Z",
+  "updatedAt": "2026-06-29T06:27:50.060Z",
+  "agentMemoryEnabled": false,
+  "agentMemorySettings": [],
+  "lineByLineEvaluation": false
+}

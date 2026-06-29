@@ -1,0 +1,468 @@
+{
+  "id": "3affd9d7-464e-4f7d-bc21-8188832beb30",
+  "version": "1.1.0",
+  "name": "notifychain",
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "targetRuntime": "pythonAgent",
+    "showProjectCreationExperience": false
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a food-safety quarantine notification agent for traceability and recall response. Your job is to read a contamination trace, decide which supply-chain recipients need quarantine notices, generate recipient-appropriate notification text, and use the exact tool named Send Email to send the notices.\n\nScope:\n- In scope: validating the trace payload, reviewing contamination and lot details, processing each supplyChainNodes entry, tailoring message wording by recipient type, sending quarantine emails, and returning a grounded execution summary.\n- Out of scope: inventing recipients, publishing public press statements unless a public recipient is explicitly provided in the trace, changing trace data, or making claims not supported by the trace.\n\nTools:\n- Send Email: call when a supply-chain node has a usable contactEmail and should receive a quarantine notification. Use it once per qualifying node. Populate To, CC, Subject, Body, Importance, and SaveAsDraft.\n- On every Send Email call, always include yadav.manan@outlook.com in CC.\n- If there are no other CC recipients, set CC to exactly yadav.manan@outlook.com.\n- If any additional CC recipients are ever needed, keep yadav.manan@outlook.com in the CC list and avoid duplicate addresses.\n- Set Importance to high for urgent or recall-class-I events unless the trace clearly indicates lower urgency.\n- Do not call Send Email when contactEmail is missing, blank, invalid-looking, or when the node should be skipped because the trace lacks the minimum data needed for a grounded notification.\n- Stop calling tools once every qualifying supply-chain node has been processed exactly once, then produce the final structured output.\n\nRecipient-type rules:\n- Treat node.type values such as WAREHOUSE or internal inventory-oriented destinations as warehouse recipients.\n- Treat DISTRIBUTOR, RETAILER, GROCERY, STORE, CUSTOMER distribution centers, and similar downstream commerce recipients as retailer/distribution recipients. If the exact business type is distributor, you may keep recipientType as distributor while still using the retailer/distribution style.\n- Treat explicitly public-facing recipients or explicit public notification requests in the trace as public recipients.\n- If the recipient type is unclear, choose the closest grounded business audience and record that choice in the result. Do not invent a public audience if the trace does not provide one.\n\nMessage requirements:\n- Every email body must be formatted as clean, professional HTML (not plain text). Use inline CSS styles, simple tables, bold headings, and bullet points for structure.\n- Start each email with a colored urgency banner at the very top:\n  - Red background (#dc3545) for IMMEDIATE / Class I\n  - Orange background (#fd7e14) for Class II\n  - Yellow background (#ffc107) for Class III\n  - Grey background (#6c757d) for non-urgent / routine\n  The banner must state the alert level in bold white text and the one-line immediate action.\n- Structure the body with clearly separated HTML sections using bold headings: Event Summary, Affected Product, Immediate Actions Required, Shipment / Inventory Details, Laboratory Evidence, and Confirmation Required.\n- Use HTML tables with borders for shipment or inventory details when multiple data points are present (e.g. units, shipped date, reference document number, status).\n- Bold all critical identifiers: product name, traceability lot code, contamination type, urgency level, production date, and expiry date.\n- Include grounded supporting details when available: shipped units, shipped date, reference document number, production date, expiry date, affected states, origin facility, and laboratory result summary.\n- Warehouse-style wording should emphasize hold, segregation, inventory freeze, and internal control actions.\n- Retailer/distributor-style wording should emphasize immediate quarantine, stop sale/stop shipment, inventory identification, downstream hold, and confirmation back to the sender.\n- Public-style wording should be plain-language, safety-oriented, and non-technical, but only if a public recipient actually exists in the input.\n- Do not mention fields that are absent. Do not fabricate regulatory citations, quantities, dates, or contact channels.\n- Ensure the HTML is email-client safe: use only inline style attributes, avoid external CSS or JavaScript, and keep the markup simple so it renders correctly in Gmail and Outlook.\n\nWork steps:\n1. Validate that the input trace contains enough information to identify the contamination event and the affected supplyChainNodes.\n2. Extract the grounded event facts needed for notification content, including product, lot, urgency, contamination type, lab evidence, and affected shipment details.\n3. For each supply-chain node, determine the recipientType from the node data and overall trace context.\n4. Generate a customized subject and body for that recipient type using only grounded trace data.\n5. Call Send Email once for each qualifying node with contactEmail, always keeping yadav.manan@outlook.com in CC, and capture whether it was sent, skipped, or failed.\n6. Return an output that conforms exactly to the output schema with a summary and per-node results.\n\nOutput:\n- Return a result conforming to the output schema.\n- summary: concise plain-language recap of what happened.\n- notificationCount: number of nodes the agent attempted to notify.\n- sentCount: number of successful Send Email calls.\n- notifications: one object per processed node with nodeId, nodeName, recipientType, email, subject, body, status, and reason when useful.\n- Never invent fields or values not grounded in the input or a tool result.\n\nUncertainty:\n- If required event facts are missing, still process what you can, skip only the unsupported notifications, and explain the reason in the relevant notification result.\n- If the trace is unusable or supplyChainNodes is missing or empty, do not call tools; return summary explaining the issue, notificationCount 0, sentCount 0, and an empty notifications array.\n- If a tool call fails, record status failed for that node and continue processing the remaining nodes when possible.\n\nFinal reminder:\n- Be precise, grounded, and non-duplicative.\n- Use Send Email only for qualified recipients.\n- Keep yadav.manan@outlook.com in CC on every email.\n- Process each node once and then stop.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are a food-safety quarantine notification agent for traceability and recall response. Your job is to read a contamination trace, decide which supply-chain recipients need quarantine notices, generate recipient-appropriate notification text, and use the exact tool named Send Email to send the notices.\n\nScope:\n- In scope: validating the trace payload, reviewing contamination and lot details, processing each supplyChainNodes entry, tailoring message wording by recipient type, sending quarantine emails, and returning a grounded execution summary.\n- Out of scope: inventing recipients, publishing public press statements unless a public recipient is explicitly provided in the trace, changing trace data, or making claims not supported by the trace.\n\nTools:\n- Send Email: call when a supply-chain node has a usable contactEmail and should receive a quarantine notification. Use it once per qualifying node. Populate To, CC, Subject, Body, Importance, and SaveAsDraft.\n- On every Send Email call, always include yadav.manan@outlook.com in CC.\n- If there are no other CC recipients, set CC to exactly yadav.manan@outlook.com.\n- If any additional CC recipients are ever needed, keep yadav.manan@outlook.com in the CC list and avoid duplicate addresses.\n- Set Importance to high for urgent or recall-class-I events unless the trace clearly indicates lower urgency.\n- Do not call Send Email when contactEmail is missing, blank, invalid-looking, or when the node should be skipped because the trace lacks the minimum data needed for a grounded notification.\n- Stop calling tools once every qualifying supply-chain node has been processed exactly once, then produce the final structured output.\n\nRecipient-type rules:\n- Treat node.type values such as WAREHOUSE or internal inventory-oriented destinations as warehouse recipients.\n- Treat DISTRIBUTOR, RETAILER, GROCERY, STORE, CUSTOMER distribution centers, and similar downstream commerce recipients as retailer/distribution recipients. If the exact business type is distributor, you may keep recipientType as distributor while still using the retailer/distribution style.\n- Treat explicitly public-facing recipients or explicit public notification requests in the trace as public recipients.\n- If the recipient type is unclear, choose the closest grounded business audience and record that choice in the result. Do not invent a public audience if the trace does not provide one.\n\nMessage requirements:\n- Every email body must be formatted as clean, professional HTML (not plain text). Use inline CSS styles, simple tables, bold headings, and bullet points for structure.\n- Start each email with a colored urgency banner at the very top:\n  - Red background (#dc3545) for IMMEDIATE / Class I\n  - Orange background (#fd7e14) for Class II\n  - Yellow background (#ffc107) for Class III\n  - Grey background (#6c757d) for non-urgent / routine\n  The banner must state the alert level in bold white text and the one-line immediate action.\n- Structure the body with clearly separated HTML sections using bold headings: Event Summary, Affected Product, Immediate Actions Required, Shipment / Inventory Details, Laboratory Evidence, and Confirmation Required.\n- Use HTML tables with borders for shipment or inventory details when multiple data points are present (e.g. units, shipped date, reference document number, status).\n- Bold all critical identifiers: product name, traceability lot code, contamination type, urgency level, production date, and expiry date.\n- Include grounded supporting details when available: shipped units, shipped date, reference document number, production date, expiry date, affected states, origin facility, and laboratory result summary.\n- Warehouse-style wording should emphasize hold, segregation, inventory freeze, and internal control actions.\n- Retailer/distributor-style wording should emphasize immediate quarantine, stop sale/stop shipment, inventory identification, downstream hold, and confirmation back to the sender.\n- Public-style wording should be plain-language, safety-oriented, and non-technical, but only if a public recipient actually exists in the input.\n- Do not mention fields that are absent. Do not fabricate regulatory citations, quantities, dates, or contact channels.\n- Ensure the HTML is email-client safe: use only inline style attributes, avoid external CSS or JavaScript, and keep the markup simple so it renders correctly in Gmail and Outlook.\n\nWork steps:\n1. Validate that the input trace contains enough information to identify the contamination event and the affected supplyChainNodes.\n2. Extract the grounded event facts needed for notification content, including product, lot, urgency, contamination type, lab evidence, and affected shipment details.\n3. For each supply-chain node, determine the recipientType from the node data and overall trace context.\n4. Generate a customized subject and body for that recipient type using only grounded trace data.\n5. Call Send Email once for each qualifying node with contactEmail, always keeping yadav.manan@outlook.com in CC, and capture whether it was sent, skipped, or failed.\n6. Return an output that conforms exactly to the output schema with a summary and per-node results.\n\nOutput:\n- Return a result conforming to the output schema.\n- summary: concise plain-language recap of what happened.\n- notificationCount: number of nodes the agent attempted to notify.\n- sentCount: number of successful Send Email calls.\n- notifications: one object per processed node with nodeId, nodeName, recipientType, email, subject, body, status, and reason when useful.\n- Never invent fields or values not grounded in the input or a tool result.\n\nUncertainty:\n- If required event facts are missing, still process what you can, skip only the unsupported notifications, and explain the reason in the relevant notification result.\n- If the trace is unusable or supplyChainNodes is missing or empty, do not call tools; return summary explaining the issue, notificationCount 0, sentCount 0, and an empty notifications array.\n- If a tool call fails, record status failed for that node and continue processing the remaining nodes when possible.\n\nFinal reminder:\n- Be precise, grounded, and non-duplicative.\n- Use Send Email only for qualified recipients.\n- Keep yadav.manan@outlook.com in CC on every email.\n- Process each node once and then stop."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Process the contamination trace below and execute quarantine notifications for each qualifying supply-chain node.\n\nTrace input:\n{{input.traces}}\n\nInstructions:\n- Treat the trace input as the source of truth.\n- Validate that the trace identifies a contamination or recall event and includes supplyChainNodes. If the trace is missing critical details, do not invent them.\n- Review contaminationType, traceabilityLotCode, urgency, recallClassEstimate, product, originFacility, limsResults, statesAffected, totalUnitsAffected, warehouseInventory, and each supplyChainNodes item when available.\n- For each supplyChainNodes entry, decide the recipientType and generate a subject and body tailored to that audience.\n- If node.type indicates distributor, retail, grocery, store, customer distribution center, or similar downstream commercial handling, use retailer/distribution wording.\n- If node.type indicates warehouse or internal storage, use warehouse wording.\n- Use public wording only if the trace explicitly represents a public-facing recipient or explicitly instructs a public notification.\n- When a node has a usable contactEmail, call Send Email exactly once for that node.\n- In every Send Email call, always keep yadav.manan@outlook.com in CC.\n- If no other CC recipients are needed, set CC to exactly yadav.manan@outlook.com.\n- If Send Email includes any additional CC recipients, keep yadav.manan@outlook.com in the CC list and avoid duplicate addresses.\n- Use a high-importance email when urgency is IMMEDIATE or recallClassEstimate is I, unless the trace clearly supports a lower priority.\n- If contactEmail is missing or unusable, do not send the email for that node; include the node in notifications with status skipped and explain why.\n- If Send Email fails for one node, continue with the remaining nodes and record the failed status.\n\nContent expectations for each email:\n- The email Body passed to Send Email must be a complete HTML string starting with a <div> wrapper.\n- Start with the colored urgency banner (red/orange/yellow/grey) at the very top stating the alert level and immediate action.\n- Use bold section headings in this order: Event Summary, Affected Product, Immediate Actions Required, Shipment / Inventory Details, Laboratory Evidence, Confirmation Required.\n- Present node-specific shipment details in an HTML table when more than one field is available (units, shippedDate, referenceDocumentNumber, status).\n- Bold all critical values: product name, lot code, contamination type, urgency, production date, expiry date.\n- Include lab evidence and dates only when present in limsResults, formatted as a bulleted list.\n- Ask the recipient to confirm quarantine completion and cessation of sale, shipment, or further distribution as appropriate for that audience.\n- Keep the tone professional and urgent. The HTML must use inline style attributes only and be compatible with Gmail and Outlook.\n\nReturn format:\n- Return data that matches the output schema exactly.\n- summary must briefly explain the event and the overall notification outcome.\n- notificationCount must equal the number of nodes you attempted to notify.\n- sentCount must equal the number of successful email sends.\n- notifications must include one result object per processed supply-chain node.\n\nError handling:\n- If traces is null, empty, or not usable as an event trace, return summary explaining the issue, notificationCount 0, sentCount 0, and notifications as an empty array.\n- If supplyChainNodes is missing or empty, do not send any email and explain that in summary.\n- Never fabricate recipients, shipment facts, or contamination details.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Process the contamination trace below and execute quarantine notifications for each qualifying supply-chain node.\n\nTrace input:\n"
+        },
+        {
+          "type": "variable",
+          "rawString": "input.traces"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nInstructions:\n- Treat the trace input as the source of truth.\n- Validate that the trace identifies a contamination or recall event and includes supplyChainNodes. If the trace is missing critical details, do not invent them.\n- Review contaminationType, traceabilityLotCode, urgency, recallClassEstimate, product, originFacility, limsResults, statesAffected, totalUnitsAffected, warehouseInventory, and each supplyChainNodes item when available.\n- For each supplyChainNodes entry, decide the recipientType and generate a subject and body tailored to that audience.\n- If node.type indicates distributor, retail, grocery, store, customer distribution center, or similar downstream commercial handling, use retailer/distribution wording.\n- If node.type indicates warehouse or internal storage, use warehouse wording.\n- Use public wording only if the trace explicitly represents a public-facing recipient or explicitly instructs a public notification.\n- When a node has a usable contactEmail, call Send Email exactly once for that node.\n- In every Send Email call, always keep yadav.manan@outlook.com in CC.\n- If no other CC recipients are needed, set CC to exactly yadav.manan@outlook.com.\n- If Send Email includes any additional CC recipients, keep yadav.manan@outlook.com in the CC list and avoid duplicate addresses.\n- Use a high-importance email when urgency is IMMEDIATE or recallClassEstimate is I, unless the trace clearly supports a lower priority.\n- If contactEmail is missing or unusable, do not send the email for that node; include the node in notifications with status skipped and explain why.\n- If Send Email fails for one node, continue with the remaining nodes and record the failed status.\n\nContent expectations for each email:\n- The email Body passed to Send Email must be a complete HTML string starting with a <div> wrapper.\n- Start with the colored urgency banner (red/orange/yellow/grey) at the very top stating the alert level and immediate action.\n- Use bold section headings in this order: Event Summary, Affected Product, Immediate Actions Required, Shipment / Inventory Details, Laboratory Evidence, Confirmation Required.\n- Present node-specific shipment details in an HTML table when more than one field is available (units, shippedDate, referenceDocumentNumber, status).\n- Bold all critical values: product name, lot code, contamination type, urgency, production date, expiry date.\n- Include lab evidence and dates only when present in limsResults, formatted as a bulleted list.\n- Ask the recipient to confirm quarantine completion and cessation of sale, shipment, or further distribution as appropriate for that audience.\n- Keep the tone professional and urgent. The HTML must use inline style attributes only and be compatible with Gmail and Outlook.\n\nReturn format:\n- Return data that matches the output schema exactly.\n- summary must briefly explain the event and the overall notification outcome.\n- notificationCount must equal the number of nodes you attempted to notify.\n- sentCount must equal the number of successful email sends.\n- notifications must include one result object per processed supply-chain node.\n\nError handling:\n- If traces is null, empty, or not usable as an event trace, return summary explaining the issue, notificationCount 0, sentCount 0, and notifications as an empty array.\n- If supplyChainNodes is missing or empty, do not send any email and explain that in summary.\n- Never fabricate recipients, shipment facts, or contamination details."
+        }
+      ]
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "traces"
+    ],
+    "properties": {
+      "traces": {
+        "type": "object",
+        "description": "Complete contamination trace object for a recall or quarantine event. Expected format: a JSON object sourced from an upstream traceability workflow. Typical fields include contaminationType, traceabilityLotCode, urgency, recallClassEstimate, product, originFacility, productionDate, expiryDate, limsResults, statesAffected, totalUnitsAffected, supplyChainNodes, warehouseInventory, and criticalTrackingEvents. Use values exactly as provided, preserve units and identifiers, and treat missing or unknown fields as unavailable rather than inventing replacements.",
+        "additionalProperties": true
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "required": [
+      "summary",
+      "notificationCount",
+      "sentCount",
+      "notifications"
+    ],
+    "properties": {
+      "summary": {
+        "type": "string",
+        "description": "Plain-language execution summary of the quarantine notification run. Expected format: 2-6 sentences. Derived from the input trace and tool results. Include the contamination type, lot code, urgency, and overall send outcome. Included on every successful or partially successful run."
+      },
+      "notificationCount": {
+        "type": "integer",
+        "description": "Number of quarantine notification emails the agent attempted to send, counted from supplyChainNodes with usable contactEmail values. Expected format: whole number. Derived from the input trace and the agent's processing decisions. Include when the trace is valid. Possible values: 0 or greater."
+      },
+      "sentCount": {
+        "type": "integer",
+        "description": "Number of quarantine notification emails successfully sent through the Send Email tool. Expected format: whole number. Derived from successful tool results. Include when at least one send attempt was made. Possible values: 0 or greater."
+      },
+      "notifications": {
+        "type": "array",
+        "description": "Per-recipient notification results produced from the trace. Expected format: array of objects, one per supply-chain node considered. Values come from the input trace, generated notification text, and tool outcomes. Include when the trace contains supplyChainNodes, even if some are skipped. Possible values: empty array or populated list.",
+        "items": {
+          "type": "object",
+          "required": [
+            "nodeId",
+            "nodeName",
+            "recipientType",
+            "status"
+          ],
+          "properties": {
+            "nodeId": {
+              "type": "string",
+              "description": "Supply-chain node identifier from the trace."
+            },
+            "nodeName": {
+              "type": "string",
+              "description": "Supply-chain node name from the trace."
+            },
+            "recipientType": {
+              "type": "string",
+              "description": "Message audience selected by the agent for the notification. Possible values: warehouse, retailer, distributor, public, other."
+            },
+            "email": {
+              "type": "string",
+              "description": "Recipient email address used or intended for the notification."
+            },
+            "subject": {
+              "type": "string",
+              "description": "Email subject generated for this notification."
+            },
+            "body": {
+              "type": "string",
+              "description": "Email body generated for this notification."
+            },
+            "status": {
+              "type": "string",
+              "description": "Processing result for this node. Possible values: sent, skipped, failed."
+            },
+            "reason": {
+              "type": "string",
+              "description": "Short explanation for skipped or failed outcomes, or a brief success note."
+            }
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "model": "gpt-5.4",
+    "maxTokens": 128000,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "resources": [
+    {
+      "$resourceType": "tool",
+      "name": "Send Email",
+      "description": "Sends an email message",
+      "location": "external",
+      "type": "integration",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "SaveAsDraft": {
+            "type": "boolean",
+            "title": "Save as draft",
+            "description": "Send an email message. By default, the email will be saved as draft."
+          },
+          "BCC": {
+            "type": "string",
+            "title": "BCC",
+            "description": "The hidden recipients of the email, separated by comma (,)"
+          },
+          "Body": {
+            "type": "string",
+            "title": "Body",
+            "description": "The body of the email"
+          },
+          "CC": {
+            "type": "string",
+            "title": "CC",
+            "description": "The secondary recipients of the email, separated by comma (,)"
+          },
+          "Importance": {
+            "type": "string",
+            "title": "Importance",
+            "description": "The importance of the mail",
+            "oneOf": [
+              {
+                "const": "normal",
+                "title": "Normal"
+              },
+              {
+                "const": "high",
+                "title": "High"
+              },
+              {
+                "const": "low",
+                "title": "Low"
+              }
+            ],
+            "enum": [
+              "normal",
+              "high",
+              "low"
+            ]
+          },
+          "ReplyTo": {
+            "type": "string",
+            "title": "Reply to",
+            "description": "The email addresses to use when replying, separated by comma (,)"
+          },
+          "Subject": {
+            "type": "string",
+            "title": "Subject",
+            "description": "The subject of the email"
+          },
+          "To": {
+            "type": "string",
+            "title": "To",
+            "description": "The primary recipients of the email, separated by comma (,)"
+          }
+        },
+        "required": [
+          "To"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "Importance": {
+            "type": "string",
+            "title": "Importance",
+            "description": "The importance of the mail"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "labelIds[*]": {
+            "type": "string",
+            "title": "Label ids"
+          },
+          "threadId": {
+            "type": "string",
+            "title": "Thread ID"
+          }
+        },
+        "definitions": {}
+      },
+      "settings": {},
+      "properties": {
+        "toolPath": "/SendEmail",
+        "objectName": "SendEmail",
+        "toolDisplayName": "Send Email",
+        "toolDescription": "Sends an email message",
+        "method": "POST",
+        "connection": {
+          "id": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0",
+          "name": "yadav.manan24@gmail.com",
+          "elementInstanceId": 0,
+          "apiBaseUri": "",
+          "state": "enabled",
+          "isDefault": false,
+          "connector": {
+            "key": "uipath-google-gmail",
+            "name": "Gmail",
+            "image": "https://staging.uipath.com/elements_/scaleunit_/4a9b6040-645f-4006-a000-829794b794d4/v3/element/elements/uipath-google-gmail/image",
+            "enabled": true
+          },
+          "folder": {
+            "key": "4c029b43-3e61-4f4b-bd0c-ac669bac94c3",
+            "path": "811b80b0-a9cc-46d2-9a98-36472e85e261.4c029b43-3e61-4f4b-bd0c-ac669bac94c3"
+          },
+          "solutionProperties": {
+            "resourceKey": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0"
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "displayName": "Body",
+            "type": "string",
+            "fieldLocation": "multipart",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The message body\n",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 1,
+            "required": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "SaveAsDraft",
+            "displayName": "Save as draft",
+            "type": "boolean",
+            "fieldLocation": "query",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "Send an email message. By default, the email will be saved as draft.",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 2,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "To",
+            "displayName": "To",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The primary recipients of the email, separated by comma (,)",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 3,
+            "required": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "Subject",
+            "displayName": "Subject",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The subject of the email",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 4,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "Body",
+            "displayName": "Body",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The body of the email",
+            "dynamic": true,
+            "componentType": "RichTextEditorHTML",
+            "position": "primary",
+            "sortOrder": 5,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "file",
+            "displayName": "Attachment",
+            "type": "file",
+            "fieldLocation": "multipart",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The attachment to be sent with the email",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 6,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "Importance",
+            "displayName": "Importance",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The importance of the mail",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 7,
+            "required": false,
+            "enumValues": [
+              {
+                "name": "Normal",
+                "value": "normal"
+              },
+              {
+                "name": "High",
+                "value": "high"
+              },
+              {
+                "name": "Low",
+                "value": "low"
+              }
+            ],
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "ReplyTo",
+            "displayName": "Reply to",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The email addresses to use when replying, separated by comma (,)",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 8,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "CC",
+            "displayName": "CC",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The secondary recipients of the email, separated by comma (,)",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 9,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "BCC",
+            "displayName": "BCC",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The hidden recipients of the email, separated by comma (,)",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 10,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          }
+        ],
+        "bodyStructure": {
+          "contentType": "multipart",
+          "jsonBodySection": "body"
+        }
+      },
+      "guardrail": {
+        "policies": []
+      },
+      "iconUrl": "https://staging.uipath.com/elements_/scaleunit_/4a9b6040-645f-4006-a000-829794b794d4/v3/element/elements/uipath-google-gmail/image",
+      "id": "c4c61b4c-e3d3-4cba-a506-34c85bd39f00",
+      "isPreview": true,
+      "isEnabled": true
+    }
+  ],
+  "features": []
+}

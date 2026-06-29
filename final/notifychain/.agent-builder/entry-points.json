@@ -1,0 +1,95 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "75e6769e-401e-45ec-9432-848c8cbfef64",
+      "input": {
+        "type": "object",
+        "title": "Inputs",
+        "properties": {
+          "traces": {
+            "type": "object",
+            "description": "Complete contamination trace object for a recall or quarantine event. Expected format: a JSON object sourced from an upstream traceability workflow. Typical fields include contaminationType, traceabilityLotCode, urgency, recallClassEstimate, product, originFacility, productionDate, expiryDate, limsResults, statesAffected, totalUnitsAffected, supplyChainNodes, warehouseInventory, and criticalTrackingEvents. Use values exactly as provided, preserve units and identifiers, and treat missing or unknown fields as unavailable rather than inventing replacements.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "traces"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string",
+            "description": "Plain-language execution summary of the quarantine notification run. Expected format: 2-6 sentences. Derived from the input trace and tool results. Include the contamination type, lot code, urgency, and overall send outcome. Included on every successful or partially successful run."
+          },
+          "notificationCount": {
+            "type": "integer",
+            "description": "Number of quarantine notification emails the agent attempted to send, counted from supplyChainNodes with usable contactEmail values. Expected format: whole number. Derived from the input trace and the agent's processing decisions. Include when the trace is valid. Possible values: 0 or greater."
+          },
+          "sentCount": {
+            "type": "integer",
+            "description": "Number of quarantine notification emails successfully sent through the Send Email tool. Expected format: whole number. Derived from successful tool results. Include when at least one send attempt was made. Possible values: 0 or greater."
+          },
+          "notifications": {
+            "type": "array",
+            "description": "Per-recipient notification results produced from the trace. Expected format: array of objects, one per supply-chain node considered. Values come from the input trace, generated notification text, and tool outcomes. Include when the trace contains supplyChainNodes, even if some are skipped. Possible values: empty array or populated list.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nodeId": {
+                  "type": "string",
+                  "description": "Supply-chain node identifier from the trace."
+                },
+                "nodeName": {
+                  "type": "string",
+                  "description": "Supply-chain node name from the trace."
+                },
+                "recipientType": {
+                  "type": "string",
+                  "description": "Message audience selected by the agent for the notification. Possible values: warehouse, retailer, distributor, public, other."
+                },
+                "email": {
+                  "type": "string",
+                  "description": "Recipient email address used or intended for the notification."
+                },
+                "subject": {
+                  "type": "string",
+                  "description": "Email subject generated for this notification."
+                },
+                "body": {
+                  "type": "string",
+                  "description": "Email body generated for this notification."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Processing result for this node. Possible values: sent, skipped, failed."
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "Short explanation for skipped or failed outcomes, or a brief success note."
+                }
+              },
+              "required": [
+                "nodeId",
+                "nodeName",
+                "recipientType",
+                "status"
+              ]
+            }
+          }
+        },
+        "required": [
+          "summary",
+          "notificationCount",
+          "sentCount",
+          "notifications"
+        ]
+      }
+    }
+  ]
+}

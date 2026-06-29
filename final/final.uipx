@@ -1,0 +1,63 @@
+{
+  "DocVersion": "1.0.0",
+  "StudioMinVersion": "2025.04.0",
+  "SolutionId": "88e13f31-5486-4198-b6a1-08ded446259e",
+  "Projects": [
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "quarantineapi_final/project.uiproj",
+      "Id": "2d47ed8a-296a-4ac2-b22c-627af97ab697"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "connect_recall/project.uiproj",
+      "Id": "b3bb5942-9a21-4f08-b94b-c5685a75bdba"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "recall_trigger_final/project.uiproj",
+      "Id": "c3189189-fc2e-4635-8da5-47c92c9a503e"
+    },
+    {
+      "Type": "Api",
+      "ProjectRelativePath": "quarantine/project.uiproj",
+      "Id": "e255a603-fef7-440c-bb49-e796094acc05"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "lot_tracing_final/project.uiproj",
+      "Id": "e53b0fbc-4a01-4db9-aaf1-39fe1b741d65"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "notifychain/project.uiproj",
+      "Id": "692950c1-91c6-4464-a707-0f86e9812d60"
+    },
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "RPA Workflow/project.uiproj",
+      "Id": "ceeb0519-9c20-404b-a1d0-736bb30aceba"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "kde_report_final/project.uiproj",
+      "Id": "97d15fd4-e06f-4f47-81a0-7344d7f48241"
+    },
+    {
+      "Type": "CaseManagement",
+      "ProjectRelativePath": "Maestro Case/project.uiproj",
+      "Id": "5ef97789-d930-47d8-b290-253cf932bcef"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "send_recalled_report/project.uiproj",
+      "Id": "713f46dc-a96b-435e-9dbc-3c5dd9ed444b"
+    },
+    {
+      "Type": "Api",
+      "ProjectRelativePath": "API Workflow/project.uiproj",
+      "Id": "d4230db7-693c-4776-8a93-ab9612dd2929"
+    }
+  ],
+  "AutomationHubIdeaUrl": null
+}

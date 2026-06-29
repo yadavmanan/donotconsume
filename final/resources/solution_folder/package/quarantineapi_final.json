@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "quarantineapi_final",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "2d47ed8a-296a-4ac2-b22c-627af97ab697",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "quarantineapi_final",
+      "description": null
+    },
+    "locks": [],
+    "key": "4afd286e-b37b-41c8-be57-ef7a40ccf37c"
+  }
+}

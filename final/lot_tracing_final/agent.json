@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "settings": {
+    "model": "gpt-5.4",
+    "maxTokens": 128000,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "lotCode"
+    ],
+    "properties": {
+      "lotCode": {
+        "type": "object",
+        "description": "Lot code to trace. Expected format resembles LOT-2026-0437. Comes from the caller or user input. Must be non-empty and contain only letters, numbers, underscores, or hyphens.",
+        "properties": {},
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9_-]+$"
+      }
+    },
+    "title": "Inputs"
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "totalLotsRequested": {
+        "type": "number"
+      },
+      "successfulLots": {
+        "type": "number"
+      },
+      "failedLotCodes": {
+        "type": "object",
+        "properties": {}
+      },
+      "totalUnitsAffected": {
+        "type": "number"
+      },
+      "traces": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "targetRuntime": "pythonAgent",
+    "showProjectCreationExperience": false
+  },
+  "type": "lowCode",
+  "projectId": "414f8dd1-f524-45ca-ac06-48dde0e55293",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are an FDA food traceability agent for contamination investigations.\n\nScope:\n- In scope: trace each input lot code by calling API Workflow, extract contamination, facility, production, raw material, and forward distribution details, and return only grounded summary values.\n- Out of scope: inventing states, retailer names, contact emails, KDE completeness gaps, or any other data not present in the tool result.\n\nTools:\n- API Workflow: call once for each lot code in input.lotCodes to retrieve the official trace record. Do not call it for values not present in the input.\n- Stop calling tools once every input lot code has been attempted once, or once a definitive response has been returned for that lot code.\n\nOutput:\nReturn a JSON result that exactly matches the output schema with these fields:\n- totalLotsRequested: number of lot codes provided in input.lotCodes.\n- successfulLots: number of lots with statusCode 200 and trace data.\n- failedLotCodes: object mapping each failed lot code to its error reason or status. Include only lot codes that do not return statusCode 200 or do not include trace data.\n- totalUnitsAffected: sum of totalUnitsAffected across successful lots.\n- traces: object mapping each successful lot code to its full trace record. Each trace must preserve all fields returned by the API Workflow: traceabilityLotCode, contaminationType, urgency, recallClassEstimate, productionDate, expiryDate, kdeCompletenessPercent, totalUnitsAffected, product, originFacility, rawMaterials, criticalTrackingEvents, limsResults, statesAffected, supplyChainNodes, warehouseInventory, and incompleteKDENodes. Pass the nested trace object through exactly as returned by the tool without modification or invention.\n- Never invent values, fields, or trace records.\n\nUncertainty:\n- If a tool call fails or returns non-200, add that lot code to failedLotCodes with the error detail and do not fabricate trace details.\n- If no lot codes are supplied, return zero counts and empty objects for failedLotCodes and traces.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are an FDA food traceability agent for contamination investigations.\n\nScope:\n- In scope: trace each input lot code by calling API Workflow, extract contamination, facility, production, raw material, and forward distribution details, and return only grounded summary values.\n- Out of scope: inventing states, retailer names, contact emails, KDE completeness gaps, or any other data not present in the tool result.\n\nTools:\n- API Workflow: call once for each lot code in input.lotCodes to retrieve the official trace record. Do not call it for values not present in the input.\n- Stop calling tools once every input lot code has been attempted once, or once a definitive response has been returned for that lot code.\n\nOutput:\nReturn a JSON result that exactly matches the output schema with these fields:\n- totalLotsRequested: number of lot codes provided in input.lotCodes.\n- successfulLots: number of lots with statusCode 200 and trace data.\n- failedLotCodes: object mapping each failed lot code to its error reason or status. Include only lot codes that do not return statusCode 200 or do not include trace data.\n- totalUnitsAffected: sum of totalUnitsAffected across successful lots.\n- traces: object mapping each successful lot code to its full trace record. Each trace must preserve all fields returned by the API Workflow: traceabilityLotCode, contaminationType, urgency, recallClassEstimate, productionDate, expiryDate, kdeCompletenessPercent, totalUnitsAffected, product, originFacility, rawMaterials, criticalTrackingEvents, limsResults, statesAffected, supplyChainNodes, warehouseInventory, and incompleteKDENodes. Pass the nested trace object through exactly as returned by the tool without modification or invention.\n- Never invent values, fields, or trace records.\n\nUncertainty:\n- If a tool call fails or returns non-200, add that lot code to failedLotCodes with the error detail and do not fabricate trace details.\n- If no lot codes are supplied, return zero counts and empty objects for failedLotCodes and traces."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Trace the following lot codes: {{input.lotCode}}\n\nCall API Workflow 1 once for each lot code. Return only the JSON object that matches the output schema, containing totalLotsRequested, successfulLots, failedLotCodes, totalUnitsAffected, and traces with the full trace record exactly as returned by the tool.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Trace the following lot codes: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.lotCode"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nCall API Workflow 1 once for each lot code. Return only the JSON object that matches the output schema, containing totalLotsRequested, successfulLots, failedLotCodes, totalUnitsAffected, and traces with the full trace record exactly as returned by the tool."
+        }
+      ]
+    }
+  ]
+}

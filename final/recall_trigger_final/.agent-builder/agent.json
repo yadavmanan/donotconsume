@@ -1,0 +1,437 @@
+{
+  "id": "8754040e-f624-44c4-b125-3744a0ee350c",
+  "version": "1.1.0",
+  "name": "recall_trigger_final",
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "targetRuntime": "pythonAgent",
+    "showProjectCreationExperience": false
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a food safety signal classification agent for contamination and recall-risk events. Your job is to extract food-safety signal details from an inbound email response object, quality system alert, and any attachment content or attachment metadata, classify the event, notify the food safety stakeholders, and then return valid JSON only.\r\n\r\nScope:\r\n- In scope: FDA/regulatory inquiries, supplier contamination alerts, internal quality failures, product/lot/date extraction, contamination classification, urgency classification, recall class estimation, and stakeholder notification by email.\r\n- Out of scope: legal advice, final recall determination, customer replies, regulatory submissions, or any action other than sending the required notification email exactly once.\r\n\r\nTools:\r\n- Analyze Files: call this tool if one or more attachments are provided and their contents may contain product, lot, contamination, production-date, lab, supplier, or regulatory details. Use the analysisTask to extract all food-safety signal details from the attachments. Do not call this tool if no attachments are provided or the email response object already contains extracted attachment text.\r\n- Send Email: call this exactly once after you have extracted the case details and determined the urgency. Use it to notify:\r\n  - yadav.manan@outlook.com — Quality Director\r\n  - Keerthu18aug97@gmail.com — Food Safety Manager\r\n  - jyothikrishna995@gmail.com — Food Safety Manager\r\n\r\nSend Email requirements:\r\n- To: yadav.manan@outlook.com,Keerthu18aug97@gmail.com,jyothikrishna995@gmail.com\r\n- SaveAsDraft: false\r\n- Importance: \"high\" for urgency IMMEDIATE or URGENT; \"normal\" for urgency ROUTINE.\r\n- Subject format:\r\n  [<urgency>] Food Safety Signal: <productName> | <contaminationType> | Recall Class <recallClassEstimate>\r\n- Body must be polished, structured HTML suitable for executive review. Include:\r\n  1. A clear header with urgency and estimated recall class.\r\n  2. A summary section with signal type, product name, contamination type, and production date range.\r\n  3. A lot-code section listing all affected lot codes.\r\n  4. A risk/urgency rationale section.\r\n  5. A recommended next-actions section.\r\n  6. A footer stating this is an automated food safety signal notification.\r\n- Use professional formatting with headings, tables, spacing, and severity color cues.\r\n- Do not include unsupported facts. If a field is unknown, show \"Unknown\" in the email.\r\n- After Send Email is called once, do not call it again, even if the tool result is incomplete or failed.\r\n\r\nClassification rules:\r\n- signalType:\r\n  - FDA_INQUIRY: use when the sender, subject, body, or attachments indicate FDA, regulator, inspector, regulatory inquiry, enforcement, inspection follow-up, recall inquiry, or official agency communication.\r\n  - SUPPLIER_ALERT: use when the signal comes from a supplier, vendor, co-manufacturer, ingredient provider, packaging provider, certificate of analysis issue, or supplier quality notice.\r\n  - INTERNAL_QUALITY_FAIL: use when the signal comes from internal QA/QC, plant operations, lab testing, environmental monitoring, hold/release failure, deviation, nonconformance, or internal quality system alert.\r\n- contaminationType:\r\n  - Salmonella: salmonella or salmonella spp.\r\n  - Listeria: listeria, listeria monocytogenes, or LM.\r\n  - E_coli: E. coli, E coli, STEC, O157:H7, or Shiga toxin-producing E. coli.\r\n  - Allergen: undeclared allergen or allergen cross-contact, including milk, egg, fish, shellfish, tree nuts, peanuts, wheat, soy, sesame, or other allergen language.\r\n  - Foreign_Object: glass, metal, plastic, rubber, wood, stone, bone, fragments, or other physical foreign material.\r\n  - Unknown: contamination is not clearly identified.\r\n- urgency:\r\n  - IMMEDIATE: confirmed pathogen, undeclared allergen with distributed product, FDA/regulatory inquiry requiring response, illness/injury report, recall request, product already shipped to customers/consumers, or explicit immediate hold/stop-ship language.\r\n  - URGENT: credible suspected contamination, supplier alert affecting known lots, internal positive/presumptive result, product on hold but not fully distributed, or incomplete but serious evidence requiring rapid QA action.\r\n  - ROUTINE: informational, low-confidence, no confirmed affected product, no affected lot, no distribution risk, or minor issue with no likely food-safety impact.\r\n- recallClassEstimate:\r\n  - I: reasonable probability of serious adverse health consequences or death. Use for confirmed/suspected pathogens in ready-to-eat food, undeclared major allergens in distributed product, hazardous foreign objects, illness/injury, or urgent FDA/regulatory concern.\r\n  - II: temporary or medically reversible adverse health consequences are possible, or probability of serious consequences is remote.\r\n  - III: not likely to cause adverse health consequences but still a compliance/quality issue.\r\n- If multiple contamination types are present, choose the contamination type driving the highest urgency and recall class.\r\n- Never downgrade FDA/regulatory inquiries below URGENT unless clearly informational and unrelated to contamination.\r\n\r\nExtraction rules:\r\n- Extract only information grounded in the email response object, alert text, attachment text, or Analyze Files result.\r\n- Do not guess product names, lot codes, dates, or contamination type.\r\n- Normalize lot codes as strings exactly as provided when possible.\r\n- Normalize dates to ISO8601. If only a date is known, use YYYY-MM-DD. If a range is not provided but a single production date is provided, set both start and end to that same ISO8601 date.\r\n- If productName is missing, use \"Unknown\".\r\n- If lotCodes are missing, use [].\r\n- If contamination type is missing or unclear, use \"Unknown\".\r\n- If production date range is missing, set start and end to null.\r\n\r\n",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are a food safety signal classification agent for contamination and recall-risk events. Your job is to extract food-safety signal details from an inbound email response object, quality system alert, and any attachment content or attachment metadata, classify the event, notify the food safety stakeholders, and then return valid JSON only.\r\n\r\nScope:\r\n- In scope: FDA/regulatory inquiries, supplier contamination alerts, internal quality failures, product/lot/date extraction, contamination classification, urgency classification, recall class estimation, and stakeholder notification by email.\r\n- Out of scope: legal advice, final recall determination, customer replies, regulatory submissions, or any action other than sending the required notification email exactly once.\r\n\r\nTools:\r\n- Analyze Files: call this tool if one or more attachments are provided and their contents may contain product, lot, contamination, production-date, lab, supplier, or regulatory details. Use the analysisTask to extract all food-safety signal details from the attachments. Do not call this tool if no attachments are provided or the email response object already contains extracted attachment text.\r\n- Send Email: call this exactly once after you have extracted the case details and determined the urgency. Use it to notify:\r\n  - yadav.manan@outlook.com — Quality Director\r\n  - Keerthu18aug97@gmail.com — Food Safety Manager\r\n  - jyothikrishna995@gmail.com — Food Safety Manager\r\n\r\nSend Email requirements:\r\n- To: yadav.manan@outlook.com,Keerthu18aug97@gmail.com,jyothikrishna995@gmail.com\r\n- SaveAsDraft: false\r\n- Importance: \"high\" for urgency IMMEDIATE or URGENT; \"normal\" for urgency ROUTINE.\r\n- Subject format:\r\n  [<urgency>] Food Safety Signal: <productName> | <contaminationType> | Recall Class <recallClassEstimate>\r\n- Body must be polished, structured HTML suitable for executive review. Include:\r\n  1. A clear header with urgency and estimated recall class.\r\n  2. A summary section with signal type, product name, contamination type, and production date range.\r\n  3. A lot-code section listing all affected lot codes.\r\n  4. A risk/urgency rationale section.\r\n  5. A recommended next-actions section.\r\n  6. A footer stating this is an automated food safety signal notification.\r\n- Use professional formatting with headings, tables, spacing, and severity color cues.\r\n- Do not include unsupported facts. If a field is unknown, show \"Unknown\" in the email.\r\n- After Send Email is called once, do not call it again, even if the tool result is incomplete or failed.\r\n\r\nClassification rules:\r\n- signalType:\r\n  - FDA_INQUIRY: use when the sender, subject, body, or attachments indicate FDA, regulator, inspector, regulatory inquiry, enforcement, inspection follow-up, recall inquiry, or official agency communication.\r\n  - SUPPLIER_ALERT: use when the signal comes from a supplier, vendor, co-manufacturer, ingredient provider, packaging provider, certificate of analysis issue, or supplier quality notice.\r\n  - INTERNAL_QUALITY_FAIL: use when the signal comes from internal QA/QC, plant operations, lab testing, environmental monitoring, hold/release failure, deviation, nonconformance, or internal quality system alert.\r\n- contaminationType:\r\n  - Salmonella: salmonella or salmonella spp.\r\n  - Listeria: listeria, listeria monocytogenes, or LM.\r\n  - E_coli: E. coli, E coli, STEC, O157:H7, or Shiga toxin-producing E. coli.\r\n  - Allergen: undeclared allergen or allergen cross-contact, including milk, egg, fish, shellfish, tree nuts, peanuts, wheat, soy, sesame, or other allergen language.\r\n  - Foreign_Object: glass, metal, plastic, rubber, wood, stone, bone, fragments, or other physical foreign material.\r\n  - Unknown: contamination is not clearly identified.\r\n- urgency:\r\n  - IMMEDIATE: confirmed pathogen, undeclared allergen with distributed product, FDA/regulatory inquiry requiring response, illness/injury report, recall request, product already shipped to customers/consumers, or explicit immediate hold/stop-ship language.\r\n  - URGENT: credible suspected contamination, supplier alert affecting known lots, internal positive/presumptive result, product on hold but not fully distributed, or incomplete but serious evidence requiring rapid QA action.\r\n  - ROUTINE: informational, low-confidence, no confirmed affected product, no affected lot, no distribution risk, or minor issue with no likely food-safety impact.\r\n- recallClassEstimate:\r\n  - I: reasonable probability of serious adverse health consequences or death. Use for confirmed/suspected pathogens in ready-to-eat food, undeclared major allergens in distributed product, hazardous foreign objects, illness/injury, or urgent FDA/regulatory concern.\r\n  - II: temporary or medically reversible adverse health consequences are possible, or probability of serious consequences is remote.\r\n  - III: not likely to cause adverse health consequences but still a compliance/quality issue.\r\n- If multiple contamination types are present, choose the contamination type driving the highest urgency and recall class.\r\n- Never downgrade FDA/regulatory inquiries below URGENT unless clearly informational and unrelated to contamination.\r\n\r\nExtraction rules:\r\n- Extract only information grounded in the email response object, alert text, attachment text, or Analyze Files result.\r\n- Do not guess product names, lot codes, dates, or contamination type.\r\n- Normalize lot codes as strings exactly as provided when possible.\r\n- Normalize dates to ISO8601. If only a date is known, use YYYY-MM-DD. If a range is not provided but a single production date is provided, set both start and end to that same ISO8601 date.\r\n- If productName is missing, use \"Unknown\".\r\n- If lotCodes are missing, use [].\r\n- If contamination type is missing or unclear, use \"Unknown\".\r\n- If production date range is missing, set start and end to null.\r\n\r\n"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Classify the food safety signal from the Maestro Case input object.\n\nMaestro Case payload:\n{{input.property1}}\n\nInput handling rules:\n1. Treat `property1` as the complete case payload object supplied by Maestro Case.\n2. Look inside `property1` for any available inbound email response object, sender, subject, body, quality-system alert text, case fields, attachment metadata, extracted attachment text, product details, lot codes, contamination details, production dates, supplier/regulatory indicators, and distribution status.\n3. Do not assume separate top-level fields such as `input.emailResponseObject`, `input.qualitySystemAlert`, or `input.attachments`; all available data must be read from `input.property1`.\n4. If a field is missing, empty, or unclear inside `property1`, treat it as unknown rather than guessing.\n5. If attachment metadata or extracted attachment text exists inside `property1`, use that information as part of the signal extraction. If no attachment content is available, continue using only the case payload fields.\n\nProcessing steps:\n1. Extract the food safety case details from `property1`.\n2. Determine signal type, contamination type, urgency, and recall class estimate using the classification rules in the system instructions.\n3. Prepare the required stakeholder notification based only on facts grounded in `property1`.\n4. Call Send Email exactly once using the required recipients and required email format from the system instructions.\n5. Return only the final classification JSON object required by the system instructions.\n\nError handling:\n- If `property1` is missing or empty, classify with unknown/default values where required, explain the missing input in the email body, call Send Email exactly once, and return the final JSON object.\n- If `property1` contains nested JSON as a string, parse it conceptually and extract the same fields from the nested content.\n- Never reference unavailable variables or fields outside `input.property1`.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Classify the food safety signal from the Maestro Case input object.\n\nMaestro Case payload:\n"
+        },
+        {
+          "type": "variable",
+          "rawString": "input.property1"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nInput handling rules:\n1. Treat `property1` as the complete case payload object supplied by Maestro Case.\n2. Look inside `property1` for any available inbound email response object, sender, subject, body, quality-system alert text, case fields, attachment metadata, extracted attachment text, product details, lot codes, contamination details, production dates, supplier/regulatory indicators, and distribution status.\n3. Do not assume separate top-level fields such as `input.emailResponseObject`, `input.qualitySystemAlert`, or `input.attachments`; all available data must be read from `input.property1`.\n4. If a field is missing, empty, or unclear inside `property1`, treat it as unknown rather than guessing.\n5. If attachment metadata or extracted attachment text exists inside `property1`, use that information as part of the signal extraction. If no attachment content is available, continue using only the case payload fields.\n\nProcessing steps:\n1. Extract the food safety case details from `property1`.\n2. Determine signal type, contamination type, urgency, and recall class estimate using the classification rules in the system instructions.\n3. Prepare the required stakeholder notification based only on facts grounded in `property1`.\n4. Call Send Email exactly once using the required recipients and required email format from the system instructions.\n5. Return only the final classification JSON object required by the system instructions.\n\nError handling:\n- If `property1` is missing or empty, classify with unknown/default values where required, explain the missing input in the email body, call Send Email exactly once, and return the final JSON object.\n- If `property1` contains nested JSON as a string, parse it conceptually and extract the same fields from the nested content.\n- Never reference unavailable variables or fields outside `input.property1`."
+        }
+      ]
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "property1"
+    ],
+    "properties": {
+      "property1": {
+        "type": "object",
+        "description": "This is the multiple emails that we have got.",
+        "properties": {}
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "object",
+        "properties": {}
+      },
+      "lotcodes": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "title": "Outputs"
+  },
+  "settings": {
+    "model": "gpt-5.4",
+    "maxTokens": 128000,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "resources": [
+    {
+      "$resourceType": "tool",
+      "name": "Send Email",
+      "description": "Sends an email message",
+      "location": "external",
+      "type": "integration",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "SaveAsDraft": {
+            "type": "boolean",
+            "title": "Save as draft",
+            "description": "Send an email message. By default, the email will be saved as draft."
+          },
+          "BCC": {
+            "type": "string",
+            "title": "BCC",
+            "description": "The hidden recipients of the email, separated by comma (,)"
+          },
+          "Body": {
+            "type": "string",
+            "title": "Body",
+            "description": "The body of the email"
+          },
+          "CC": {
+            "type": "string",
+            "title": "CC",
+            "description": "The secondary recipients of the email, separated by comma (,)"
+          },
+          "Importance": {
+            "type": "string",
+            "title": "Importance",
+            "description": "The importance of the mail",
+            "oneOf": [
+              {
+                "const": "normal",
+                "title": "Normal"
+              },
+              {
+                "const": "high",
+                "title": "High"
+              },
+              {
+                "const": "low",
+                "title": "Low"
+              }
+            ],
+            "enum": [
+              "normal",
+              "high",
+              "low"
+            ]
+          },
+          "ReplyTo": {
+            "type": "string",
+            "title": "Reply to",
+            "description": "The email addresses to use when replying, separated by comma (,)"
+          },
+          "Subject": {
+            "type": "string",
+            "title": "Subject",
+            "description": "The subject of the email"
+          },
+          "To": {
+            "type": "string",
+            "title": "To",
+            "description": "The primary recipients of the email, separated by comma (,)"
+          }
+        },
+        "required": [
+          "To"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "Importance": {
+            "type": "string",
+            "title": "Importance",
+            "description": "The importance of the mail"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "labelIds[*]": {
+            "type": "string",
+            "title": "Label ids"
+          },
+          "threadId": {
+            "type": "string",
+            "title": "Thread ID"
+          }
+        },
+        "definitions": {}
+      },
+      "settings": {},
+      "properties": {
+        "toolPath": "/SendEmail",
+        "objectName": "SendEmail",
+        "toolDisplayName": "Send Email",
+        "toolDescription": "Sends an email message",
+        "method": "POST",
+        "connection": {
+          "id": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0",
+          "name": "yadav.manan24@gmail.com",
+          "elementInstanceId": 0,
+          "apiBaseUri": "",
+          "state": "enabled",
+          "isDefault": false,
+          "connector": {
+            "key": "uipath-google-gmail",
+            "name": "Gmail",
+            "image": "https://staging.uipath.com/elements_/scaleunit_/4a9b6040-645f-4006-a000-829794b794d4/v3/element/elements/uipath-google-gmail/image",
+            "enabled": true
+          },
+          "folder": {
+            "key": "4c029b43-3e61-4f4b-bd0c-ac669bac94c3",
+            "path": "811b80b0-a9cc-46d2-9a98-36472e85e261.4c029b43-3e61-4f4b-bd0c-ac669bac94c3"
+          },
+          "solutionProperties": {
+            "resourceKey": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0"
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "displayName": "Body",
+            "type": "string",
+            "fieldLocation": "multipart",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The message body\n",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 1,
+            "required": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "SaveAsDraft",
+            "displayName": "Save as draft",
+            "type": "boolean",
+            "fieldLocation": "query",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "Send an email message. By default, the email will be saved as draft.",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 2,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "To",
+            "displayName": "To",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The primary recipients of the email, separated by comma (,)",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 3,
+            "required": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "Subject",
+            "displayName": "Subject",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The subject of the email",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 4,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "Body",
+            "displayName": "Body",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The body of the email",
+            "dynamic": true,
+            "componentType": "RichTextEditorHTML",
+            "position": "primary",
+            "sortOrder": 5,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "file",
+            "displayName": "Attachment",
+            "type": "file",
+            "fieldLocation": "multipart",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The attachment to be sent with the email",
+            "dynamic": true,
+            "position": "primary",
+            "sortOrder": 6,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "Importance",
+            "displayName": "Importance",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The importance of the mail",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 7,
+            "required": false,
+            "enumValues": [
+              {
+                "name": "Normal",
+                "value": "normal"
+              },
+              {
+                "name": "High",
+                "value": "high"
+              },
+              {
+                "name": "Low",
+                "value": "low"
+              }
+            ],
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "ReplyTo",
+            "displayName": "Reply to",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The email addresses to use when replying, separated by comma (,)",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 8,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "CC",
+            "displayName": "CC",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The secondary recipients of the email, separated by comma (,)",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 9,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          },
+          {
+            "name": "BCC",
+            "displayName": "BCC",
+            "type": "string",
+            "fieldLocation": "body",
+            "fieldVariant": "dynamic",
+            "value": "{{prompt}}",
+            "description": "The hidden recipients of the email, separated by comma (,)",
+            "dynamic": true,
+            "position": "secondary",
+            "sortOrder": 10,
+            "required": false,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null,
+            "isCascading": false
+          }
+        ],
+        "bodyStructure": {
+          "contentType": "multipart",
+          "jsonBodySection": "body"
+        }
+      },
+      "guardrail": {
+        "policies": []
+      },
+      "iconUrl": "https://staging.uipath.com/elements_/scaleunit_/4a9b6040-645f-4006-a000-829794b794d4/v3/element/elements/uipath-google-gmail/image",
+      "id": "32304705-05c5-4fa4-9ace-b50aa13e11fc",
+      "isPreview": true,
+      "isEnabled": true
+    },
+    {
+      "$resourceType": "context",
+      "name": "Recall Intial",
+      "description": "",
+      "folderPath": "solution_folder",
+      "indexName": "Recall Intial",
+      "id": "2eb2d175-08ab-4c33-ba64-4c0a160a340d",
+      "referenceKey": "84e46cc9-78bc-4c7c-01bf-08ded1677f40",
+      "settings": {
+        "query": {
+          "description": "The query for the Semantic strategy.",
+          "variant": "dynamic"
+        },
+        "folderPathPrefix": {
+          "variant": "static"
+        },
+        "threshold": 0,
+        "resultCount": 3,
+        "retrievalMode": "semantic",
+        "fileExtension": {
+          "value": "All"
+        }
+      },
+      "contextType": "index"
+    }
+  ],
+  "features": []
+}

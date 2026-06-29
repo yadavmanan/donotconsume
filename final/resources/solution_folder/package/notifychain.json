@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "notifychain",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "692950c1-91c6-4464-a707-0f86e9812d60",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "notifychain",
+      "description": null
+    },
+    "locks": [],
+    "key": "f8b707f2-a2b1-4155-9bb3-2e435854c6d5"
+  }
+}

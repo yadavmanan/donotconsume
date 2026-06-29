@@ -1,0 +1,169 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "20ea6b93-f2d3-4d1c-8bdf-946e0fcd0e00",
+      "input": {
+        "type": "object",
+        "properties": {
+          "attachments": {
+            "type": "array",
+            "description": "Supply chain trace files, recall case documents, FDA correspondence, distribution records, and supporting attachments to analyze.",
+            "items": {
+              "$ref": "#/definitions/job-attachment"
+            }
+          },
+          "email_body": {
+            "type": "string",
+            "description": "Email body text containing recall context, case notes, or user instructions."
+          },
+          "traces": {
+            "type": "object",
+            "description": "The lot code tracing agent.",
+            "properties": {}
+          }
+        },
+        "definitions": {
+          "job-attachment": {
+            "type": "object",
+            "required": [
+              "ID"
+            ],
+            "x-uipath-resource-kind": "JobAttachment",
+            "properties": {
+              "ID": {
+                "type": "string",
+                "description": "Orchestrator attachment key"
+              },
+              "FullName": {
+                "type": "string",
+                "description": "File name"
+              },
+              "MimeType": {
+                "type": "string",
+                "description": "MIME type, e.g. \"application/pdf\", \"image/png\""
+              },
+              "Metadata": {
+                "type": "object",
+                "description": "Dictionary<string, string> of metadata",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "required": [
+          "fsma204_kde_data",
+          "fda_cover_letter",
+          "internal_recall_summary",
+          "incomplete_fields",
+          "content"
+        ],
+        "properties": {
+          "fsma204_kde_data": {
+            "type": "array",
+            "description": "FSMA Section 204 KDE spreadsheet records in JSON format. Use INCOMPLETE for any mandatory field that cannot be found.",
+            "items": {
+              "type": "object",
+              "required": [
+                "traceabilityLotCode",
+                "productDescription",
+                "quantity",
+                "unitOfMeasure",
+                "cteType",
+                "cteDate",
+                "cteLocation",
+                "referenceDocumentNumber",
+                "firstReceiverInfo"
+              ],
+              "properties": {
+                "traceabilityLotCode": {
+                  "type": "string"
+                },
+                "productDescription": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "string"
+                },
+                "unitOfMeasure": {
+                  "type": "string"
+                },
+                "cteType": {
+                  "type": "string",
+                  "description": "One of: harvesting, cooling, packing, shipping, receiving"
+                },
+                "cteDate": {
+                  "type": "string"
+                },
+                "cteLocation": {
+                  "type": "string"
+                },
+                "referenceDocumentNumber": {
+                  "type": "string"
+                },
+                "firstReceiverInfo": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "fda_cover_letter": {
+            "type": "string",
+            "description": "Formal FDA recall cover letter including company name, FDA registration number, product description and lot codes, scope of recall and distribution, actions taken to date, and point of contact information."
+          },
+          "internal_recall_summary": {
+            "type": "string",
+            "description": "One-page executive brief summarizing the recall case, risk, affected products/lots, distribution, actions, open items, and next steps."
+          },
+          "incomplete_fields": {
+            "type": "array",
+            "description": "Mandatory KDE fields that were missing or could not be verified. Each item must have status INCOMPLETE.",
+            "items": {
+              "type": "object",
+              "required": [
+                "fieldName",
+                "status"
+              ],
+              "properties": {
+                "recordReference": {
+                  "type": "string",
+                  "description": "Best available reference such as lot code, CTE type/date, or source document."
+                },
+                "fieldName": {
+                  "type": "string",
+                  "description": "Name of the missing mandatory KDE field."
+                },
+                "cteType": {
+                  "type": "string",
+                  "description": "Related CTE type when known."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Always INCOMPLETE."
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "Brief explanation of what source data is missing."
+                }
+              }
+            }
+          },
+          "content": {
+            "type": "string",
+            "description": "Complete combined FDA recall compliance package for human review, including the KDE JSON, cover letter, and internal recall summary."
+          }
+        },
+        "title": "Outputs"
+      }
+    }
+  ]
+}

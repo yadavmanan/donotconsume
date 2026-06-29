@@ -1,0 +1,23 @@
+{
+  "zoom": 0.61,
+  "agentPosition": {
+    "x": 0,
+    "y": 0
+  },
+  "resourceNodes": [
+    {
+      "id": "agent=>Analyze Files:c74727f3-47f4-4eae-be89-f9b59131e2a8",
+      "position": {
+        "x": 48,
+        "y": 272
+      }
+    },
+    {
+      "id": "agent=>Send Email:6b76b3c4-7e09-4994-a31e-1e1b5e909e7e",
+      "position": {
+        "x": 256,
+        "y": 368
+      }
+    }
+  ]
+}

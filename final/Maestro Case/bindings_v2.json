@@ -1,0 +1,229 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "EventTrigger",
+      "key": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0_trigger_1",
+      "id": "EventTrigger0178e46e-3ab0-49a8-81f9-c9784a77f6e0_trigger_1",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0",
+          "isExpression": false
+        },
+        "EntryPointUniqueId": {
+          "defaultValue": "732ee0fd-1d15-45bd-8a65-6f90d107e737",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-gmail",
+        "ActivityName": "Mail trigger.",
+        "BindingsVersion": "2.2",
+        "ObjectName": "Message",
+        "Operation": "EMAIL_RECEIVED",
+        "FilterExpression": "(ParentFolders[?ID=='INBOX']) && ((contains(Subject,'CONTAMINATION'))||(contains(Subject,'RECALL'))||(contains(Subject,'ALERT'))||(contains(Subject,'WITHDRAWL'))||(contains(From.Email,'@agriseed.com'))||(contains(From.Email,'yadav.manan@outlook.com'))||(contains(From.Email,'@fda.gov'))||(contains(From.Email,'outbreak.response@fda.gov')))"
+      }
+    },
+    {
+      "resource": "Property",
+      "key": "EMAIL_RECEIVED_EventTrigger.0178e46e-3ab0-49a8-81f9-c9784a77f6e0_trigger_1",
+      "value": {
+        "ParentFolders[*].ID": {
+          "defaultValue": "INBOX",
+          "isExpression": false
+        }
+      },
+      "activityDisplayName": "Connector",
+      "metadata": {
+        "ActivityName": "Mail trigger.",
+        "BindingsVersion": "2.2",
+        "ObjectName": "Message",
+        "ParentResourceKey": "EventTrigger.0178e46e-3ab0-49a8-81f9-c9784a77f6e0_trigger_1",
+        "TriggerCreateParameters": "ParentFolders[*].ID",
+        "DebugQueryParameters": "ParentFolders[*].ID"
+      },
+      "id": "Property_trigger_1"
+    },
+    {
+      "resource": "EventTrigger",
+      "key": "StartEvent_Trigger_vyWNsl",
+      "id": "EventTriggerStartEvent_Trigger_vyWNsl",
+      "value": {
+        "ConnectionId": {
+          "isExpression": false
+        },
+        "EntryPointUniqueId": {
+          "defaultValue": "27f1337e-c6a6-490b-9284-1e1c56571e4c",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-gmail",
+        "ActivityName": "Trigger 2",
+        "BindingsVersion": "2.2",
+        "ObjectName": "Message",
+        "Operation": "EMAIL_RECEIVED",
+        "FilterExpression": ""
+      }
+    },
+    {
+      "resource": "Connection",
+      "key": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0",
+      "id": "Connection0178e46e-3ab0-49a8-81f9-c9784a77f6e0",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "0178e46e-3ab0-49a8-81f9-c9784a77f6e0",
+          "isExpression": false,
+          "displayName": "uipath-google-gmail connection"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Mail trigger.",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "uipath-google-gmail connection",
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-gmail"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "=bindings.bNjHd8Lvs.recall_trigger_final",
+      "id": "process=bindings.bNjHd8Lvs.recall_trigger_final",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.bNjHd8Lvs",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "recall_trigger_final",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "recall_trigger_final",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "=bindings.b0hDQa1lP.lot_tracing_final",
+      "id": "process=bindings.b0hDQa1lP.lot_tracing_final",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.b0hDQa1lP",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "lot_tracing_final",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "lot_tracing_final",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "=bindings.bmgLr6BmA.kde_report_final",
+      "id": "process=bindings.bmgLr6BmA.kde_report_final",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.bmgLr6BmA",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "kde_report_final",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "kde_report_final",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "=bindings.bdV9IQKkd.quarantineapi_final",
+      "id": "process=bindings.bdV9IQKkd.quarantineapi_final",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.bdV9IQKkd",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "quarantineapi_final",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "quarantineapi_final",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "=bindings.bP8F5yXww.notifychain",
+      "id": "process=bindings.bP8F5yXww.notifychain",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.bP8F5yXww",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "notifychain",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "notifychain",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "Agent",
+      "id": "processAgent",
+      "value": {
+        "name": {
+          "defaultValue": "Agent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    }
+  ]
+}

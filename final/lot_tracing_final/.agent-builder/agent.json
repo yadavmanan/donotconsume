@@ -1,0 +1,220 @@
+{
+  "id": "414f8dd1-f524-45ca-ac06-48dde0e55293",
+  "version": "1.1.0",
+  "name": "lot_tracing_final",
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "targetRuntime": "pythonAgent",
+    "showProjectCreationExperience": false
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are an FDA food traceability agent for contamination investigations.\n\nScope:\n- In scope: trace each input lot code by calling API Workflow, extract contamination, facility, production, raw material, and forward distribution details, and return only grounded summary values.\n- Out of scope: inventing states, retailer names, contact emails, KDE completeness gaps, or any other data not present in the tool result.\n\nTools:\n- API Workflow: call once for each lot code in input.lotCodes to retrieve the official trace record. Do not call it for values not present in the input.\n- Stop calling tools once every input lot code has been attempted once, or once a definitive response has been returned for that lot code.\n\nOutput:\nReturn a JSON result that exactly matches the output schema with these fields:\n- totalLotsRequested: number of lot codes provided in input.lotCodes.\n- successfulLots: number of lots with statusCode 200 and trace data.\n- failedLotCodes: object mapping each failed lot code to its error reason or status. Include only lot codes that do not return statusCode 200 or do not include trace data.\n- totalUnitsAffected: sum of totalUnitsAffected across successful lots.\n- traces: object mapping each successful lot code to its full trace record. Each trace must preserve all fields returned by the API Workflow: traceabilityLotCode, contaminationType, urgency, recallClassEstimate, productionDate, expiryDate, kdeCompletenessPercent, totalUnitsAffected, product, originFacility, rawMaterials, criticalTrackingEvents, limsResults, statesAffected, supplyChainNodes, warehouseInventory, and incompleteKDENodes. Pass the nested trace object through exactly as returned by the tool without modification or invention.\n- Never invent values, fields, or trace records.\n\nUncertainty:\n- If a tool call fails or returns non-200, add that lot code to failedLotCodes with the error detail and do not fabricate trace details.\n- If no lot codes are supplied, return zero counts and empty objects for failedLotCodes and traces.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are an FDA food traceability agent for contamination investigations.\n\nScope:\n- In scope: trace each input lot code by calling API Workflow, extract contamination, facility, production, raw material, and forward distribution details, and return only grounded summary values.\n- Out of scope: inventing states, retailer names, contact emails, KDE completeness gaps, or any other data not present in the tool result.\n\nTools:\n- API Workflow: call once for each lot code in input.lotCodes to retrieve the official trace record. Do not call it for values not present in the input.\n- Stop calling tools once every input lot code has been attempted once, or once a definitive response has been returned for that lot code.\n\nOutput:\nReturn a JSON result that exactly matches the output schema with these fields:\n- totalLotsRequested: number of lot codes provided in input.lotCodes.\n- successfulLots: number of lots with statusCode 200 and trace data.\n- failedLotCodes: object mapping each failed lot code to its error reason or status. Include only lot codes that do not return statusCode 200 or do not include trace data.\n- totalUnitsAffected: sum of totalUnitsAffected across successful lots.\n- traces: object mapping each successful lot code to its full trace record. Each trace must preserve all fields returned by the API Workflow: traceabilityLotCode, contaminationType, urgency, recallClassEstimate, productionDate, expiryDate, kdeCompletenessPercent, totalUnitsAffected, product, originFacility, rawMaterials, criticalTrackingEvents, limsResults, statesAffected, supplyChainNodes, warehouseInventory, and incompleteKDENodes. Pass the nested trace object through exactly as returned by the tool without modification or invention.\n- Never invent values, fields, or trace records.\n\nUncertainty:\n- If a tool call fails or returns non-200, add that lot code to failedLotCodes with the error detail and do not fabricate trace details.\n- If no lot codes are supplied, return zero counts and empty objects for failedLotCodes and traces."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Trace the following lot codes: {{input.lotCode}}\n\nCall API Workflow 1 once for each lot code. Return only the JSON object that matches the output schema, containing totalLotsRequested, successfulLots, failedLotCodes, totalUnitsAffected, and traces with the full trace record exactly as returned by the tool.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Trace the following lot codes: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.lotCode"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nCall API Workflow 1 once for each lot code. Return only the JSON object that matches the output schema, containing totalLotsRequested, successfulLots, failedLotCodes, totalUnitsAffected, and traces with the full trace record exactly as returned by the tool."
+        }
+      ]
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "lotCode"
+    ],
+    "properties": {
+      "lotCode": {
+        "type": "string",
+        "description": "Lot code to trace. Expected format resembles LOT-2026-0437. Comes from the caller or user input. Must be non-empty and contain only letters, numbers, underscores, or hyphens.",
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9_-]+$"
+      }
+    },
+    "title": "Inputs"
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "totalLotsRequested": {
+        "type": "number"
+      },
+      "successfulLots": {
+        "type": "number"
+      },
+      "failedLotCodes": {
+        "type": "object",
+        "properties": {}
+      },
+      "totalUnitsAffected": {
+        "type": "number"
+      },
+      "traces": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  "settings": {
+    "model": "gpt-5.4",
+    "maxTokens": 128000,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "resources": [
+    {
+      "$resourceType": "tool",
+      "name": "API Workflow",
+      "description": "",
+      "location": "solution",
+      "type": "api",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "lotCode": {
+            "type": "string",
+            "description": "Lot code to trace. Expected format resembles LOT-2026-0437. Comes from the calling agent or user input. Use only letters, numbers, underscores, and hyphens.",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          }
+        },
+        "required": [
+          "lotCode"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "traceabilityLotCode": {
+            "type": "string",
+            "description": "Lot code returned by the trace API response body."
+          },
+          "contaminationType": {
+            "type": "string",
+            "description": "Contamination type returned by the trace API response body."
+          },
+          "urgency": {
+            "type": "string",
+            "description": "Urgency returned by the trace API response body."
+          },
+          "recallClassEstimate": {
+            "type": "string",
+            "description": "Recall class estimate returned by the trace API response body."
+          },
+          "productionDate": {
+            "type": "string",
+            "description": "Production date returned by the trace API response body."
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Expiry date returned by the trace API response body."
+          },
+          "kdeCompletenessPercent": {
+            "type": "number",
+            "description": "KDE completeness percentage returned by the trace API response body."
+          },
+          "totalUnitsAffected": {
+            "type": "number",
+            "description": "Total affected units returned by the trace API response body."
+          },
+          "product": {
+            "type": "object",
+            "description": "Product details returned by the trace API response body.",
+            "additionalProperties": true
+          },
+          "originFacility": {
+            "type": "object",
+            "description": "Origin facility details returned by the trace API response body.",
+            "additionalProperties": true
+          },
+          "rawMaterials": {
+            "type": "array",
+            "description": "Raw material records returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "criticalTrackingEvents": {
+            "type": "array",
+            "description": "Critical tracking events returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "limsResults": {
+            "type": "array",
+            "description": "LIMS results returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "statesAffected": {
+            "type": "array",
+            "description": "States affected as returned by the trace API response body.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supplyChainNodes": {
+            "type": "array",
+            "description": "Supply chain nodes returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "warehouseInventory": {
+            "type": "array",
+            "description": "Warehouse inventory records returned by the trace API response body.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "incompleteKDENodes": {
+            "type": "array",
+            "description": "Incomplete KDE nodes returned by the trace API response body.",
+            "items": {}
+          }
+        }
+      },
+      "settings": {},
+      "properties": {
+        "folderPath": "solution_folder",
+        "processName": "API Workflow"
+      },
+      "guardrail": {
+        "policies": []
+      },
+      "id": "7a8824c2-91eb-4dbb-b38c-a8209e3bf4af",
+      "referenceKey": "eb3baa10-0d01-44e5-abce-d25ac63e9e35",
+      "isEnabled": true,
+      "argumentProperties": {}
+    }
+  ],
+  "features": []
+}
